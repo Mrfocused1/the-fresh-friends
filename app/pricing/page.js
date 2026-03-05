@@ -131,7 +131,7 @@ export default function PricingPage() {
         <div
           style={{
             position: 'absolute', inset: 0,
-            background: 'radial-gradient(ellipse 55% 45% at 50% 60%, rgba(23,115,176,0.07) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse 55% 45% at 50% 60%, rgba(120,181,57,0.07) 0%, transparent 70%)',
             pointerEvents: 'none',
           }}
         />
@@ -144,12 +144,12 @@ export default function PricingPage() {
             textAlign: 'center',
           }}
         >
-          <p style={{ fontSize: '11px', fontWeight: 400, letterSpacing: '3px', textTransform: 'uppercase', color: '#1773b0', marginBottom: '28px' }}>
+          <p style={{ fontSize: '11px', fontWeight: 400, letterSpacing: '3px', textTransform: 'uppercase', color: 'rgb(120,181,57)', marginBottom: '28px' }}>
             Pricing
           </p>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(52px, 8vw, 96px)', fontWeight: 400, lineHeight: 1.0, letterSpacing: '-3px', color: '#111827', marginBottom: '24px' }}>
             Stories worth{' '}
-            <em style={{ fontStyle: 'italic', color: '#1773b0' }}>sharing.</em>
+            <em style={{ fontStyle: 'italic', color: 'rgb(120,181,57)' }}>sharing.</em>
           </h1>
           <p style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(18px, 2.5vw, 26px)', fontStyle: 'italic', color: 'var(--text-secondary)', fontWeight: 400, marginBottom: '20px' }}>
             Books for every child, every classroom, every home.
@@ -159,7 +159,7 @@ export default function PricingPage() {
           </p>
           <a
             href="#pricing-tiers"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: '#1773b0', color: 'white', padding: '16px 36px', borderRadius: '100px', fontSize: '15px', fontWeight: 400, textDecoration: 'none' }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgb(120,181,57)', color: 'white', padding: '16px 36px', borderRadius: '100px', fontSize: '15px', fontWeight: 400, textDecoration: 'none' }}
           >
             See all options
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -182,7 +182,7 @@ export default function PricingPage() {
             </p>
             <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 400, letterSpacing: '-2px', color: 'var(--white)', lineHeight: 1.05 }}>
               Find the right{' '}
-              <em style={{ fontStyle: 'italic', color: '#1773b0' }}>plan.</em>
+              <em style={{ fontStyle: 'italic', color: 'rgb(120,181,57)' }}>plan.</em>
             </h2>
           </div>
 
@@ -287,8 +287,8 @@ export default function PricingPage() {
         <div className="schools-grid" style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
           {/* Visual */}
           <div className="schools-visual" style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '380px', height: '380px', borderRadius: '50%', background: 'linear-gradient(135deg, rgba(23,115,176,0.10) 0%, rgba(23,115,176,0.03) 100%)', border: '2px solid rgba(23,115,176,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '16px' }}>
-              <p style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontStyle: 'italic', fontWeight: 600, color: '#1773b0', textAlign: 'center', padding: '0 40px', lineHeight: 1.4 }}>
+            <div style={{ width: '380px', height: '380px', borderRadius: '50%', background: 'linear-gradient(135deg, rgba(120,181,57,0.10) 0%, rgba(120,181,57,0.03) 100%)', border: '2px solid rgba(120,181,57,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '16px' }}>
+              <p style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontStyle: 'italic', fontWeight: 600, color: 'rgb(120,181,57)', textAlign: 'center', padding: '0 40px', lineHeight: 1.4 }}>
                 For classrooms that come alive.
               </p>
             </div>
@@ -301,7 +301,7 @@ export default function PricingPage() {
             </p>
             <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 400, letterSpacing: '-2px', color: 'var(--text-primary)', lineHeight: 1.05, marginBottom: '24px' }}>
               Bring{' '}
-              <em style={{ fontStyle: 'italic', color: '#1773b0' }}>Freshland</em>{' '}
+              <em style={{ fontStyle: 'italic', color: 'rgb(120,181,57)' }}>Freshland</em>{' '}
               to your classroom.
             </h2>
             <p style={{ fontSize: '16px', lineHeight: 1.75, color: 'var(--text-secondary)', marginBottom: '32px', maxWidth: '460px' }}>
@@ -309,14 +309,14 @@ export default function PricingPage() {
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '40px' }}>
               {['PSHE Aligned', 'Invoice Accepted', 'Free Delivery', 'Curriculum Guide', 'Workshop Add-on'].map((pill) => (
-                <span key={pill} style={{ padding: '8px 18px', borderRadius: '100px', border: '1px solid rgba(23,115,176,0.25)', background: 'rgba(23,115,176,0.05)', fontSize: '13px', fontWeight: 600, color: '#1773b0' }}>
+                <span key={pill} style={{ padding: '8px 18px', borderRadius: '100px', border: '1px solid rgba(120,181,57,0.25)', background: 'rgba(120,181,57,0.05)', fontSize: '13px', fontWeight: 600, color: 'rgb(120,181,57)' }}>
                   {pill}
                 </span>
               ))}
             </div>
             <a
               href="mailto:schools@thefreshfriends.com"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: '#1773b0', color: 'white', padding: '16px 36px', borderRadius: '100px', fontSize: '15px', fontWeight: 400, textDecoration: 'none' }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgb(120,181,57)', color: 'white', padding: '16px 36px', borderRadius: '100px', fontSize: '15px', fontWeight: 400, textDecoration: 'none' }}
             >
               Contact our Schools Team
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -336,7 +336,7 @@ export default function PricingPage() {
           <p style={{ fontSize: '11px', fontWeight: 400, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-light)', marginBottom: '16px' }}>FAQ</p>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 400, letterSpacing: '-2px', color: 'var(--white)', lineHeight: 1.05, marginBottom: '64px' }}>
             Questions{' '}
-            <em style={{ fontStyle: 'italic', color: '#1773b0' }}>answered.</em>
+            <em style={{ fontStyle: 'italic', color: 'rgb(120,181,57)' }}>answered.</em>
           </h2>
 
           <div>
@@ -348,10 +348,10 @@ export default function PricingPage() {
                     onClick={() => setOpenFaq(prev => prev === i ? null : i)}
                     style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px', padding: '28px 0', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}
                   >
-                    <span style={{ fontSize: '17px', fontWeight: 600, color: isOpen ? '#1773b0' : 'var(--white)', lineHeight: 1.4, transition: 'color 0.2s', fontFamily: 'var(--font-main)' }}>
+                    <span style={{ fontSize: '17px', fontWeight: 600, color: isOpen ? 'rgb(120,181,57)' : 'var(--white)', lineHeight: 1.4, transition: 'color 0.2s', fontFamily: 'var(--font-main)' }}>
                       {faq.q}
                     </span>
-                    <span style={{ flexShrink: 0, width: '32px', height: '32px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: isOpen ? '#1773b0' : 'var(--text-secondary)', transition: 'all 0.2s', transform: isOpen ? 'rotate(45deg)' : 'rotate(0)' }}>
+                    <span style={{ flexShrink: 0, width: '32px', height: '32px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: isOpen ? 'rgb(120,181,57)' : 'var(--text-secondary)', transition: 'all 0.2s', transform: isOpen ? 'rotate(45deg)' : 'rotate(0)' }}>
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <path d="M7 1v12M1 7h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                       </svg>
@@ -378,14 +378,14 @@ export default function PricingPage() {
               </h3>
               <p style={{ fontSize: '15px', color: 'var(--text-light)', lineHeight: 1.6 }}>
                 Our team is here to help. Drop us a line at{' '}
-                <a href="mailto:hello@thefreshfriends.com" style={{ color: '#1773b0', textDecoration: 'none', fontWeight: 600 }}>
+                <a href="mailto:hello@thefreshfriends.com" style={{ color: 'rgb(120,181,57)', textDecoration: 'none', fontWeight: 600 }}>
                   hello@thefreshfriends.com
                 </a>
               </p>
             </div>
             <a
               href="mailto:hello@thefreshfriends.com"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: '#1773b0', color: 'white', padding: '15px 32px', borderRadius: '100px', fontSize: '14px', fontWeight: 400, textDecoration: 'none', flexShrink: 0 }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgb(120,181,57)', color: 'white', padding: '15px 32px', borderRadius: '100px', fontSize: '14px', fontWeight: 400, textDecoration: 'none', flexShrink: 0 }}
             >
               Get in touch
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
