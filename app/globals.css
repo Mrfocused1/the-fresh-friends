@@ -932,6 +932,28 @@ p { font-family: var(--font-playful); }
   opacity: 1;
 }
 
+/* LOGIN PAGE — light form overrides */
+.login-page .form-field label {
+  color: #444;
+}
+.login-page .form-field input,
+.login-page .form-field textarea,
+.login-page .form-field select {
+  background: #f5f5f0;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #111;
+}
+.login-page .form-field input:focus,
+.login-page .form-field textarea:focus,
+.login-page .form-field select:focus {
+  border-color: rgb(120, 181, 57);
+  background: #fff;
+}
+.login-page .form-field input::placeholder,
+.login-page .form-field textarea::placeholder {
+  color: #aaa;
+}
+
 /* SERVICE CHIPS */
 .form-services {
   display: flex;

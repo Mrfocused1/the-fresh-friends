@@ -30,6 +30,7 @@ export default function LoginPage() {
 
       {/* PAGE */}
       <div
+        className="login-page"
         style={{
           minHeight: '100vh',
           background: '#f5f5f0',
