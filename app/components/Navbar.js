@@ -9,9 +9,10 @@ export default function Navbar({ activePage }) {
   const pathname = usePathname();
 
   const links = [
-    { label: 'Home',    href: '/' },
-    { label: 'Pricing', href: '/pricing' },
-    { label: 'Contact', href: pathname === '/' ? '#contact' : '/#contact' },
+    { label: 'Home',         href: '/' },
+    { label: 'How it works', href: '/publish-with-onyx' },
+    { label: 'Pricing',      href: '/pricing' },
+    { label: 'Contact',      href: pathname === '/' ? '#contact' : '/#contact' },
   ];
 
   return (
