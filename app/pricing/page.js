@@ -10,7 +10,7 @@ const tiers = [
   {
     id: 'single',
     label: 'Single Book',
-    price: '£9.99',
+    price: '£250',
     per: 'per book',
     badge: null,
     description: 'The perfect starting point. Pick your favourite Fresh Friend and begin the adventure.',
@@ -28,7 +28,7 @@ const tiers = [
   {
     id: 'collection',
     label: 'Full Collection',
-    price: '£59.99',
+    price: '£400',
     per: 'all 8 books',
     badge: 'Most Popular',
     description: 'Every character. Every power. Every adventure. The complete Fresh Friends series in one beautiful set.',
@@ -48,7 +48,7 @@ const tiers = [
   {
     id: 'school',
     label: 'School Bundle',
-    price: '£249',
+    price: null,
     per: 'classroom set',
     badge: 'Best for Schools',
     description: 'Designed for Reception and KS1 classrooms. Enough books for your whole class, plus resources to bring the stories to life.',
@@ -107,22 +107,6 @@ export default function PricingPage() {
 
   return (
     <>
-      <style>{`
-        @media (max-width: 960px) {
-          .pricing-grid { grid-template-columns: 1fr !important; max-width: 480px; margin: 0 auto; }
-          .pricing-featured { transform: scale(1) !important; }
-          .schools-grid { grid-template-columns: 1fr !important; }
-          .schools-visual { display: none !important; }
-          .faq-cta-card { flex-direction: column !important; align-items: flex-start !important; }
-        }
-        @media (max-width: 640px) {
-          .pricing-hero-inner { padding: 130px 24px 80px !important; }
-          .pricing-tiers { padding: 80px 20px 100px !important; }
-          .pricing-schools { padding: 80px 20px !important; }
-          .pricing-faq { padding: 80px 20px 100px !important; }
-        }
-      `}</style>
-
       {/* GRAIN */}
       <div className="grain-overlay" />
 
@@ -136,7 +120,7 @@ export default function PricingPage() {
         <div className="nav-container">
           <div className="nav-right">
             <div className="nav-links">
-              <Link href="/#books">The Books</Link>
+              <Link href="/">Home</Link>
               <Link href="/#characters">The Friends</Link>
               <Link href="/#workshops">Workshops</Link>
               <Link href="/pricing" style={{ color: '#1773b0', fontWeight: 600 }}>Pricing</Link>
@@ -163,7 +147,7 @@ export default function PricingPage() {
           </svg>
         </button>
         <nav className="fs-menu__nav">
-          <Link href="/#books"      className="fs-menu__link" onClick={() => setMenuOpen(false)}>The Books</Link>
+          <Link href="/"            className="fs-menu__link" onClick={() => setMenuOpen(false)}>Home</Link>
           <Link href="/#characters" className="fs-menu__link" onClick={() => setMenuOpen(false)}>The Friends</Link>
           <Link href="/#workshops"  className="fs-menu__link" onClick={() => setMenuOpen(false)}>Workshops</Link>
           <Link href="/pricing"     className="fs-menu__link" onClick={() => setMenuOpen(false)}>Pricing</Link>
@@ -226,11 +210,11 @@ export default function PricingPage() {
       <section
         id="pricing-tiers"
         className="pricing-tiers"
-        style={{ background: 'var(--dark-bg)', padding: '100px 40px 120px' }}
+        style={{ background: 'rgb(0,113,77)', padding: '100px 40px 120px' }}
       >
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '72px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-light)', marginBottom: '16px' }}>
+            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'white', marginBottom: '16px' }}>
               Choose your adventure
             </p>
             <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 700, letterSpacing: '-2px', color: 'var(--white)', lineHeight: 1.05 }}>
@@ -248,26 +232,26 @@ export default function PricingPage() {
               const isLight    = tier.style === 'light';
               const isFeatured = tier.style === 'featured';
 
-              const cardBg      = isLight ? 'white' : isFeatured ? '#1773b0' : 'var(--dark-card-bg)';
-              const cardBorder  = isLight ? '1px solid rgba(0,0,0,0.07)' : isFeatured ? 'none' : '1px solid rgba(255,255,255,0.06)';
-              const bodyColor   = isLight ? 'var(--text-secondary)' : isFeatured ? 'rgba(255,255,255,0.82)' : 'var(--text-light)';
-              const priceColor  = isLight ? 'var(--text-primary)' : 'white';
-              const perColor    = isLight ? 'var(--text-secondary)' : isFeatured ? 'rgba(255,255,255,0.65)' : 'var(--text-light)';
-              const checkBg     = isLight ? 'rgba(23,115,176,0.10)' : isFeatured ? 'rgba(255,255,255,0.20)' : 'rgba(23,115,176,0.15)';
-              const checkStroke = isLight ? '#1773b0' : isFeatured ? 'white' : '#1773b0';
-              const divider     = isLight ? 'rgba(0,0,0,0.08)' : isFeatured ? 'rgba(255,255,255,0.20)' : 'rgba(255,255,255,0.08)';
-              const ctaBg       = isLight ? '#1773b0' : isFeatured ? 'white' : '#1773b0';
-              const ctaColor    = isFeatured ? '#1773b0' : 'white';
-              const badgeBg     = isFeatured ? 'rgba(255,255,255,0.18)' : 'rgba(23,115,176,0.10)';
-              const badgeColor  = isFeatured ? 'white' : '#1773b0';
-              const shadow      = isLight ? '0 4px 32px rgba(0,0,0,0.08)' : isFeatured ? '0 8px 64px rgba(23,115,176,0.35)' : '0 4px 32px rgba(0,0,0,0.3)';
+              const cardBg      = isFeatured ? 'rgb(0,65,43)' : 'rgb(0,80,54)';
+              const cardBorder  = '1px solid rgba(255,255,255,0.06)';
+              const bodyColor   = 'white';
+              const priceColor  = 'white';
+              const perColor    = 'white';
+              const checkBg     = 'rgba(255,255,255,0.20)';
+              const checkStroke = 'white';
+              const divider     = 'rgba(255,255,255,0.20)';
+              const ctaBg       = 'rgba(255,255,255,0.15)';
+              const ctaColor    = 'white';
+              const badgeBg     = 'rgba(255,255,255,0.15)';
+              const badgeColor  = 'white';
+              const shadow      = isFeatured ? '0 8px 64px rgba(0,0,0,0.4)' : '0 4px 32px rgba(0,0,0,0.3)';
 
               return (
                 <div
                   key={tier.id}
                   className={isFeatured ? 'pricing-featured' : ''}
                   style={{
-                    background: cardBg, border: cardBorder, borderRadius: '24px',
+                    background: cardBg, border: cardBorder, borderRadius: '0',
                     padding: '40px 36px 44px', display: 'flex', flexDirection: 'column',
                     boxShadow: shadow,
                     transform: isFeatured ? 'scale(1.03)' : 'scale(1)',
@@ -283,12 +267,18 @@ export default function PricingPage() {
                     {tier.label}
                   </p>
 
-                  <div style={{ marginBottom: '8px' }}>
-                    <span style={{ fontFamily: 'var(--font-main)', fontSize: '52px', fontWeight: 800, color: priceColor, letterSpacing: '-2px', lineHeight: 1 }}>
-                      {tier.price}
-                    </span>
-                  </div>
-                  <p style={{ fontSize: '13px', color: perColor, marginBottom: '20px' }}>{tier.per}</p>
+                  {tier.price ? (
+                    <>
+                      <div style={{ marginBottom: '8px' }}>
+                        <span style={{ fontFamily: 'var(--font-main)', fontSize: '52px', fontWeight: 800, color: priceColor, letterSpacing: '-2px', lineHeight: 1 }}>
+                          {tier.price}
+                        </span>
+                      </div>
+                      <p style={{ fontSize: '13px', color: perColor, marginBottom: '20px' }}>{tier.per}</p>
+                    </>
+                  ) : (
+                    <p style={{ fontSize: '18px', fontWeight: 700, color: perColor, marginBottom: '20px' }}>Contact us for a quote</p>
+                  )}
 
                   <p style={{ fontSize: '15px', lineHeight: 1.65, color: bodyColor, marginBottom: '28px' }}>
                     {tier.description}
@@ -298,7 +288,7 @@ export default function PricingPage() {
 
                   <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '36px', flex: 1 }}>
                     {tier.features.map((feature) => (
-                      <li key={feature} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', fontSize: '14px', color: bodyColor, lineHeight: 1.55 }}>
+                      <li key={feature} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', fontSize: '14px', color: bodyColor, lineHeight: 1.55, fontFamily: 'var(--font-playful)' }}>
                         <span style={{ flexShrink: 0, width: '20px', height: '20px', borderRadius: '50%', background: checkBg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '1px' }}>
                           <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                             <path d="M2 5l2 2 4-4" stroke={checkStroke} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -323,7 +313,7 @@ export default function PricingPage() {
             })}
           </div>
 
-          <p style={{ textAlign: 'center', fontSize: '13px', color: 'var(--text-secondary)', marginTop: '40px' }}>
+          <p style={{ textAlign: 'center', fontSize: '13px', color: 'white', marginTop: '40px' }}>
             All prices include VAT · Secure checkout · 30-day returns on all orders
           </p>
         </div>
@@ -378,7 +368,7 @@ export default function PricingPage() {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="pricing-faq" style={{ background: 'var(--dark-bg)', padding: '100px 40px 120px' }}>
+      <section className="pricing-faq" style={{ background: 'rgb(0,113,77)', padding: '100px 40px 120px' }}>
         <div style={{ maxWidth: '860px', margin: '0 auto' }}>
           <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-light)', marginBottom: '16px' }}>FAQ</p>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 700, letterSpacing: '-2px', color: 'var(--white)', lineHeight: 1.05, marginBottom: '64px' }}>
@@ -417,7 +407,7 @@ export default function PricingPage() {
           {/* Bottom CTA card */}
           <div
             className="faq-cta-card"
-            style={{ marginTop: '72px', background: 'var(--dark-card-bg)', borderRadius: '20px', padding: '48px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '32px', flexWrap: 'wrap', border: '1px solid rgba(255,255,255,0.06)' }}
+            style={{ marginTop: '72px', background: 'rgb(0,80,54)', borderRadius: '20px', padding: '48px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '32px', flexWrap: 'wrap', border: '1px solid rgba(255,255,255,0.06)' }}
           >
             <div>
               <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 700, color: 'var(--white)', letterSpacing: '-1px', marginBottom: '8px' }}>

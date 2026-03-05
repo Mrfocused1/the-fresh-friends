@@ -706,7 +706,7 @@ p { font-family: var(--font-playful); }
 .testimonials-heading h2 {
   font-family: var(--font-serif);
   font-size: clamp(48px, 7vw, 96px);
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.05;
   color: var(--text-primary);
 }
@@ -1374,6 +1374,23 @@ p { font-family: var(--font-playful); }
   .testimonials-heading {
     padding: 0 24px 40px;
   }
+}
+
+/* ============================================================
+   PRICING PAGE
+   ============================================================ */
+@media (max-width: 960px) {
+  .pricing-grid { grid-template-columns: 1fr !important; max-width: 480px; margin: 0 auto; }
+  .pricing-featured { transform: scale(1) !important; }
+  .schools-grid { grid-template-columns: 1fr !important; }
+  .schools-visual { display: none !important; }
+  .faq-cta-card { flex-direction: column !important; align-items: flex-start !important; }
+}
+@media (max-width: 640px) {
+  .pricing-hero-inner { padding: 130px 24px 80px !important; }
+  .pricing-tiers { padding: 80px 20px 100px !important; }
+  .pricing-schools { padding: 80px 20px !important; }
+  .pricing-faq { padding: 80px 20px 100px !important; }
 }
 
 @media (max-width: 560px) {

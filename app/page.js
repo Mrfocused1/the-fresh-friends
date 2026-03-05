@@ -232,7 +232,8 @@ export default function Home() {
       if (heroContent) {
         const textFade = Math.max(0, 1 - Math.max(0, (progress - 0.75) / 0.15));
         heroContent.style.opacity = textFade;
-        heroContent.style.display = textFade <= 0 ? 'none' : 'flex';
+        heroContent.style.visibility = textFade <= 0 ? 'hidden' : 'visible';
+        heroContent.style.pointerEvents = textFade <= 0 ? 'none' : '';
       }
 
       // Books section fades in as circle finishes (starts at 85% of animation)
@@ -245,7 +246,7 @@ export default function Home() {
       // scrolls over the circle naturally, both are blue so transition is seamless
       const wrapperBottom = wrapper.getBoundingClientRect().bottom;
       if (expandCircle) {
-        expandCircle.style.display = wrapperBottom <= 0 ? 'none' : 'block';
+        expandCircle.style.visibility = wrapperBottom <= 0 ? 'hidden' : 'visible';
       }
     }
 
@@ -276,14 +277,18 @@ export default function Home() {
 
   /* Cycling word effect */
   useEffect(() => {
+    let timeout;
     const interval = setInterval(() => {
       setGrowVisible(false);
-      setTimeout(() => {
+      timeout = setTimeout(() => {
         setGrowIndex(i => (i + 1) % growWords.length);
         setGrowVisible(true);
       }, 600);
     }, 2600);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
   }, []);
 
   /* ----------------------------------------------------------
@@ -304,14 +309,14 @@ export default function Home() {
         <div className="nav-container">
           <div className="nav-right">
             <div className="nav-links">
-              <a href="#books">The Books</a>
+              <a href="/">Home</a>
               <a href="#characters">The Friends</a>
-              <a href="#workshops">Workshops</a>
+              <Link href="/pricing">Pricing</Link>
               <Link href="/publish-with-onyx">Publish with Onyx</Link>
             </div>
-            <a href="#contact" className="nav-cta">
-              Get in touch
-            </a>
+            <Link href="/login" className="nav-cta">
+              Login
+            </Link>
             <button
               className="nav-hamburger"
               onClick={() => setMenuOpen(o => !o)}
@@ -333,12 +338,13 @@ export default function Home() {
           </svg>
         </button>
         <nav className="fs-menu__nav">
-          <a href="#books"      className="fs-menu__link" onClick={() => setMenuOpen(false)}>The Books</a>
+          <a href="/"            className="fs-menu__link" onClick={() => setMenuOpen(false)}>Home</a>
           <a href="#characters" className="fs-menu__link" onClick={() => setMenuOpen(false)}>The Friends</a>
-          <a href="#workshops"  className="fs-menu__link" onClick={() => setMenuOpen(false)}>Workshops</a>
+          <Link href="/pricing"          className="fs-menu__link" onClick={() => setMenuOpen(false)}>Pricing</Link>
           <Link href="/publish-with-onyx" className="fs-menu__link" onClick={() => setMenuOpen(false)}>Publish with Onyx</Link>
+          <Link href="/dashboard"        className="fs-menu__link" onClick={() => setMenuOpen(false)}>My Dashboard</Link>
         </nav>
-        <a href="#contact" className="fs-menu__cta" onClick={() => setMenuOpen(false)}>Get in touch</a>
+        <Link href="/login" className="fs-menu__cta" onClick={() => setMenuOpen(false)}>Login</Link>
       </div>
 
       {/* HERO */}
