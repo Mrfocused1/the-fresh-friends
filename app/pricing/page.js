@@ -144,10 +144,10 @@ export default function PricingPage() {
             textAlign: 'center',
           }}
         >
-          <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: '#1773b0', marginBottom: '28px' }}>
+          <p style={{ fontSize: '11px', fontWeight: 400, letterSpacing: '3px', textTransform: 'uppercase', color: '#1773b0', marginBottom: '28px' }}>
             Pricing
           </p>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(52px, 8vw, 96px)', fontWeight: 700, lineHeight: 1.0, letterSpacing: '-3px', color: '#111827', marginBottom: '24px' }}>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(52px, 8vw, 96px)', fontWeight: 400, lineHeight: 1.0, letterSpacing: '-3px', color: '#111827', marginBottom: '24px' }}>
             Stories worth{' '}
             <em style={{ fontStyle: 'italic', color: '#1773b0' }}>sharing.</em>
           </h1>
@@ -159,7 +159,7 @@ export default function PricingPage() {
           </p>
           <a
             href="#pricing-tiers"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: '#1773b0', color: 'white', padding: '16px 36px', borderRadius: '100px', fontSize: '15px', fontWeight: 700, textDecoration: 'none' }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: '#1773b0', color: 'white', padding: '16px 36px', borderRadius: '100px', fontSize: '15px', fontWeight: 400, textDecoration: 'none' }}
           >
             See all options
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -177,10 +177,10 @@ export default function PricingPage() {
       >
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '72px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'white', marginBottom: '16px' }}>
+            <p style={{ fontSize: '11px', fontWeight: 400, letterSpacing: '2px', textTransform: 'uppercase', color: 'white', marginBottom: '16px' }}>
               Choose your adventure
             </p>
-            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 700, letterSpacing: '-2px', color: 'var(--white)', lineHeight: 1.05 }}>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 400, letterSpacing: '-2px', color: 'var(--white)', lineHeight: 1.05 }}>
               Find the right{' '}
               <em style={{ fontStyle: 'italic', color: '#1773b0' }}>plan.</em>
             </h2>
@@ -221,12 +221,12 @@ export default function PricingPage() {
                   }}
                 >
                   {tier.badge && (
-                    <div style={{ alignSelf: 'flex-start', background: badgeBg, borderRadius: '100px', padding: '6px 16px', fontSize: '11px', fontWeight: 700, letterSpacing: '1px', color: badgeColor, textTransform: 'uppercase', marginBottom: '20px' }}>
+                    <div style={{ alignSelf: 'flex-start', background: badgeBg, borderRadius: '100px', padding: '6px 16px', fontSize: '11px', fontWeight: 400, letterSpacing: '1px', color: badgeColor, textTransform: 'uppercase', marginBottom: '20px' }}>
                       {tier.badge}
                     </div>
                   )}
 
-                  <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: perColor, marginBottom: '16px' }}>
+                  <p style={{ fontSize: '11px', fontWeight: 400, letterSpacing: '2px', textTransform: 'uppercase', color: perColor, marginBottom: '16px' }}>
                     {tier.label}
                   </p>
 
@@ -240,7 +240,7 @@ export default function PricingPage() {
                       <p style={{ fontSize: '13px', color: perColor, marginBottom: '20px' }}>{tier.per}</p>
                     </>
                   ) : (
-                    <p style={{ fontSize: '18px', fontWeight: 700, color: perColor, marginBottom: '20px' }}>Contact us for a quote</p>
+                    <p style={{ fontSize: '18px', fontWeight: 400, color: perColor, marginBottom: '20px' }}>Contact us for a quote</p>
                   )}
 
                   <p style={{ fontSize: '15px', lineHeight: 1.65, color: bodyColor, marginBottom: '28px' }}>
@@ -264,7 +264,7 @@ export default function PricingPage() {
 
                   <a
                     href={tier.ctaHref}
-                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', background: ctaBg, color: ctaColor, padding: '16px 28px', borderRadius: '100px', fontSize: '15px', fontWeight: 700, textDecoration: 'none' }}
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', background: ctaBg, color: ctaColor, padding: '16px 28px', borderRadius: '100px', fontSize: '15px', fontWeight: 400, textDecoration: 'none' }}
                   >
                     {tier.cta}
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -296,10 +296,10 @@ export default function PricingPage() {
 
           {/* Text */}
           <div>
-            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-secondary)', marginBottom: '16px' }}>
+            <p style={{ fontSize: '11px', fontWeight: 400, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-secondary)', marginBottom: '16px' }}>
               For Schools & Educators
             </p>
-            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 700, letterSpacing: '-2px', color: 'var(--text-primary)', lineHeight: 1.05, marginBottom: '24px' }}>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 400, letterSpacing: '-2px', color: 'var(--text-primary)', lineHeight: 1.05, marginBottom: '24px' }}>
               Bring{' '}
               <em style={{ fontStyle: 'italic', color: '#1773b0' }}>Freshland</em>{' '}
               to your classroom.
@@ -316,7 +316,7 @@ export default function PricingPage() {
             </div>
             <a
               href="mailto:schools@thefreshfriends.com"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: '#1773b0', color: 'white', padding: '16px 36px', borderRadius: '100px', fontSize: '15px', fontWeight: 700, textDecoration: 'none' }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: '#1773b0', color: 'white', padding: '16px 36px', borderRadius: '100px', fontSize: '15px', fontWeight: 400, textDecoration: 'none' }}
             >
               Contact our Schools Team
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -333,8 +333,8 @@ export default function PricingPage() {
       {/* ── FAQ ── */}
       <section className="pricing-faq" style={{ background: 'rgb(0,113,77)', padding: '100px 40px 120px' }}>
         <div style={{ maxWidth: '860px', margin: '0 auto' }}>
-          <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-light)', marginBottom: '16px' }}>FAQ</p>
-          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 700, letterSpacing: '-2px', color: 'var(--white)', lineHeight: 1.05, marginBottom: '64px' }}>
+          <p style={{ fontSize: '11px', fontWeight: 400, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-light)', marginBottom: '16px' }}>FAQ</p>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 400, letterSpacing: '-2px', color: 'var(--white)', lineHeight: 1.05, marginBottom: '64px' }}>
             Questions{' '}
             <em style={{ fontStyle: 'italic', color: '#1773b0' }}>answered.</em>
           </h2>
@@ -373,7 +373,7 @@ export default function PricingPage() {
             style={{ marginTop: '72px', background: 'rgb(0,80,54)', borderRadius: '20px', padding: '48px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '32px', flexWrap: 'wrap', border: '1px solid rgba(255,255,255,0.06)' }}
           >
             <div>
-              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 700, color: 'var(--white)', letterSpacing: '-1px', marginBottom: '8px' }}>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 400, color: 'var(--white)', letterSpacing: '-1px', marginBottom: '8px' }}>
                 Still have questions?
               </h3>
               <p style={{ fontSize: '15px', color: 'var(--text-light)', lineHeight: 1.6 }}>
@@ -385,7 +385,7 @@ export default function PricingPage() {
             </div>
             <a
               href="mailto:hello@thefreshfriends.com"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: '#1773b0', color: 'white', padding: '15px 32px', borderRadius: '100px', fontSize: '14px', fontWeight: 700, textDecoration: 'none', flexShrink: 0 }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: '#1773b0', color: 'white', padding: '15px 32px', borderRadius: '100px', fontSize: '14px', fontWeight: 400, textDecoration: 'none', flexShrink: 0 }}
             >
               Get in touch
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

@@ -440,7 +440,7 @@ export default function Home() {
                 <p
                   style={{
                     color: 'white',
-                    fontWeight: 700,
+                    fontWeight: 400,
                     fontSize: '22px',
                     textAlign: 'center',
                     padding: '0 32px',
@@ -494,7 +494,7 @@ export default function Home() {
                 <p
                   style={{
                     color: '#ffffff',
-                    fontWeight: 700,
+                    fontWeight: 400,
                     fontSize: '22px',
                     textAlign: 'center',
                     padding: '0 32px',
@@ -550,7 +550,7 @@ export default function Home() {
                 <p
                   style={{
                     color: 'white',
-                    fontWeight: 700,
+                    fontWeight: 400,
                     fontSize: '22px',
                     textAlign: 'center',
                     padding: '0 32px',

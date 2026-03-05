@@ -204,7 +204,7 @@ function Sidebar({ modules, completedIds, activeLesson, onSelect, collapsed, set
       {!collapsed && (
         <div style={{ padding: '16px 20px', borderBottom: '1px solid rgba(0,0,0,0.07)', flexShrink: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)' }}>Your Progress</span>
+            <span style={{ fontSize: 11, fontWeight: 400, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)' }}>Your Progress</span>
             <span style={{ fontSize: 12, fontWeight: 600, color: 'rgb(120,181,57)' }}>{overallPct}%</span>
           </div>
           <div style={{ height: 4, background: 'rgba(0,0,0,0.08)', borderRadius: 4, overflow: 'hidden' }}>
@@ -240,12 +240,12 @@ function Sidebar({ modules, completedIds, activeLesson, onSelect, collapsed, set
                 onMouseLeave={e => e.currentTarget.style.background = 'none'}
               >
                 {collapsed ? (
-                  <span title={mod.title} style={{ fontSize: 11, fontWeight: 700, color: color, letterSpacing: '0.5px' }}>{mod.phase.replace('Phase ', 'P').replace('Welcome', 'W').replace('Bonus', 'B')}</span>
+                  <span title={mod.title} style={{ fontSize: 11, fontWeight: 400, color: color, letterSpacing: '0.5px' }}>{mod.phase.replace('Phase ', 'P').replace('Welcome', 'W').replace('Bonus', 'B')}</span>
                 ) : (
                   <>
                     <ProgressRing pct={pct} size={32} color={color} />
                     <div style={{ flex: 1, textAlign: 'left', minWidth: 0 }}>
-                      <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: color, marginBottom: 2 }}>{mod.phase}</p>
+                      <p style={{ fontSize: 10, fontWeight: 400, letterSpacing: '1.5px', textTransform: 'uppercase', color: color, marginBottom: 2 }}>{mod.phase}</p>
                       <p style={{ fontSize: 13, fontWeight: 600, color: 'rgba(0,0,0,0.8)', lineHeight: 1.3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{mod.title}</p>
                     </div>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.3)" strokeWidth="2" strokeLinecap="round" style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s', flexShrink: 0 }}>
@@ -287,7 +287,7 @@ function Sidebar({ modules, completedIds, activeLesson, onSelect, collapsed, set
                           {isDone ? (
                             <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                           ) : (
-                            <span style={{ fontSize: 9, color: isActive ? 'rgb(120,181,57)' : 'rgba(0,0,0,0.35)', fontWeight: 700 }}>{idx + 1}</span>
+                            <span style={{ fontSize: 9, color: isActive ? 'rgb(120,181,57)' : 'rgba(0,0,0,0.35)', fontWeight: 400 }}>{idx + 1}</span>
                           )}
                         </span>
                         <span style={{ fontSize: 13, color: isDone ? 'rgba(0,0,0,0.35)' : isActive ? 'rgb(120,181,57)' : 'rgba(0,0,0,0.65)', lineHeight: 1.4, flex: 1 }}>{lesson.title}</span>
@@ -332,7 +332,7 @@ function VideoPlayer({ lesson, mod, completedIds, onComplete, onNext, onPrev, ha
 
       {/* Breadcrumb */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24, fontSize: 12, color: 'rgba(0,0,0,0.4)' }}>
-        <span style={{ color: color, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', fontSize: 11 }}>{mod.phase}</span>
+        <span style={{ color: color, fontWeight: 400, textTransform: 'uppercase', letterSpacing: '1px', fontSize: 11 }}>{mod.phase}</span>
         <span>›</span>
         <span>{mod.title}</span>
         <span>›</span>
@@ -381,9 +381,9 @@ function VideoPlayer({ lesson, mod, completedIds, onComplete, onNext, onPrev, ha
       {/* Title + actions */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 24, marginBottom: 24, flexWrap: 'wrap' }}>
         <div>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 700, color: '#111827', lineHeight: 1.15, marginBottom: 8 }}>{lesson.title}</h1>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 400, color: '#111827', lineHeight: 1.15, marginBottom: 8 }}>{lesson.title}</h1>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', color: color }}>{mod.phase}</span>
+            <span style={{ fontSize: 12, fontWeight: 400, textTransform: 'uppercase', letterSpacing: '1.5px', color: color }}>{mod.phase}</span>
             {lesson.duration !== 'Resource' && (
               <>
                 <span style={{ color: 'rgba(0,0,0,0.2)' }}>·</span>
@@ -418,14 +418,14 @@ function VideoPlayer({ lesson, mod, completedIds, onComplete, onNext, onPrev, ha
 
       {/* Description */}
       <div style={{ background: 'white', borderRadius: 16, padding: '28px 32px', marginBottom: 24, border: '1px solid rgba(0,0,0,0.07)', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
-        <h3 style={{ fontSize: 13, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 12 }}>About This Lesson</h3>
+        <h3 style={{ fontSize: 13, fontWeight: 400, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 12 }}>About This Lesson</h3>
         <p style={{ fontSize: 15, lineHeight: 1.75, color: 'rgba(0,0,0,0.65)' }}>{desc}</p>
       </div>
 
       {/* Resources */}
       {mod.id === 'bonus' && (
         <div style={{ background: 'white', borderRadius: 16, padding: '28px 32px', marginBottom: 24, border: '1px solid rgba(0,0,0,0.07)', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
-          <h3 style={{ fontSize: 13, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 20 }}>Download Resource</h3>
+          <h3 style={{ fontSize: 13, fontWeight: 400, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 20 }}>Download Resource</h3>
           <button style={{
             display: 'inline-flex', alignItems: 'center', gap: 10,
             background: 'rgba(120,181,57,0.08)', border: '1px solid rgba(120,181,57,0.2)',
@@ -486,8 +486,8 @@ function Overview({ completedIds, onSelect, isMobile }) {
 
       {/* Header */}
       <div style={{ marginBottom: 40 }}>
-        <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 8 }}>Publish with Onyx</p>
-        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 700, color: '#111827', lineHeight: 1.1, marginBottom: 8 }}>Welcome back, Author</h1>
+        <p style={{ fontSize: 11, fontWeight: 400, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 8 }}>Publish with Onyx</p>
+        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 400, color: '#111827', lineHeight: 1.1, marginBottom: 8 }}>Welcome back, Author</h1>
         <p style={{ fontSize: 15, color: 'rgba(0,0,0,0.5)' }}>{totalDone} of {totalLessons} lessons complete — keep going!</p>
       </div>
 
@@ -495,7 +495,7 @@ function Overview({ completedIds, onSelect, isMobile }) {
       <div style={{ background: 'white', borderRadius: 16, padding: '24px 28px', marginBottom: 24, border: '1px solid rgba(0,0,0,0.07)', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
           <span style={{ fontSize: 13, fontWeight: 600, color: 'rgba(0,0,0,0.6)' }}>Overall Course Progress</span>
-          <span style={{ fontSize: 14, fontWeight: 700, color: 'rgb(120,181,57)' }}>{overallPct}%</span>
+          <span style={{ fontSize: 14, fontWeight: 400, color: 'rgb(120,181,57)' }}>{overallPct}%</span>
         </div>
         <div style={{ height: 8, background: 'rgba(0,0,0,0.06)', borderRadius: 8, overflow: 'hidden' }}>
           <div style={{ height: '100%', width: overallPct + '%', background: 'linear-gradient(90deg, rgb(120,181,57), rgb(80,160,30))', borderRadius: 8, transition: 'width 0.5s ease' }} />
@@ -510,15 +510,15 @@ function Overview({ completedIds, onSelect, isMobile }) {
           display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', gap: isMobile ? 16 : 24,
         }}>
           <div>
-            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', marginBottom: 8 }}>Continue where you left off</p>
-            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 700, color: 'white', marginBottom: 4 }}>{next.title}</h2>
+            <p style={{ fontSize: 11, fontWeight: 400, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', marginBottom: 8 }}>Continue where you left off</p>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: 400, color: 'white', marginBottom: 4 }}>{next.title}</h2>
             <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)' }}>{nextMod.phase} — {nextMod.title} · {next.duration}</p>
           </div>
           <button onClick={() => onSelect(next, nextMod)} style={{
             display: 'inline-flex', alignItems: 'center', gap: 10,
             background: 'white', color: 'rgb(0,113,77)',
             border: 'none', borderRadius: 100, padding: '14px 28px',
-            fontSize: 15, fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font-main)',
+            fontSize: 15, fontWeight: 400, cursor: 'pointer', fontFamily: 'var(--font-main)',
             transition: 'opacity 0.2s', flexShrink: 0,
           }}
             onMouseEnter={e => e.currentTarget.style.opacity = '0.9'}
@@ -531,7 +531,7 @@ function Overview({ completedIds, onSelect, isMobile }) {
       )}
 
       {/* Module cards */}
-      <h2 style={{ fontSize: 18, fontWeight: 700, color: '#111827', marginBottom: 20 }}>All Modules</h2>
+      <h2 style={{ fontSize: 18, fontWeight: 400, color: '#111827', marginBottom: 20 }}>All Modules</h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {COURSE.map(mod => {
           const done  = mod.lessons.filter(l => completedIds.has(l.id)).length;
@@ -555,12 +555,12 @@ function Overview({ completedIds, onSelect, isMobile }) {
               <ProgressRing pct={pct} size={48} color={color} />
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
-                  <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color }}>{mod.phase}</span>
+                  <span style={{ fontSize: 11, fontWeight: 400, letterSpacing: '1.5px', textTransform: 'uppercase', color }}>{mod.phase}</span>
                   {isComplete && (
                     <span style={{ fontSize: 11, background: 'rgba(120,181,57,0.1)', color: 'rgb(120,181,57)', borderRadius: 100, padding: '2px 10px', fontWeight: 600 }}>Complete</span>
                   )}
                 </div>
-                <h3 style={{ fontSize: 15, fontWeight: 700, color: '#111827', marginBottom: 2 }}>{mod.title}</h3>
+                <h3 style={{ fontSize: 15, fontWeight: 400, color: '#111827', marginBottom: 2 }}>{mod.title}</h3>
                 <p style={{ fontSize: 12, color: 'rgba(0,0,0,0.4)' }}>{done}/{mod.lessons.length} lessons · {mod.lessons[0].duration !== 'Resource' ? 'Video lessons' : 'Downloadable resources'}</p>
               </div>
               <div style={{ textAlign: 'right', flexShrink: 0 }}>
@@ -708,7 +708,7 @@ export default function DashboardPage() {
               </button>
             )}
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgb(120,181,57)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, color: 'white', flexShrink: 0 }}>A</div>
+              <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgb(120,181,57)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 400, color: 'white', flexShrink: 0 }}>A</div>
               {!isMobile && <span style={{ fontSize: 13, color: 'rgba(0,0,0,0.55)' }}>Author</span>}
             </div>
           </div>

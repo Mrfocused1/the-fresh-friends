@@ -75,7 +75,7 @@ export default function LoginPage() {
               style={{
                 fontFamily: 'var(--font-serif)',
                 fontSize: '32px',
-                fontWeight: 700,
+                fontWeight: 400,
                 color: '#111',
                 letterSpacing: '-1px',
                 marginBottom: '8px',
@@ -135,7 +135,7 @@ export default function LoginPage() {
                 color: 'white',
                 fontFamily: 'var(--font-main)',
                 fontSize: '16px',
-                fontWeight: 700,
+                fontWeight: 400,
                 padding: '16px 32px',
                 borderRadius: '100px',
                 border: 'none',
