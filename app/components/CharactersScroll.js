@@ -14,13 +14,15 @@ const characters = [
 ];
 
 export default function CharactersScroll() {
+  const wrapperRef = useRef(null);
   const sectionRef = useRef(null);
   const trackRef   = useRef(null);
 
   useEffect(() => {
+    const wrapper = wrapperRef.current;
     const section = sectionRef.current;
     const track   = trackRef.current;
-    if (!section || !track) return;
+    if (!wrapper || !section || !track) return;
 
     let cancelled = false;
     let ctx;
@@ -32,9 +34,8 @@ export default function CharactersScroll() {
         if (cancelled) return;
 
         gsap.registerPlugin(ScrollTrigger);
-        // Kill any existing triggers on this element to prevent double-init (React Strict Mode)
         ScrollTrigger.getAll()
-          .filter(t => t.trigger === section || t.pin === section)
+          .filter(t => t.trigger === wrapper)
           .forEach(t => t.kill());
 
         const panels      = track.querySelectorAll('.panel');
@@ -45,8 +46,7 @@ export default function CharactersScroll() {
             x: () => -(track.scrollWidth - window.innerWidth),
             ease: 'none',
             scrollTrigger: {
-              trigger: section,
-              pin: true,
+              trigger: wrapper,
               scrub: 1,
               invalidateOnRefresh: true,
               start: 'top top',
@@ -76,7 +76,8 @@ export default function CharactersScroll() {
   }, []);
 
   return (
-    <section className="services-scroll" id="characters" ref={sectionRef}>
+    <div id="characters" ref={wrapperRef} style={{ height: `${characters.length * 100}vw` }}>
+    <section className="services-scroll" ref={sectionRef} style={{ position: 'sticky', top: 0 }}>
       <div className="services-track" ref={trackRef}>
         {characters.map((char, i) => (
           <div className="panel" key={char.name}>
@@ -112,5 +113,6 @@ export default function CharactersScroll() {
         ))}
       </div>
     </section>
+    </div>
   );
 }
