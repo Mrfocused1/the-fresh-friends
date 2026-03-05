@@ -123,7 +123,7 @@ export default function PublishWithOnyxContent() {
       {/* HERO */}
       <section
         style={{
-          background: 'var(--dark-bg)',
+          background: 'rgb(0,113,77)',
           minHeight: '100vh',
           display: 'flex',
           alignItems: 'center',
@@ -263,7 +263,7 @@ export default function PublishWithOnyxContent() {
       </section>
 
       {/* THE PROGRAMME */}
-      <section id="programme" style={{ background: 'var(--dark-bg)', padding: '100px 40px' }}>
+      <section id="programme" style={{ background: 'rgb(0,113,77)', padding: '100px 40px' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-light)', marginBottom: '16px' }}>
             Course Structure
@@ -286,7 +286,7 @@ export default function PublishWithOnyxContent() {
               <div
                 key={mod.num}
                 style={{
-                  background: 'var(--dark-card-bg)',
+                  background: 'rgb(0,80,54)',
                   borderRadius: '20px',
                   padding: '44px 48px',
                   display: 'grid',
@@ -402,7 +402,7 @@ export default function PublishWithOnyxContent() {
       </section>
 
       {/* WHO IS THIS FOR */}
-      <section style={{ background: 'var(--dark-bg)', padding: '100px 40px' }}>
+      <section style={{ background: 'rgb(0,113,77)', padding: '100px 40px' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start' }}>
           <div>
             <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-light)', marginBottom: '16px' }}>
@@ -504,7 +504,7 @@ export default function PublishWithOnyxContent() {
       </section>
 
       {/* STUDENT TESTIMONIALS */}
-      <section style={{ background: 'var(--dark-bg)', padding: '100px 40px' }}>
+      <section style={{ background: 'rgb(0,113,77)', padding: '100px 40px' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <h2
             style={{
@@ -523,7 +523,7 @@ export default function PublishWithOnyxContent() {
               <div
                 key={t.name}
                 style={{
-                  background: 'var(--dark-card-bg)',
+                  background: 'rgb(0,80,54)',
                   borderRadius: '20px',
                   padding: '40px 36px 32px',
                   display: 'flex',
