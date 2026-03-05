@@ -762,42 +762,18 @@ export default function Home() {
                     <circle cx="17.5" cy="6.5" r="1" fill="currentColor" strokeWidth="0" />
                   </svg>
                 </a>
-                {/* Facebook */}
-                <a
-                  href="https://facebook.com/thefreshfriends"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Facebook"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
+                {/* Facebook — disabled */}
+                <span aria-label="Facebook" style={{ opacity: 0.25, cursor: 'default', width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>
+                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 15, height: 15, stroke: 'currentColor' }}>
                     <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
                   </svg>
-                </a>
-                {/* TikTok */}
-                <a
-                  href="https://tiktok.com/@thefreshfriends"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="TikTok"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
+                </span>
+                {/* TikTok — disabled */}
+                <span aria-label="TikTok" style={{ opacity: 0.25, cursor: 'default', width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>
+                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 15, height: 15, stroke: 'currentColor' }}>
                     <path d="M9 12a4 4 0 104 4V4a5 5 0 005 5" />
                   </svg>
-                </a>
+                </span>
               </div>
             </div>
 
