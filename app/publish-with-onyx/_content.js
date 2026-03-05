@@ -143,7 +143,7 @@ export default function PublishWithOnyxContent() {
           }}
         />
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '780px' }}>
-          <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: '#1773b0', marginBottom: '28px' }}>
+          <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: 'rgb(120,181,57)', marginBottom: '28px' }}>
             Publish with Onyx
           </p>
           <h1
@@ -158,7 +158,7 @@ export default function PublishWithOnyxContent() {
             }}
           >
             The Self-Publishing{' '}
-            <em style={{ fontStyle: 'italic', color: '#1773b0' }}>Blueprint.</em>
+            <em style={{ fontStyle: 'italic', color: 'rgb(120,181,57)' }}>Blueprint.</em>
           </h1>
           <p
             style={{
@@ -182,7 +182,7 @@ export default function PublishWithOnyxContent() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '10px',
-                background: '#1773b0',
+                background: 'rgb(120,181,57)',
                 color: 'white',
                 padding: '16px 36px',
                 borderRadius: '100px',
@@ -253,7 +253,7 @@ export default function PublishWithOnyxContent() {
                   boxShadow: '0 2px 20px rgba(0,0,0,0.06)',
                 }}
               >
-                <div style={{ width: 40, height: 3, background: '#1773b0', borderRadius: 2 }} />
+                <div style={{ width: 40, height: 3, background: 'rgb(120,181,57)', borderRadius: 2 }} />
                 <h3 style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.5px' }}>{card.title}</h3>
                 <p style={{ fontSize: '15px', lineHeight: 1.65, color: 'var(--text-secondary)' }}>{card.desc}</p>
               </div>
@@ -279,7 +279,7 @@ export default function PublishWithOnyxContent() {
               marginBottom: '64px',
             }}
           >
-            The <em style={{ fontStyle: 'italic', color: '#1773b0' }}>Programme.</em>
+            The <em style={{ fontStyle: 'italic', color: 'rgb(120,181,57)' }}>Programme.</em>
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             {modules.map((mod) => (
@@ -296,7 +296,7 @@ export default function PublishWithOnyxContent() {
                 }}
               >
                 <div>
-                  <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#1773b0', marginBottom: '12px' }}>
+                  <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgb(120,181,57)', marginBottom: '12px' }}>
                     Module {mod.num}
                   </p>
                   <h3
@@ -331,7 +331,7 @@ export default function PublishWithOnyxContent() {
                         }}
                       >
                         <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                          <path d="M2 5l2 2 4-4" stroke="#1773b0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M2 5l2 2 4-4" stroke="rgb(120,181,57)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </span>
                       {lesson}
@@ -381,7 +381,7 @@ export default function PublishWithOnyxContent() {
                     width: '56px',
                     height: '56px',
                     borderRadius: '50%',
-                    background: '#1773b0',
+                    background: 'rgb(120,181,57)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -419,7 +419,7 @@ export default function PublishWithOnyxContent() {
                 lineHeight: 1.05,
               }}
             >
-              This course is <em style={{ fontStyle: 'italic', color: '#1773b0' }}>for you</em> if...
+              This course is <em style={{ fontStyle: 'italic', color: 'rgb(120,181,57)' }}>for you</em> if...
             </h2>
             <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'white' }}>
               You have a story to tell — and you're ready to stop waiting for permission and start publishing on your own terms.
@@ -449,7 +449,7 @@ export default function PublishWithOnyxContent() {
                   }}
                 >
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 6l3 3 5-5" stroke="#1773b0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M2 6l3 3 5-5" stroke="rgb(120,181,57)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
                 {item}
@@ -488,7 +488,7 @@ export default function PublishWithOnyxContent() {
                 lineHeight: 1.05,
               }}
             >
-              Meet <em style={{ fontStyle: 'italic', color: '#1773b0' }}>Onyx.</em>
+              Meet <em style={{ fontStyle: 'italic', color: 'rgb(120,181,57)' }}>Onyx.</em>
             </h2>
             <p style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '24px' }}>
               Founder of The Fresh Friends, author & self-publishing educator
@@ -516,7 +516,7 @@ export default function PublishWithOnyxContent() {
               marginBottom: '64px',
             }}
           >
-            From our <em style={{ fontStyle: 'italic', color: '#1773b0' }}>students.</em>
+            From our <em style={{ fontStyle: 'italic', color: 'rgb(120,181,57)' }}>students.</em>
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
             {studentTestimonials.map((t) => (
@@ -539,7 +539,7 @@ export default function PublishWithOnyxContent() {
                       width: '48px',
                       height: '48px',
                       borderRadius: '50%',
-                      background: '#1773b0',
+                      background: 'rgb(120,181,57)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -601,7 +601,7 @@ export default function PublishWithOnyxContent() {
                 fontSize: '13px',
                 fontWeight: 700,
                 letterSpacing: '1px',
-                color: '#1773b0',
+                color: 'rgb(120,181,57)',
                 textTransform: 'uppercase',
               }}
             >
@@ -634,7 +634,7 @@ export default function PublishWithOnyxContent() {
                     }}
                   >
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <path d="M2 6l3 3 5-5" stroke="#1773b0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M2 6l3 3 5-5" stroke="rgb(120,181,57)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
                   {item}
@@ -647,7 +647,7 @@ export default function PublishWithOnyxContent() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '10px',
-                background: '#1773b0',
+                background: 'rgb(120,181,57)',
                 color: 'white',
                 padding: '18px 40px',
                 borderRadius: '100px',
