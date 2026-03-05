@@ -148,8 +148,8 @@ p { font-family: var(--font-playful); }
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.12) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.12) 2px, transparent 2px);
+  background-size: 56px 56px;
   background-color: var(--hero-bg);
   z-index: 0;
 }
