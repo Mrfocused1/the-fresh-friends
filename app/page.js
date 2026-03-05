@@ -802,31 +802,30 @@ export default function Home() {
             </div>
 
             <div className="footer-col">
-              <h4>The Books</h4>
+              <h4>Navigate</h4>
               <ul>
-                <li><a href="#books">Strawberry — Courage</a></li>
-                <li><a href="#books">Banana — Joy</a></li>
-                <li><a href="#books">Broccoli — Strength</a></li>
-                <li><a href="#books">View all books</a></li>
+                <li><Link href="/">Home</Link></li>
+                <li><Link href="/publish-with-onyx">How it works</Link></li>
+                <li><Link href="/pricing">Pricing</Link></li>
+                <li><a href="#contact">Contact</a></li>
               </ul>
             </div>
 
             <div className="footer-col">
-              <h4>The Friends</h4>
+              <h4>Explore</h4>
               <ul>
-                <li><a href="#characters">Meet the Characters</a></li>
-                <li><a href="#characters">Nature Powers</a></li>
-                <li><a href="#characters">Freshland</a></li>
-              </ul>
-            </div>
-
-            <div className="footer-col">
-              <h4>Learn</h4>
-              <ul>
+                <li><a href="#books">The Books</a></li>
+                <li><a href="#characters">The Characters</a></li>
                 <li><a href="#contact">School Workshops</a></li>
-                <li><a href="#contact">Nursery Visits</a></li>
-                <li><Link href="/publish-with-onyx">Publish with Onyx</Link></li>
+              </ul>
+            </div>
+
+            <div className="footer-col">
+              <h4>Account</h4>
+              <ul>
                 <li><Link href="/login">Author Login</Link></li>
+                <li><Link href="/dashboard">Dashboard</Link></li>
+                <li><Link href="/publish-with-onyx">Publish with Onyx</Link></li>
               </ul>
             </div>
           </div>
