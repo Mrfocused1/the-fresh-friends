@@ -837,9 +837,9 @@ export default function Home() {
               <span>&#9829;</span> in London.
             </p>
             <div className="footer-legal">
-              <a href="#">Privacy Policy</a>
-              <a href="#">Terms of Use</a>
-              <a href="#">Cookie Settings</a>
+              <span style={{ opacity: 0.4, cursor: 'default' }}>Privacy Policy</span>
+              <span style={{ opacity: 0.4, cursor: 'default' }}>Terms of Use</span>
+              <span style={{ opacity: 0.4, cursor: 'default' }}>Cookie Settings</span>
             </div>
           </div>
         </div>
