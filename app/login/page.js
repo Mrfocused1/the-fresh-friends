@@ -20,12 +20,9 @@ export default function LoginPage() {
 
   return (
     <>
-      {/* GRAIN */}
-      <div className="grain-overlay" />
-
       {/* FLOATING LOGO */}
       <a href="/" className="floating-logo">
-        <img src="/logo.svg" alt="The Fresh Friends" />
+        <img src="/logo-dark.svg" alt="The Fresh Friends" />
       </a>
 
       {/* NAVBAR */}
@@ -35,7 +32,7 @@ export default function LoginPage() {
       <div
         style={{
           minHeight: '100vh',
-          background: 'var(--dark-bg)',
+          background: '#f5f5f0',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -48,7 +45,7 @@ export default function LoginPage() {
             position: 'fixed',
             inset: 0,
             background:
-              'radial-gradient(ellipse 50% 50% at 50% 50%, rgba(23,115,176,0.06) 0%, transparent 70%)',
+              'radial-gradient(ellipse 50% 50% at 50% 50%, rgba(120,181,57,0.08) 0%, transparent 70%)',
             pointerEvents: 'none',
             zIndex: 0,
           }}
@@ -59,26 +56,26 @@ export default function LoginPage() {
           style={{
             position: 'relative',
             zIndex: 1,
-            background: 'var(--dark-card-bg)',
+            background: 'white',
             borderRadius: '20px',
             padding: '48px',
             width: '100%',
             maxWidth: '420px',
-            border: '1px solid rgba(255,255,255,0.06)',
-            boxShadow: '0 32px 80px rgba(0,0,0,0.4)',
+            border: '1px solid rgba(0,0,0,0.08)',
+            boxShadow: '0 32px 80px rgba(0,0,0,0.08)',
           }}
         >
           {/* Logo mark inside card */}
           <div style={{ marginBottom: '32px', textAlign: 'center' }}>
             <div style={{ margin: '0 auto 16px', width: 52, height: 52, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img src="/logo.svg" alt="" style={{ height: 40, width: 'auto' }} />
+              <img src="/logo-dark.svg" alt="" style={{ height: 40, width: 'auto' }} />
             </div>
             <h1
               style={{
                 fontFamily: 'var(--font-serif)',
                 fontSize: '32px',
                 fontWeight: 700,
-                color: 'var(--white)',
+                color: '#111',
                 letterSpacing: '-1px',
                 marginBottom: '8px',
               }}
@@ -88,7 +85,7 @@ export default function LoginPage() {
             <p
               style={{
                 fontSize: '15px',
-                color: 'var(--text-secondary)',
+                color: '#666',
                 lineHeight: 1.5,
               }}
             >
@@ -133,7 +130,7 @@ export default function LoginPage() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '10px',
-                background: '#1773b0',
+                background: 'rgb(120,181,57)',
                 color: 'white',
                 fontFamily: 'var(--font-main)',
                 fontSize: '16px',
@@ -177,18 +174,18 @@ export default function LoginPage() {
               textAlign: 'center',
               marginTop: '16px',
               fontSize: '13px',
-              color: 'var(--text-secondary)',
+              color: '#999',
             }}
           >
             <a
               href="#"
               style={{
-                color: 'var(--text-secondary)',
+                color: '#999',
                 textDecoration: 'none',
                 transition: 'color 0.2s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'white')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#111')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#999')}
             >
               Forgot password?
             </a>
@@ -207,13 +204,13 @@ export default function LoginPage() {
               style={{
                 flex: 1,
                 height: '1px',
-                background: 'rgba(255,255,255,0.08)',
+                background: 'rgba(0,0,0,0.08)',
               }}
             />
             <span
               style={{
                 fontSize: '12px',
-                color: 'var(--text-secondary)',
+                color: '#999',
                 letterSpacing: '1px',
                 textTransform: 'uppercase',
               }}
@@ -224,7 +221,7 @@ export default function LoginPage() {
               style={{
                 flex: 1,
                 height: '1px',
-                background: 'rgba(255,255,255,0.08)',
+                background: 'rgba(0,0,0,0.08)',
               }}
             />
           </div>
@@ -234,7 +231,7 @@ export default function LoginPage() {
             style={{
               textAlign: 'center',
               fontSize: '14px',
-              color: 'var(--text-secondary)',
+              color: '#666',
               lineHeight: 1.5,
             }}
           >
@@ -242,7 +239,7 @@ export default function LoginPage() {
             <Link
               href="/publish-with-onyx"
               style={{
-                color: '#1773b0',
+                color: 'rgb(120,181,57)',
                 fontWeight: 600,
                 textDecoration: 'none',
               }}
