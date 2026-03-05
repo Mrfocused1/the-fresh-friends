@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 const CharactersScroll = dynamic(() => import('./components/CharactersScroll'), { ssr: false });
