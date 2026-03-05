@@ -165,14 +165,14 @@ export default function PublishWithOnyxContent() {
               fontFamily: 'var(--font-serif)',
               fontSize: 'clamp(22px, 3vw, 32px)',
               fontStyle: 'italic',
-              color: 'var(--text-light)',
+              color: 'white',
               marginBottom: '20px',
               fontWeight: 400,
             }}
           >
             Turn Your Book Into a Brand
           </p>
-          <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'var(--text-light)', maxWidth: '540px', margin: '0 auto 48px' }}>
+          <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'white', maxWidth: '540px', margin: '0 auto 48px' }}>
             A complete online course teaching aspiring authors how to write, design, publish, and build a brand around their children's book — from scratch.
           </p>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
@@ -198,7 +198,7 @@ export default function PublishWithOnyxContent() {
             </a>
             <a
               href="#programme"
-              style={{ fontSize: '15px', fontWeight: 500, color: 'var(--text-light)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}
+              style={{ fontSize: '15px', fontWeight: 500, color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}
             >
               <span
                 style={{
@@ -265,7 +265,7 @@ export default function PublishWithOnyxContent() {
       {/* THE PROGRAMME */}
       <section id="programme" style={{ background: 'rgb(0,113,77)', padding: '100px 40px' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-light)', marginBottom: '16px' }}>
+          <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'white', marginBottom: '16px' }}>
             Course Structure
           </p>
           <h2
@@ -312,11 +312,11 @@ export default function PublishWithOnyxContent() {
                   >
                     {mod.title}
                   </h3>
-                  <p style={{ fontSize: '15px', color: 'var(--text-light)', fontStyle: 'italic' }}>{mod.sub}</p>
+                  <p style={{ fontSize: '15px', color: 'white', fontStyle: 'italic' }}>{mod.sub}</p>
                 </div>
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {mod.lessons.map((lesson) => (
-                    <li key={lesson} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', fontSize: '15px', color: 'var(--text-light)', lineHeight: 1.5 }}>
+                    <li key={lesson} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', fontSize: '15px', color: 'white', lineHeight: 1.5 }}>
                       <span
                         style={{
                           flexShrink: 0,
@@ -405,7 +405,7 @@ export default function PublishWithOnyxContent() {
       <section style={{ background: 'rgb(0,113,77)', padding: '100px 40px' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start' }}>
           <div>
-            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-light)', marginBottom: '16px' }}>
+            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'white', marginBottom: '16px' }}>
               Is this for me?
             </p>
             <h2
@@ -421,7 +421,7 @@ export default function PublishWithOnyxContent() {
             >
               This course is <em style={{ fontStyle: 'italic', color: '#1773b0' }}>for you</em> if...
             </h2>
-            <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--text-light)' }}>
+            <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'white' }}>
               You have a story to tell — and you're ready to stop waiting for permission and start publishing on your own terms.
             </p>
           </div>
@@ -434,7 +434,7 @@ export default function PublishWithOnyxContent() {
               "You're a parent with a story you want to share with your child — and others",
               "You've started a book before but got stuck and need a clear system",
             ].map((item) => (
-              <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', fontSize: '16px', color: 'var(--text-light)', lineHeight: 1.55 }}>
+              <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', fontSize: '16px', color: 'white', lineHeight: 1.55 }}>
                 <span
                   style={{
                     flexShrink: 0,
@@ -532,7 +532,7 @@ export default function PublishWithOnyxContent() {
                   gap: '32px',
                 }}
               >
-                <p style={{ fontSize: '17px', lineHeight: 1.65, color: 'var(--text-light)' }}>{t.quote}</p>
+                <p style={{ fontSize: '17px', lineHeight: 1.65, color: 'white' }}>{t.quote}</p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <div
                     style={{
@@ -553,7 +553,7 @@ export default function PublishWithOnyxContent() {
                   </div>
                   <div>
                     <strong style={{ display: 'block', fontSize: '15px', fontWeight: 600, color: 'var(--white)' }}>{t.name}</strong>
-                    <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>{t.role}</span>
+                    <span style={{ fontSize: '13px', color: 'white' }}>{t.role}</span>
                   </div>
                 </div>
               </div>
