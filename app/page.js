@@ -596,7 +596,7 @@ export default function Home() {
       </section>
 
       {/* ENQUIRY / WORKSHOPS */}
-      <section className="enquiry-section" id="workshops">
+      <section className="enquiry-section" id="contact">
         <div className="enquiry-inner">
           <div className="enquiry-left">
             <h2>
@@ -732,7 +732,7 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="footer" id="contact">
+      <footer className="footer">
         <div className="footer-inner">
           <div className="footer-top">
             <div className="footer-brand">
@@ -823,8 +823,8 @@ export default function Home() {
             <div className="footer-col">
               <h4>Learn</h4>
               <ul>
-                <li><a href="#workshops">School Workshops</a></li>
-                <li><a href="#workshops">Nursery Visits</a></li>
+                <li><a href="#contact">School Workshops</a></li>
+                <li><a href="#contact">Nursery Visits</a></li>
                 <li><Link href="/publish-with-onyx">Publish with Onyx</Link></li>
                 <li><Link href="/login">Author Login</Link></li>
               </ul>
