@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 /* ============================================================
    DATA
@@ -397,47 +398,7 @@ export default function PricingPage() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="footer" id="contact">
-        <div className="footer-inner">
-          <div className="footer-top">
-            <div className="footer-brand">
-              <img src="/logo-dark.svg" alt="The Fresh Friends" />
-              <p>A children's book series celebrating the extraordinary nature powers within every fruit, vegetable — and child.</p>
-              <div className="footer-social">
-                <a href="https://instagram.com/thefreshfriends" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" />
-                    <circle cx="12" cy="12" r="4" />
-                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" strokeWidth="0" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div className="footer-col">
-              <h4>Navigate</h4>
-              <ul>
-                <li><Link href="/">Home</Link></li>
-                <li><Link href="/pricing">Pricing</Link></li>
-                <li><Link href="/#contact">Contact</Link></li>
-              </ul>
-            </div>
-            <div className="footer-col">
-              <h4>Account</h4>
-              <ul>
-                <li><Link href="/dashboard">Dashboard</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>© 2026 The Fresh Friends. Made with ♥ in London.</p>
-            <div className="footer-legal">
-              <span style={{ opacity: 0.4, cursor: 'default' }}>Privacy Policy</span>
-              <span style={{ opacity: 0.4, cursor: 'default' }}>Terms of Use</span>
-            </div>
-          </div>
-        </div>
-        <p className="footer-wordmark">The Fresh Friends</p>
-      </footer>
+      <Footer />
     </>
   );
 }

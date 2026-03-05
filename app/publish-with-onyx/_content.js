@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const learnCards = [
   {
@@ -669,66 +670,7 @@ export default function PublishWithOnyxContent() {
       </section>
 
       {/* FOOTER */}
-      <footer className="footer" id="contact">
-        <div className="footer-inner">
-          <div className="footer-top">
-            <div className="footer-brand">
-              <img src="/logo-dark.svg" alt="The Fresh Friends" />
-              <p>A children's book series celebrating the extraordinary nature powers within every fruit, vegetable — and child.</p>
-              <div className="footer-social">
-                <a href="https://instagram.com/thefreshfriends" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" />
-                    <circle cx="12" cy="12" r="4" />
-                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" strokeWidth="0" />
-                  </svg>
-                </a>
-                <a href="https://facebook.com/thefreshfriends" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
-                  </svg>
-                </a>
-                <a href="https://tiktok.com/@thefreshfriends" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M9 12a4 4 0 104 4V4a5 5 0 005 5" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div className="footer-col">
-              <h4>The Books</h4>
-              <ul>
-                <li><Link href="/#books">Strawberry — Courage</Link></li>
-                <li><Link href="/#books">Banana — Joy</Link></li>
-                <li><Link href="/#books">Broccoli — Strength</Link></li>
-              </ul>
-            </div>
-            <div className="footer-col">
-              <h4>The Friends</h4>
-              <ul>
-                <li><Link href="/#characters">Meet the Characters</Link></li>
-                <li><Link href="/#characters">Nature Powers</Link></li>
-              </ul>
-            </div>
-            <div className="footer-col">
-              <h4>Learn</h4>
-              <ul>
-                <li><Link href="/#workshops">School Workshops</Link></li>
-                <li><Link href="/publish-with-onyx">Publish with Onyx</Link></li>
-                <li><Link href="/login">Author Login</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>© 2026 The Fresh Friends. Made with <span>&#9829;</span> in London.</p>
-            <div className="footer-legal">
-              <a href="#">Privacy Policy</a>
-              <a href="#">Terms of Use</a>
-            </div>
-          </div>
-        </div>
-        <p className="footer-wordmark">The Fresh Friends</p>
-      </footer>
+      <Footer />
     </>
   );
 }
