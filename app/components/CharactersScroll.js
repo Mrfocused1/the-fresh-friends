@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 
 const characters = [
   { emoji:'', name:'Strawberry', power:'Power of Courage',    powerColor:'#e8365d', bgColor:'rgba(232,54,93,0.12)',   body:"Strawberry is the bravest fruit in Freshland. When the others are scared, she leads the way — reminding us that courage isn't the absence of fear, it's doing it anyway." },
@@ -14,23 +14,19 @@ const characters = [
 ];
 
 export default function CharactersScroll() {
-  const wrapperRef = useRef(null);
   const sectionRef = useRef(null);
   const trackRef   = useRef(null);
 
-  useEffect(() => {
-    const wrapper = wrapperRef.current;
+  // useLayoutEffect cleanup runs synchronously before React removes DOM nodes,
+  // so ctx.revert() restores the section from GSAP's pin-spacer before React
+  // tries removeChild — preventing the "not a child" crash on navigation.
+  useLayoutEffect(() => {
     const section = sectionRef.current;
     const track   = trackRef.current;
-    if (!wrapper || !section || !track) return;
+    if (!section || !track) return;
 
     let cancelled = false;
     let ctx;
-
-    function setWrapperHeight() {
-      const scrollDist = track.scrollWidth - window.innerWidth;
-      wrapper.style.height = `${window.innerHeight + scrollDist}px`;
-    }
 
     async function init() {
       try {
@@ -40,21 +36,18 @@ export default function CharactersScroll() {
 
         gsap.registerPlugin(ScrollTrigger);
         ScrollTrigger.getAll()
-          .filter(t => t.trigger === wrapper)
+          .filter(t => t.trigger === section || t.pin === section)
           .forEach(t => t.kill());
 
-        setWrapperHeight();
-        window.addEventListener('resize', setWrapperHeight);
-
-        const panels      = track.querySelectorAll('.panel');
-        const totalPanels = panels.length;
+        const totalPanels = characters.length;
 
         ctx = gsap.context(() => {
           gsap.to(track, {
             x: () => -(track.scrollWidth - window.innerWidth),
             ease: 'none',
             scrollTrigger: {
-              trigger: wrapper,
+              trigger: section,
+              pin: true,
               scrub: 1,
               invalidateOnRefresh: true,
               start: 'top top',
@@ -77,16 +70,15 @@ export default function CharactersScroll() {
     }
 
     init();
+
     return () => {
       cancelled = true;
-      window.removeEventListener('resize', setWrapperHeight);
       if (ctx) ctx.revert();
     };
   }, []);
 
   return (
-    <div id="characters" ref={wrapperRef}>
-    <section className="services-scroll" ref={sectionRef} style={{ position: 'sticky', top: 0 }}>
+    <section className="services-scroll" id="characters" ref={sectionRef}>
       <div className="services-track" ref={trackRef}>
         {characters.map((char, i) => (
           <div className="panel" key={char.name}>
@@ -122,6 +114,5 @@ export default function CharactersScroll() {
         ))}
       </div>
     </section>
-    </div>
   );
 }
