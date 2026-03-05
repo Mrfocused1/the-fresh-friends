@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Navbar from '../components/Navbar';
 
 const learnCards = [
   {
@@ -117,23 +118,7 @@ export default function PublishWithOnyxContent() {
       </a>
 
       {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="nav-container">
-          <div className="nav-right">
-            <div className="nav-links">
-              <Link href="/#books">The Books</Link>
-              <Link href="/#characters">The Friends</Link>
-              <Link href="/#workshops">Workshops</Link>
-              <Link href="/publish-with-onyx" style={{ color: '#1773b0', fontWeight: 600 }}>
-                Publish with Onyx
-              </Link>
-            </div>
-            <a href="#enrol" className="nav-cta">
-              Enrol Now
-            </a>
-          </div>
-        </div>
-      </nav>
+      <Navbar activePage="How it works" />
 
       {/* HERO */}
       <section
