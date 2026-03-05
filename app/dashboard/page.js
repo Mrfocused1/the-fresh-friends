@@ -130,13 +130,13 @@ const LESSON_DESCRIPTIONS = {
 };
 
 const PHASE_COLORS = {
-  welcome: '#1773b0',
+  welcome: 'rgb(120,181,57)',
   phase1:  '#e8365d',
   phase2:  '#f5c518',
   phase3:  '#27ae60',
   phase4:  '#f39c12',
   phase5:  '#8e44ad',
-  bonus:   '#1773b0',
+  bonus:   'rgb(120,181,57)',
 };
 
 /* ── HELPERS ─────────────────────────────────────────────────── */
@@ -151,7 +151,7 @@ function getNextLesson(completedIds) {
 
 /* ── COMPONENTS ──────────────────────────────────────────────── */
 
-function ProgressRing({ pct, size = 36, color = '#1773b0' }) {
+function ProgressRing({ pct, size = 36, color = 'rgb(120,181,57)' }) {
   const r = (size - 6) / 2;
   const circ = 2 * Math.PI * r;
   return (
@@ -190,7 +190,7 @@ function Sidebar({ modules, completedIds, activeLesson, onSelect, collapsed, set
       <div style={{ padding: collapsed ? '20px 14px' : '20px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(0,0,0,0.07)', flexShrink: 0 }}>
         {!collapsed && (
           <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-            <img src="/logo.svg" alt="The Fresh Friends" style={{ height: 24, width: 'auto' }} />
+            <img src="/logo-dark.svg" alt="The Fresh Friends" style={{ height: 24, width: 'auto' }} />
           </Link>
         )}
         <button onClick={() => setCollapsed(c => !c)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(0,0,0,0.3)', padding: 4, display: 'flex', alignItems: 'center', marginLeft: collapsed ? 'auto' : 0 }}>
@@ -205,10 +205,10 @@ function Sidebar({ modules, completedIds, activeLesson, onSelect, collapsed, set
         <div style={{ padding: '16px 20px', borderBottom: '1px solid rgba(0,0,0,0.07)', flexShrink: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
             <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)' }}>Your Progress</span>
-            <span style={{ fontSize: 12, fontWeight: 600, color: '#1773b0' }}>{overallPct}%</span>
+            <span style={{ fontSize: 12, fontWeight: 600, color: 'rgb(120,181,57)' }}>{overallPct}%</span>
           </div>
           <div style={{ height: 4, background: 'rgba(0,0,0,0.08)', borderRadius: 4, overflow: 'hidden' }}>
-            <div style={{ height: '100%', width: overallPct + '%', background: '#1773b0', borderRadius: 4, transition: 'width 0.5s ease' }} />
+            <div style={{ height: '100%', width: overallPct + '%', background: 'rgb(120,181,57)', borderRadius: 4, transition: 'width 0.5s ease' }} />
           </div>
           <p style={{ fontSize: 11, color: 'rgba(0,0,0,0.35)', marginTop: 6 }}>{totalDone} of {totalLessons} lessons complete</p>
         </div>
@@ -266,11 +266,11 @@ function Sidebar({ modules, completedIds, activeLesson, onSelect, collapsed, set
                         key={lesson.id}
                         onClick={() => onSelect(lesson, mod)}
                         style={{
-                          width: '100%', background: isActive ? 'rgba(23,115,176,0.08)' : 'none',
+                          width: '100%', background: isActive ? 'rgba(120,181,57,0.08)' : 'none',
                           border: 'none', cursor: 'pointer',
                           padding: '9px 20px 9px 48px',
                           display: 'flex', alignItems: 'center', gap: 10,
-                          borderLeft: isActive ? `3px solid #1773b0` : '3px solid transparent',
+                          borderLeft: isActive ? `3px solid rgb(120,181,57)` : '3px solid transparent',
                           transition: 'background 0.15s',
                           textAlign: 'left',
                         }}
@@ -281,16 +281,16 @@ function Sidebar({ modules, completedIds, activeLesson, onSelect, collapsed, set
                         <span style={{
                           width: 20, height: 20, borderRadius: '50%', flexShrink: 0,
                           display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          background: isDone ? '#1773b0' : isActive ? 'rgba(23,115,176,0.15)' : 'rgba(0,0,0,0.06)',
-                          border: isActive && !isDone ? '2px solid #1773b0' : 'none',
+                          background: isDone ? 'rgb(120,181,57)' : isActive ? 'rgba(120,181,57,0.15)' : 'rgba(0,0,0,0.06)',
+                          border: isActive && !isDone ? '2px solid rgb(120,181,57)' : 'none',
                         }}>
                           {isDone ? (
                             <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                           ) : (
-                            <span style={{ fontSize: 9, color: isActive ? '#1773b0' : 'rgba(0,0,0,0.35)', fontWeight: 700 }}>{idx + 1}</span>
+                            <span style={{ fontSize: 9, color: isActive ? 'rgb(120,181,57)' : 'rgba(0,0,0,0.35)', fontWeight: 700 }}>{idx + 1}</span>
                           )}
                         </span>
-                        <span style={{ fontSize: 13, color: isDone ? 'rgba(0,0,0,0.35)' : isActive ? '#1773b0' : 'rgba(0,0,0,0.65)', lineHeight: 1.4, flex: 1 }}>{lesson.title}</span>
+                        <span style={{ fontSize: 13, color: isDone ? 'rgba(0,0,0,0.35)' : isActive ? 'rgb(120,181,57)' : 'rgba(0,0,0,0.65)', lineHeight: 1.4, flex: 1 }}>{lesson.title}</span>
                         {lesson.duration !== 'Resource' && (
                           <span style={{ fontSize: 11, color: 'rgba(0,0,0,0.3)', flexShrink: 0 }}>{lesson.duration}</span>
                         )}
@@ -351,14 +351,14 @@ function VideoPlayer({ lesson, mod, completedIds, onComplete, onNext, onPrev, ha
         <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse 60% 60% at 50% 50%, ${color}18 0%, transparent 70%)` }} />
         <div style={{
           width: 72, height: 72, borderRadius: '50%',
-          background: '#1773b0',
+          background: 'rgb(120,181,57)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           cursor: 'pointer', position: 'relative', zIndex: 2,
-          boxShadow: '0 8px 40px rgba(23,115,176,0.5)',
+          boxShadow: '0 8px 40px rgba(120,181,57,0.4)',
           transition: 'transform 0.2s, box-shadow 0.2s',
         }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.08)'; e.currentTarget.style.boxShadow = '0 12px 50px rgba(23,115,176,0.7)'; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 8px 40px rgba(23,115,176,0.5)'; }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.08)'; e.currentTarget.style.boxShadow = '0 12px 50px rgba(120,181,57,0.5)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 8px 40px rgba(120,181,57,0.5)'; }}
         >
           <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
         </div>
@@ -368,7 +368,7 @@ function VideoPlayer({ lesson, mod, completedIds, onComplete, onNext, onPrev, ha
           </div>
         )}
         {isDone && (
-          <div style={{ position: 'absolute', top: 16, right: 16, background: '#1773b0', borderRadius: 100, padding: '5px 14px', fontSize: 12, color: 'white', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{ position: 'absolute', top: 16, right: 16, background: 'rgb(120,181,57)', borderRadius: 100, padding: '5px 14px', fontSize: 12, color: 'white', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 6 }}>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
             Completed
           </div>
@@ -396,7 +396,7 @@ function VideoPlayer({ lesson, mod, completedIds, onComplete, onNext, onPrev, ha
         {!isDone ? (
           <button onClick={() => onComplete(lesson.id)} style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
-            background: '#1773b0', color: 'white',
+            background: 'rgb(120,181,57)', color: 'white',
             border: 'none', borderRadius: 100, padding: '12px 24px',
             fontSize: 14, fontWeight: 600, cursor: 'pointer',
             transition: 'opacity 0.2s, transform 0.15s',
@@ -409,7 +409,7 @@ function VideoPlayer({ lesson, mod, completedIds, onComplete, onNext, onPrev, ha
             Mark as complete
           </button>
         ) : (
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(23,115,176,0.1)', border: '1px solid rgba(23,115,176,0.2)', color: '#1773b0', borderRadius: 100, padding: '12px 24px', fontSize: 14, fontWeight: 600 }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(120,181,57,0.1)', border: '1px solid rgba(120,181,57,0.2)', color: 'rgb(120,181,57)', borderRadius: 100, padding: '12px 24px', fontSize: 14, fontWeight: 600 }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M20 6L9 17l-5-5"/></svg>
             Completed
           </div>
@@ -428,8 +428,8 @@ function VideoPlayer({ lesson, mod, completedIds, onComplete, onNext, onPrev, ha
           <h3 style={{ fontSize: 13, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 20 }}>Download Resource</h3>
           <button style={{
             display: 'inline-flex', alignItems: 'center', gap: 10,
-            background: 'rgba(23,115,176,0.08)', border: '1px solid rgba(23,115,176,0.2)',
-            color: '#1773b0', borderRadius: 12, padding: '14px 24px',
+            background: 'rgba(120,181,57,0.08)', border: '1px solid rgba(120,181,57,0.2)',
+            color: 'rgb(120,181,57)', borderRadius: 12, padding: '14px 24px',
             fontSize: 14, fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-main)',
           }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 2v10m0 0l-3-3m3 3l3-3M3 15v4a2 2 0 002 2h14a2 2 0 002-2v-4"/></svg>
@@ -456,7 +456,7 @@ function VideoPlayer({ lesson, mod, completedIds, onComplete, onNext, onPrev, ha
 
         <button onClick={onNext} disabled={!hasNext} style={{
           display: 'flex', alignItems: 'center', gap: 8,
-          background: hasNext ? '#1773b0' : 'rgba(0,0,0,0.04)',
+          background: hasNext ? 'rgb(120,181,57)' : 'rgba(0,0,0,0.04)',
           border: 'none', borderRadius: 12,
           padding: '12px 24px', fontSize: 14, fontWeight: 600,
           color: hasNext ? 'white' : 'rgba(0,0,0,0.25)',
@@ -495,17 +495,17 @@ function Overview({ completedIds, onSelect, isMobile }) {
       <div style={{ background: 'white', borderRadius: 16, padding: '24px 28px', marginBottom: 24, border: '1px solid rgba(0,0,0,0.07)', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
           <span style={{ fontSize: 13, fontWeight: 600, color: 'rgba(0,0,0,0.6)' }}>Overall Course Progress</span>
-          <span style={{ fontSize: 14, fontWeight: 700, color: '#1773b0' }}>{overallPct}%</span>
+          <span style={{ fontSize: 14, fontWeight: 700, color: 'rgb(120,181,57)' }}>{overallPct}%</span>
         </div>
         <div style={{ height: 8, background: 'rgba(0,0,0,0.06)', borderRadius: 8, overflow: 'hidden' }}>
-          <div style={{ height: '100%', width: overallPct + '%', background: 'linear-gradient(90deg, #1773b0, #3a9fd4)', borderRadius: 8, transition: 'width 0.5s ease' }} />
+          <div style={{ height: '100%', width: overallPct + '%', background: 'linear-gradient(90deg, rgb(120,181,57), rgb(80,160,30))', borderRadius: 8, transition: 'width 0.5s ease' }} />
         </div>
       </div>
 
       {/* Continue card */}
       {next && nextMod && (
         <div style={{
-          background: 'linear-gradient(135deg, #1773b0 0%, #125d8e 100%)',
+          background: 'linear-gradient(135deg, rgb(0,113,77) 0%, rgb(0,80,54) 100%)',
           borderRadius: 16, padding: isMobile ? '24px 20px' : '28px 32px', marginBottom: 32,
           display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', gap: isMobile ? 16 : 24,
         }}>
@@ -516,7 +516,7 @@ function Overview({ completedIds, onSelect, isMobile }) {
           </div>
           <button onClick={() => onSelect(next, nextMod)} style={{
             display: 'inline-flex', alignItems: 'center', gap: 10,
-            background: 'white', color: '#1773b0',
+            background: 'white', color: 'rgb(0,113,77)',
             border: 'none', borderRadius: 100, padding: '14px 28px',
             fontSize: 15, fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font-main)',
             transition: 'opacity 0.2s', flexShrink: 0,
@@ -557,7 +557,7 @@ function Overview({ completedIds, onSelect, isMobile }) {
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
                   <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color }}>{mod.phase}</span>
                   {isComplete && (
-                    <span style={{ fontSize: 11, background: 'rgba(23,115,176,0.1)', color: '#1773b0', borderRadius: 100, padding: '2px 10px', fontWeight: 600 }}>Complete</span>
+                    <span style={{ fontSize: 11, background: 'rgba(120,181,57,0.1)', color: 'rgb(120,181,57)', borderRadius: 100, padding: '2px 10px', fontWeight: 600 }}>Complete</span>
                   )}
                 </div>
                 <h3 style={{ fontSize: 15, fontWeight: 700, color: '#111827', marginBottom: 2 }}>{mod.title}</h3>
@@ -708,7 +708,7 @@ export default function DashboardPage() {
               </button>
             )}
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{ width: 28, height: 28, borderRadius: '50%', background: '#1773b0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, color: 'white', flexShrink: 0 }}>A</div>
+              <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgb(120,181,57)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, color: 'white', flexShrink: 0 }}>A</div>
               {!isMobile && <span style={{ fontSize: 13, color: 'rgba(0,0,0,0.55)' }}>Author</span>}
             </div>
           </div>
