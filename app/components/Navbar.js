@@ -12,8 +12,16 @@ export default function Navbar({ activePage }) {
     { label: 'Home',         href: '/' },
     { label: 'How it works', href: '/publish-with-onyx' },
     { label: 'Pricing',      href: '/pricing' },
-    { label: 'Contact',      href: pathname === '/' ? '#contact' : '/#contact' },
+    { label: 'Contact',      href: '/#contact', anchor: true },
   ];
+
+  function handleContact(e) {
+    if (pathname === '/') {
+      e.preventDefault();
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    }
+    setMenuOpen(false);
+  }
 
   return (
     <>
@@ -21,14 +29,25 @@ export default function Navbar({ activePage }) {
         <div className="nav-container">
           <div className="nav-right">
             <div className="nav-links">
-              {links.map(({ label, href }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  style={activePage === label ? { color: 'rgb(120,181,57)', fontWeight: 600 } : undefined}
-                >
-                  {label}
-                </Link>
+              {links.map(({ label, href, anchor }) => (
+                anchor ? (
+                  <a
+                    key={label}
+                    href={href}
+                    onClick={handleContact}
+                    style={activePage === label ? { color: 'rgb(120,181,57)', fontWeight: 600 } : undefined}
+                  >
+                    {label}
+                  </a>
+                ) : (
+                  <Link
+                    key={href}
+                    href={href}
+                    style={activePage === label ? { color: 'rgb(120,181,57)', fontWeight: 600 } : undefined}
+                  >
+                    {label}
+                  </Link>
+                )
               ))}
             </div>
             <Link href="/login" className="nav-cta">Login</Link>
@@ -52,10 +71,16 @@ export default function Navbar({ activePage }) {
           </svg>
         </button>
         <nav className="fs-menu__nav">
-          {links.map(({ label, href }) => (
-            <Link key={href} href={href} className="fs-menu__link" onClick={() => setMenuOpen(false)}>
-              {label}
-            </Link>
+          {links.map(({ label, href, anchor }) => (
+            anchor ? (
+              <a key={label} href={href} className="fs-menu__link" onClick={handleContact}>
+                {label}
+              </a>
+            ) : (
+              <Link key={href} href={href} className="fs-menu__link" onClick={() => setMenuOpen(false)}>
+                {label}
+              </Link>
+            )
           ))}
         </nav>
         <Link href="/login" className="fs-menu__cta" onClick={() => setMenuOpen(false)}>Login</Link>
