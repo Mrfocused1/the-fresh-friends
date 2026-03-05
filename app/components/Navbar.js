@@ -23,7 +23,7 @@ export default function Navbar({ activePage }) {
                 <Link
                   key={href}
                   href={href}
-                  style={activePage === label ? { color: '#1773b0', fontWeight: 600 } : undefined}
+                  style={activePage === label ? { color: 'rgb(120,181,57)', fontWeight: 600 } : undefined}
                 >
                   {label}
                 </Link>
