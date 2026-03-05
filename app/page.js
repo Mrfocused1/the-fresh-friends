@@ -205,8 +205,14 @@ export default function Home() {
 
       // Logo swap
       if (logoImg) {
-        const threshold = maxScroll * 0.75;
-        logoImg.src = scrollY >= threshold ? '/logo-dark.svg' : '/logo.svg';
+        const booksRect = booksSection ? booksSection.getBoundingClientRect() : null;
+        const onGreen = booksRect && booksRect.top <= 60 && booksRect.bottom > 60;
+        if (onGreen) {
+          logoImg.src = '/logo-green-bg.svg';
+        } else {
+          const threshold = maxScroll * 0.75;
+          logoImg.src = scrollY >= threshold ? '/logo-dark.svg' : '/logo.svg';
+        }
       }
 
       // Circle scale: grows to fill screen
@@ -275,8 +281,8 @@ export default function Home() {
       setTimeout(() => {
         setGrowIndex(i => (i + 1) % growWords.length);
         setGrowVisible(true);
-      }, 400);
-    }, 2000);
+      }, 600);
+    }, 2600);
     return () => clearInterval(interval);
   }, []);
 
@@ -364,11 +370,23 @@ export default function Home() {
                 {/* Line 2: stories grow */}
                 <div className="hero-line indent">
                   <span className="h-word italic-word">stories</span>
-                  <span
-                    className={`h-word grow-cycle${growVisible ? ' grow-in' : ' grow-out'}`}
-                    style={{ color: growWords[growIndex].color }}
-                  >
-                    {growWords[growIndex].word}
+                  <span className="grow-stack">
+                    {growWords.map((w, i) => {
+                      const isActive = i === growIndex;
+                      return (
+                        <span
+                          key={w.word}
+                          className={`h-word grow-cycle${isActive ? (growVisible ? ' grow-in' : ' grow-out') : ''}`}
+                          style={{
+                            color: w.color,
+                            visibility: isActive ? 'visible' : 'hidden',
+                          }}
+                          aria-hidden={!isActive}
+                        >
+                          {w.word}
+                        </span>
+                      );
+                    })}
                   </span>
                 </div>
                 {/* Line 3: into adventures. */}
@@ -393,11 +411,11 @@ export default function Home() {
         <div className="section-container">
           <div className="our-work-heading-div">
             <div className="our-work-heading-left anim-in">
-              <p className="label-medium">The Books</p>
+              <p className="label-medium">Making Waves</p>
               <h1>
-                Every Fresh Friend has a{' '}
+                Growing healthy{' '}
                 <span className="scribble-wrap">
-                  <span className="italic-secondary">Nature Power.</span>
+                  <span className="italic-secondary">minds & bodies.</span>
                   <svg viewBox="0 0 200 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M2 9 C40 3, 80 11, 120 5 C160 -1, 180 9, 198 6"
@@ -414,48 +432,45 @@ export default function Home() {
           </div>
 
           <div className="flip-cards">
-            {/* Card 1 — Strawberry */}
+            {/* Card 1 — Self Publish */}
             <div className="flip-card anim-in delay-1">
               <div className="flip-card-inner">
-                <div className="card-img">
-                  <div className="card-img-inner" style={{ fontSize: '80px' }}>
-                    
-                  </div>
-                </div>
                 <div className="card-body">
+                  <span className="card-num">Publish with Onyx</span>
                   <div className="card-body-top">
-                    <span className="card-num">Book 01</span>
                     <h3>
-                      Strawberry &{' '}
-                      <span className="si">the Power of Courage</span>
+                      How to{' '}
+                      <span className="si">Self Publish</span>
                     </h3>
                     <p className="body-large">
-                      When the bridge to Freshland is broken and no one dares
-                      cross, Strawberry must find the courage within herself to
-                      lead the way.
+                      Learn how to bring your children's book idea to life —
+                      from first draft to published copy.
                     </p>
-                    <div className="card-tags">
-                      <span className="tag">Ages 3–7</span>
-                      <span className="tag">Courage</span>
-                      <span className="tag">Leadership</span>
-                    </div>
                   </div>
-                  <div className="card-tags" style={{ marginTop: '16px' }}>
-                    <span className="tag">32 pages</span>
-                    <span className="tag">Hardback</span>
+                  <div className="tag-marquee">
+                    <div className="tag-marquee-track">
+                      <span className="tag">Publishing</span>
+                      <span className="tag">Authors</span>
+                      <span className="tag">Creators</span>
+                      <span className="tag">Step-by-step</span>
+                      <span className="tag">Free guide</span>
+                      <span className="tag">Publishing</span>
+                      <span className="tag">Authors</span>
+                      <span className="tag">Creators</span>
+                      <span className="tag">Step-by-step</span>
+                      <span className="tag">Free guide</span>
+                    </div>
                   </div>
                 </div>
               </div>
               <div
                 className="card-preview"
                 style={{
-                  background:
-                    'linear-gradient(135deg, #e8365d 0%, #c0103a 100%)',
+                  background: 'linear-gradient(135deg, #1a5c2a 0%, #0d3318 100%)',
                   flexDirection: 'column',
                   gap: '16px',
                 }}
               >
-                <div style={{ fontSize: '100px' }}></div>
                 <p
                   style={{
                     color: 'white',
@@ -467,55 +482,52 @@ export default function Home() {
                     fontStyle: 'italic',
                   }}
                 >
-                  The Power of Courage
+                  Self Publish with Onyx
                 </p>
               </div>
             </div>
 
-            {/* Card 2 — Banana */}
+            {/* Card 2 — Nursery Visits */}
             <div className="flip-card anim-in delay-2">
               <div className="flip-card-inner">
-                <div className="card-img">
-                  <div className="card-img-inner" style={{ fontSize: '80px' }}>
-                    
-                  </div>
-                </div>
                 <div className="card-body">
+                  <span className="card-num">Nursery Visits</span>
                   <div className="card-body-top">
-                    <span className="card-num">Book 02</span>
                     <h3>
-                      Banana &{' '}
-                      <span className="si">the Power of Joy</span>
+                      Nutrition Workshops
                     </h3>
                     <p className="body-large">
-                      Banana discovers that spreading happiness — even on the
-                      gloomiest days — is the most powerful gift of all.
+                      Fun, interactive workshops that inspire healthy eating —
+                      powered by Sainsbury's "Good food for all" foundation.
                     </p>
-                    <div className="card-tags">
-                      <span className="tag">Ages 3–7</span>
-                      <span className="tag">Joy</span>
-                      <span className="tag">Kindness</span>
-                    </div>
                   </div>
-                  <div className="card-tags" style={{ marginTop: '16px' }}>
-                    <span className="tag">32 pages</span>
-                    <span className="tag">Hardback</span>
+                  <div className="tag-marquee">
+                    <div className="tag-marquee-track">
+                      <span className="tag">Workshops</span>
+                      <span className="tag">Nutrition</span>
+                      <span className="tag">Ages 2–5</span>
+                      <span className="tag">Nurseries</span>
+                      <span className="tag">UK-wide</span>
+                      <span className="tag">Workshops</span>
+                      <span className="tag">Nutrition</span>
+                      <span className="tag">Ages 2–5</span>
+                      <span className="tag">Nurseries</span>
+                      <span className="tag">UK-wide</span>
+                    </div>
                   </div>
                 </div>
               </div>
               <div
                 className="card-preview"
                 style={{
-                  background:
-                    'linear-gradient(135deg, #f5c518 0%, #d4a800 100%)',
+                  background: 'linear-gradient(135deg, #27ae60 0%, #1a7a43 100%)',
                   flexDirection: 'column',
                   gap: '16px',
                 }}
               >
-                <div style={{ fontSize: '100px' }}></div>
                 <p
                   style={{
-                    color: '#151618',
+                    color: '#ffffff',
                     fontWeight: 700,
                     fontSize: '22px',
                     textAlign: 'center',
@@ -524,40 +536,39 @@ export default function Home() {
                     fontStyle: 'italic',
                   }}
                 >
-                  The Power of Joy
+                  Nutrition Workshops
                 </p>
               </div>
             </div>
 
-            {/* Card 3 — Broccoli */}
+            {/* Card 3 — Sainsbury's Funding */}
             <div className="flip-card anim-in delay-3">
               <div className="flip-card-inner">
-                <div className="card-img">
-                  <div className="card-img-inner" style={{ fontSize: '80px' }}>
-                    
-                  </div>
-                </div>
                 <div className="card-body">
+                  <span className="card-num">Milestone</span>
                   <div className="card-body-top">
-                    <span className="card-num">Book 03</span>
                     <h3>
-                      Broccoli &{' '}
-                      <span className="si">the Power of Strength</span>
+                      Sainsbury's &{' '}
+                      <span className="si">the Fresh Friends</span>
                     </h3>
                     <p className="body-large">
-                      Broccoli learns that real strength isn't just about
-                      muscles — it's about showing up for your friends when they
-                      need you most.
+                      Proudly backed by Sainsbury's to bring The Fresh Friends
+                      to families and communities across the UK.
                     </p>
-                    <div className="card-tags">
-                      <span className="tag">Ages 3–7</span>
-                      <span className="tag">Strength</span>
-                      <span className="tag">Friendship</span>
-                    </div>
                   </div>
-                  <div className="card-tags" style={{ marginTop: '16px' }}>
-                    <span className="tag">32 pages</span>
-                    <span className="tag">Hardback</span>
+                  <div className="tag-marquee">
+                    <div className="tag-marquee-track">
+                      <span className="tag">Funding</span>
+                      <span className="tag">Partnership</span>
+                      <span className="tag">Community</span>
+                      <span className="tag">UK-wide</span>
+                      <span className="tag">2024–2025</span>
+                      <span className="tag">Funding</span>
+                      <span className="tag">Partnership</span>
+                      <span className="tag">Community</span>
+                      <span className="tag">UK-wide</span>
+                      <span className="tag">2024–2025</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -570,7 +581,6 @@ export default function Home() {
                   gap: '16px',
                 }}
               >
-                <div style={{ fontSize: '100px' }}></div>
                 <p
                   style={{
                     color: 'white',
@@ -582,7 +592,7 @@ export default function Home() {
                     fontStyle: 'italic',
                   }}
                 >
-                  The Power of Strength
+                  Backed by Sainsbury's
                 </p>
               </div>
             </div>
