@@ -424,7 +424,6 @@ export default function PricingPage() {
             <div className="footer-col">
               <h4>Account</h4>
               <ul>
-                <li><Link href="/login">Author Login</Link></li>
                 <li><Link href="/dashboard">Dashboard</Link></li>
               </ul>
             </div>
