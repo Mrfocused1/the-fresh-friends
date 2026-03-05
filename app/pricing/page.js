@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Navbar from '../components/Navbar';
 
 /* ============================================================
    DATA
@@ -102,7 +103,6 @@ const faqs = [
    PRICING PAGE
    ============================================================ */
 export default function PricingPage() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
 
   return (
@@ -116,44 +116,7 @@ export default function PricingPage() {
       </a>
 
       {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="nav-container">
-          <div className="nav-right">
-            <div className="nav-links">
-              <Link href="/">Home</Link>
-              <Link href="/#characters">The Friends</Link>
-              <Link href="/#workshops">Workshops</Link>
-              <Link href="/pricing" style={{ color: '#1773b0', fontWeight: 600 }}>Pricing</Link>
-            </div>
-            <a href="#order" className="nav-cta">Order Now</a>
-            <button
-              className="nav-hamburger"
-              onClick={() => setMenuOpen(o => !o)}
-              aria-label="Toggle menu"
-            >
-              <span className={`ham-line${menuOpen ? ' open' : ''}`} />
-              <span className={`ham-line${menuOpen ? ' open' : ''}`} />
-              <span className={`ham-line${menuOpen ? ' open' : ''}`} />
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* FULL-SCREEN MOBILE MENU */}
-      <div className={`fs-menu${menuOpen ? ' fs-menu--open' : ''}`} aria-hidden={!menuOpen}>
-        <button className="fs-menu__close" onClick={() => setMenuOpen(false)} aria-label="Close menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-          </svg>
-        </button>
-        <nav className="fs-menu__nav">
-          <Link href="/"            className="fs-menu__link" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link href="/#characters" className="fs-menu__link" onClick={() => setMenuOpen(false)}>The Friends</Link>
-          <Link href="/#workshops"  className="fs-menu__link" onClick={() => setMenuOpen(false)}>Workshops</Link>
-          <Link href="/pricing"     className="fs-menu__link" onClick={() => setMenuOpen(false)}>Pricing</Link>
-        </nav>
-        <a href="#order" className="fs-menu__cta" onClick={() => setMenuOpen(false)}>Order Now</a>
-      </div>
+      <Navbar activePage="Pricing" />
 
       {/* ── HERO ── */}
       <section

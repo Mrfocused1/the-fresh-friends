@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 const CharactersScroll = dynamic(() => import('./components/CharactersScroll'), { ssr: false });
+const Navbar = dynamic(() => import('./components/Navbar'), { ssr: false });
 
 /* ============================================================
    DATA
@@ -138,7 +138,6 @@ export default function Home() {
   const logoImgRef = useRef(null);
   const mascotRef = useRef(null);
   const [selectedChips, setSelectedChips] = useState([]);
-  const [menuOpen, setMenuOpen] = useState(false);
   const growWords = [
     { word: 'grow',     color: '#27ae60' }, // Broccoli green
     { word: 'bloom',    color: '#e8365d' }, // Strawberry red
@@ -305,47 +304,7 @@ export default function Home() {
       </a>
 
       {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="nav-container">
-          <div className="nav-right">
-            <div className="nav-links">
-              <a href="/">Home</a>
-              <a href="#characters">The Friends</a>
-              <Link href="/pricing">Pricing</Link>
-              <Link href="/publish-with-onyx">Publish with Onyx</Link>
-            </div>
-            <Link href="/login" className="nav-cta">
-              Login
-            </Link>
-            <button
-              className="nav-hamburger"
-              onClick={() => setMenuOpen(o => !o)}
-              aria-label="Toggle menu"
-            >
-              <span className={`ham-line${menuOpen ? ' open' : ''}`} />
-              <span className={`ham-line${menuOpen ? ' open' : ''}`} />
-              <span className={`ham-line${menuOpen ? ' open' : ''}`} />
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* FULL-SCREEN MOBILE MENU */}
-      <div className={`fs-menu${menuOpen ? ' fs-menu--open' : ''}`} aria-hidden={!menuOpen}>
-        <button className="fs-menu__close" onClick={() => setMenuOpen(false)} aria-label="Close menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-          </svg>
-        </button>
-        <nav className="fs-menu__nav">
-          <a href="/"            className="fs-menu__link" onClick={() => setMenuOpen(false)}>Home</a>
-          <a href="#characters" className="fs-menu__link" onClick={() => setMenuOpen(false)}>The Friends</a>
-          <Link href="/pricing"          className="fs-menu__link" onClick={() => setMenuOpen(false)}>Pricing</Link>
-          <Link href="/publish-with-onyx" className="fs-menu__link" onClick={() => setMenuOpen(false)}>Publish with Onyx</Link>
-          <Link href="/dashboard"        className="fs-menu__link" onClick={() => setMenuOpen(false)}>My Dashboard</Link>
-        </nav>
-        <Link href="/login" className="fs-menu__cta" onClick={() => setMenuOpen(false)}>Login</Link>
-      </div>
+      <Navbar activePage="Home" />
 
       {/* HERO */}
       <div className="hero-wrapper" ref={wrapperRef} id="heroWrapper">

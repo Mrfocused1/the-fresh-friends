@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Navbar from '../components/Navbar';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -26,6 +27,9 @@ export default function LoginPage() {
       <a href="/" className="floating-logo">
         <img src="/logo.svg" alt="The Fresh Friends" />
       </a>
+
+      {/* NAVBAR */}
+      <Navbar activePage="Login" />
 
       {/* PAGE */}
       <div
