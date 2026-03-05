@@ -27,6 +27,11 @@ export default function CharactersScroll() {
     let cancelled = false;
     let ctx;
 
+    function setWrapperHeight() {
+      const scrollDist = track.scrollWidth - window.innerWidth;
+      wrapper.style.height = `${window.innerHeight + scrollDist}px`;
+    }
+
     async function init() {
       try {
         const { gsap }          = await import('gsap');
@@ -37,6 +42,9 @@ export default function CharactersScroll() {
         ScrollTrigger.getAll()
           .filter(t => t.trigger === wrapper)
           .forEach(t => t.kill());
+
+        setWrapperHeight();
+        window.addEventListener('resize', setWrapperHeight);
 
         const panels      = track.querySelectorAll('.panel');
         const totalPanels = panels.length;
@@ -71,12 +79,13 @@ export default function CharactersScroll() {
     init();
     return () => {
       cancelled = true;
+      window.removeEventListener('resize', setWrapperHeight);
       if (ctx) ctx.revert();
     };
   }, []);
 
   return (
-    <div id="characters" ref={wrapperRef} style={{ height: `${characters.length * 100}vw` }}>
+    <div id="characters" ref={wrapperRef}>
     <section className="services-scroll" ref={sectionRef} style={{ position: 'sticky', top: 0 }}>
       <div className="services-track" ref={trackRef}>
         {characters.map((char, i) => (
