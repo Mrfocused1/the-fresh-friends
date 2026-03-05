@@ -1,15 +1,17 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 export default function Navbar({ activePage }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const links = [
     { label: 'Home',    href: '/' },
     { label: 'Pricing', href: '/pricing' },
-    { label: 'Contact', href: '/#contact' },
+    { label: 'Contact', href: pathname === '/' ? '#contact' : '/#contact' },
   ];
 
   return (
