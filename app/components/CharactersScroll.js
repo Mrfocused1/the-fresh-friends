@@ -84,8 +84,7 @@ export default function CharactersScroll() {
           <div className="panel" key={char.name}>
             <div className="panel-inner">
               <div className="panel-left">
-                <span className="panel-label">Character {String(i + 1).padStart(2, '0')} / 08</span>
-                <h2 className="panel-title">{char.name}</h2>
+<h2 className="panel-title">{char.name}</h2>
                 <p className="panel-power" style={{ color: char.powerColor }}>{char.power}</p>
                 <p className="panel-body">{char.body}</p>
                 <a href="#books" className="panel-cta">
