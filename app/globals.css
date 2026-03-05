@@ -805,7 +805,7 @@ p { font-family: var(--font-playful); }
 .enquiry-left h2 {
   font-family: var(--font-serif);
   font-size: clamp(42px, 5.5vw, 72px);
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.05;
   color: var(--white);
 }
