@@ -215,15 +215,23 @@ export default function Home() {
         }
       }
 
-      // Circle scale: grows to fill screen
+      // Phase 1: mascot fades + slides down (progress 0 → 0.3)
+      if (mascotWrap) {
+        const mascotP = Math.min(progress / 0.3, 1);
+        mascotWrap.style.opacity = 1 - mascotP;
+        mascotWrap.style.transform = `translateY(${mascotP * 60}px)`;
+      }
+
+      // Phase 2: circle scale — only starts after mascot is fully gone (progress 0.3 → 1)
       if (expandCircle && mascotWrap) {
+        const circleP = Math.max(0, (progress - 0.3) / 0.7);
         const rect = mascotWrap.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
         const diagonal = Math.sqrt(window.innerWidth ** 2 + window.innerHeight ** 2);
         const maxScale = (diagonal * 2.2) / size;
-        const eased = progress < 0.5
-          ? 2 * progress * progress
-          : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+        const eased = circleP < 0.5
+          ? 2 * circleP * circleP
+          : 1 - Math.pow(-2 * circleP + 2, 2) / 2;
         const scale = 1 + eased * (maxScale - 1);
         expandCircle.style.transform = `scale(${scale})`;
       }
@@ -320,17 +328,52 @@ export default function Home() {
                 <div className="hero-line">
                   <span className="h-word">Where</span>
                   <div className="mascot-wrap" ref={mascotRef}>
-                    {/* Strawberry SVG placeholder */}
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="50" cy="55" r="36" fill="#e8365d" />
-                      <ellipse cx="35" cy="28" rx="9" ry="14" fill="#27ae60" transform="rotate(-20 35 28)" />
-                      <ellipse cx="50" cy="22" rx="7" ry="13" fill="#27ae60" />
-                      <ellipse cx="65" cy="28" rx="9" ry="14" fill="#27ae60" transform="rotate(20 65 28)" />
-                      <circle cx="38" cy="55" r="3" fill="rgba(255,255,255,0.35)" />
-                      <circle cx="52" cy="62" r="3" fill="rgba(255,255,255,0.35)" />
-                      <circle cx="62" cy="50" r="3" fill="rgba(255,255,255,0.35)" />
-                      <circle cx="44" cy="68" r="2.5" fill="rgba(255,255,255,0.35)" />
-                    </svg>
+                    {/* CIRCLE — clips lower body to circle shape */}
+                    <div style={{
+                      position: 'absolute',
+                      inset: 0,
+                      borderRadius: '50%',
+                      overflow: 'hidden',
+                      background: 'rgb(0, 80, 54)',
+                    }}>
+                      {/* Video A: height=150%H, bottom=0 → shows bottom 67% of video inside circle */}
+                      <video autoPlay loop muted playsInline style={{
+                        position: 'absolute',
+                        height: '150%',
+                        width: 'auto',
+                        bottom: '-20%',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        pointerEvents: 'none',
+                      }}>
+                        <source src="/character-loop.webm" type="video/webm" />
+                        <source src="/character-loop.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                    {/* UPPER BODY — overlaps 10% into circle to eliminate seam white marks.
+                        Container bottom=90% (10% inside circle), height=60%.
+                        Video bottom=-180% keeps alignment with circle video. */}
+                    <div style={{
+                      position: 'absolute',
+                      left: 0,
+                      right: 0,
+                      bottom: '90%',
+                      height: '60%',
+                      overflow: 'hidden',
+                      pointerEvents: 'none',
+                    }}>
+                      <video autoPlay loop muted playsInline style={{
+                        position: 'absolute',
+                        height: '250%',
+                        width: 'auto',
+                        bottom: '-183%',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                      }}>
+                        <source src="/character-loop.webm" type="video/webm" />
+                        <source src="/character-loop.mp4" type="video/mp4" />
+                      </video>
+                    </div>
                   </div>
                 </div>
                 {/* Line 2: stories grow */}
