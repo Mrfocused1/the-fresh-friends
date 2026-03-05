@@ -7,10 +7,9 @@ export default function Navbar({ activePage }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const links = [
-    { label: 'Home',         href: '/' },
-    { label: 'How it works', href: '/publish-with-onyx' },
-    { label: 'Pricing',      href: '/pricing' },
-    { label: 'Contact',      href: '/#contact' },
+    { label: 'Home',    href: '/' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'Contact', href: '/#contact' },
   ];
 
   return (

@@ -805,18 +805,8 @@ export default function Home() {
               <h4>Navigate</h4>
               <ul>
                 <li><Link href="/">Home</Link></li>
-                <li><Link href="/publish-with-onyx">How it works</Link></li>
                 <li><Link href="/pricing">Pricing</Link></li>
                 <li><a href="#contact">Contact</a></li>
-              </ul>
-            </div>
-
-            <div className="footer-col">
-              <h4>Explore</h4>
-              <ul>
-                <li><a href="#books">The Books</a></li>
-                <li><a href="#characters">The Characters</a></li>
-                <li><a href="#contact">School Workshops</a></li>
               </ul>
             </div>
 
@@ -825,7 +815,6 @@ export default function Home() {
               <ul>
                 <li><Link href="/login">Author Login</Link></li>
                 <li><Link href="/dashboard">Dashboard</Link></li>
-                <li><Link href="/publish-with-onyx">Publish with Onyx</Link></li>
               </ul>
             </div>
           </div>

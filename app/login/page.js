@@ -227,7 +227,7 @@ export default function LoginPage() {
             />
           </div>
 
-          {/* Enrol link */}
+          {/* Contact link */}
           <p
             style={{
               textAlign: 'center',
@@ -236,16 +236,16 @@ export default function LoginPage() {
               lineHeight: 1.5,
             }}
           >
-            Don&apos;t have an account?{' '}
+            Need access?{' '}
             <Link
-              href="/publish-with-onyx"
+              href="/#contact"
               style={{
                 color: 'rgb(120,181,57)',
                 fontWeight: 600,
                 textDecoration: 'none',
               }}
             >
-              Enrol now &rarr;
+              Get in touch &rarr;
             </Link>
           </p>
         </div>

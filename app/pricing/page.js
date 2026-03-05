@@ -414,36 +414,26 @@ export default function PricingPage() {
               </div>
             </div>
             <div className="footer-col">
-              <h4>The Books</h4>
+              <h4>Navigate</h4>
               <ul>
-                <li><Link href="/#books">Strawberry — Courage</Link></li>
-                <li><Link href="/#books">Banana — Joy</Link></li>
-                <li><Link href="/#books">Broccoli — Strength</Link></li>
-                <li><Link href="/#books">View all books</Link></li>
-              </ul>
-            </div>
-            <div className="footer-col">
-              <h4>The Friends</h4>
-              <ul>
-                <li><Link href="/#characters">Meet the Characters</Link></li>
-                <li><Link href="/#characters">Nature Powers</Link></li>
-              </ul>
-            </div>
-            <div className="footer-col">
-              <h4>Learn</h4>
-              <ul>
-                <li><Link href="/#workshops">School Workshops</Link></li>
-                <li><Link href="/publish-with-onyx">Publish with Onyx</Link></li>
+                <li><Link href="/">Home</Link></li>
                 <li><Link href="/pricing">Pricing</Link></li>
+                <li><Link href="/#contact">Contact</Link></li>
+              </ul>
+            </div>
+            <div className="footer-col">
+              <h4>Account</h4>
+              <ul>
                 <li><Link href="/login">Author Login</Link></li>
+                <li><Link href="/dashboard">Dashboard</Link></li>
               </ul>
             </div>
           </div>
           <div className="footer-bottom">
             <p>© 2026 The Fresh Friends. Made with ♥ in London.</p>
             <div className="footer-legal">
-              <a href="#">Privacy Policy</a>
-              <a href="#">Terms of Use</a>
+              <span style={{ opacity: 0.4, cursor: 'default' }}>Privacy Policy</span>
+              <span style={{ opacity: 0.4, cursor: 'default' }}>Terms of Use</span>
             </div>
           </div>
         </div>
