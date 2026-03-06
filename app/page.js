@@ -261,36 +261,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* MARQUEE TICKER */}
-      <div className="marquee-section">
-        <div className="marquee-inner">
-          {[
-            { dir: 'left',  duration: '50s' },
-            { dir: 'right', duration: '50s' },
-          ].map((row, i) => (
-            <div className="marquee-row" key={i}>
-              <div
-                className="marquee-track"
-                style={{
-                  animationName: row.dir === 'left' ? 'marquee-left' : 'marquee-right',
-                  animationDuration: row.duration,
-                }}
-              >
-                {[0, 1].map((copy) => (
-                  <span className="marquee-set" key={copy} aria-hidden={copy === 1 ? true : undefined}>
-                    <span className="mq-bold">Where stories come alive</span>
-                    <span className="mq-light">Where stories come alive</span>
-                    <span className="mq-bold">Where stories come alive</span>
-                    <span className="mq-light">Where stories come alive</span>
-                    <span className="mq-bold">Where stories come alive</span>
-                    <span className="mq-light">Where stories come alive</span>
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
 
       {/* BOOKS / OUR WORK */}
       <section className="our-work-section" id="books">
