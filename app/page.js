@@ -240,7 +240,7 @@ export default function Home() {
 
             <div className="hero-center">
               <div className="hero-headline">
-                {/* Line 1: Where + mascot */}
+                {/* Line 1: Where */}
                 <div className="hero-line">
                   <span className="h-word">Where</span>
                 </div>
@@ -279,6 +279,19 @@ export default function Home() {
                 celebrating courage, joy, strength, and everything in between.
               </p>
             </div>
+
+            <div className="hero-video-wrap">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="hero-video"
+              >
+                <source src="/hero-video.mp4" type="video/mp4" />
+              </video>
+            </div>
+
           </div>
 
           {/* MARQUEE TICKER — sits directly below hero paragraph */}
