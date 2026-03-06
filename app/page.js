@@ -158,6 +158,18 @@ export default function Home() {
   }
 
   /* ----------------------------------------------------------
+     HASH ANCHOR — scroll to #contact on mount if present
+     ---------------------------------------------------------- */
+  useEffect(() => {
+    if (window.location.hash === '#contact') {
+      const el = document.getElementById('contact');
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 300);
+      }
+    }
+  }, []);
+
+  /* ----------------------------------------------------------
      SCROLL EFFECTS
      ---------------------------------------------------------- */
   useEffect(() => {

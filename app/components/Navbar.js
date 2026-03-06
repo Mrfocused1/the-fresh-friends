@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 
 export default function Navbar({ activePage }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   const hamburgerRef = useRef(null);
   const circleRef = useRef(null);
   const menuContentRef = useRef(null);
@@ -100,11 +101,13 @@ export default function Navbar({ activePage }) {
   }
 
   function handleContact(e) {
-    if (pathname === '/') {
-      e.preventDefault();
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-    }
+    e.preventDefault();
     closeMenu();
+    if (pathname === '/') {
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      router.push('/#contact');
+    }
   }
 
   return (
