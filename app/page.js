@@ -283,10 +283,16 @@ export default function Home() {
             <div className="hero-video-wrap">
               <video
                 autoPlay
-                loop
                 muted
                 playsInline
                 className="hero-video"
+                ref={(el) => {
+                  if (!el) return;
+                  const handler = () => {
+                    if (el.currentTime >= 19) el.currentTime = 0;
+                  };
+                  el.addEventListener('timeupdate', handler);
+                }}
               >
                 <source src="/hero-video.mp4" type="video/mp4" />
               </video>
