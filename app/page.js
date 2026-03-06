@@ -138,7 +138,6 @@ const testimonials = [
 export default function Home() {
   const wrapperRef = useRef(null);
   const logoImgRef = useRef(null);
-  const mascotRef = useRef(null);
   const [selectedChips, setSelectedChips] = useState([]);
   const growWords = [
     { word: 'grow',     color: '#27ae60' }, // Broccoli green
@@ -170,99 +169,18 @@ export default function Home() {
      SCROLL EFFECTS
      ---------------------------------------------------------- */
   useEffect(() => {
-    const wrapper = wrapperRef.current;
     const logoImg = logoImgRef.current;
-    const heroContent = document.getElementById('heroContent');
-    const expandCircle = document.getElementById('expandCircle');
-    const booksSection = document.getElementById('books');
-    const mascotWrap = document.querySelector('.mascot-wrap');
+    const heroSticky = document.getElementById('heroSticky');
 
-    /* Position expand circle over mascot */
-    function initCircle() {
-      if (!mascotWrap || !expandCircle || !wrapper) return;
-      const rect = mascotWrap.getBoundingClientRect();
-      const wrapRect = wrapper.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const size = Math.max(rect.width, rect.height);
-      expandCircle.style.width = size + 'px';
-      expandCircle.style.height = size + 'px';
-      expandCircle.style.left = cx - size / 2 + 'px';
-      expandCircle.style.top = cy - size / 2 + 'px';
-      expandCircle.style.transform = 'scale(1)';
-    }
-
-    initCircle();
-    window.addEventListener('resize', initCircle);
-
-    /* Hero scroll animation */
     function onScroll() {
-      if (!wrapper) return;
-      const scrollY = window.scrollY;
-      const wrapperHeight = wrapper.offsetHeight;
-      const vh = window.innerHeight;
-      const maxScroll = wrapperHeight - vh;
-      const progress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
-
-      // Logo swap
-      if (logoImg) {
-        const booksRect = booksSection ? booksSection.getBoundingClientRect() : null;
-        const onGreen = booksRect && booksRect.top <= 60 && booksRect.bottom > 60;
-        if (onGreen) {
-          logoImg.src = '/logo-green-bg.svg';
-        } else {
-          const threshold = maxScroll * 0.75;
-          logoImg.src = scrollY >= threshold ? '/logo-dark.svg' : '/logo.svg';
-        }
-      }
-
-      // Phase 1: mascot fades + slides down (progress 0 → 0.3)
-      if (mascotWrap) {
-        const mascotP = Math.min(progress / 0.3, 1);
-        mascotWrap.style.opacity = 1 - mascotP;
-        mascotWrap.style.transform = `translateY(${mascotP * 60}px)`;
-      }
-
-      // Phase 2: circle scale — only starts after mascot is fully gone (progress 0.3 → 1)
-      if (expandCircle && mascotWrap) {
-        const circleP = Math.max(0, (progress - 0.3) / 0.7);
-        const rect = mascotWrap.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const diagonal = Math.sqrt(window.innerWidth ** 2 + window.innerHeight ** 2);
-        const maxScale = (diagonal * 2.2) / size;
-        const eased = circleP < 0.5
-          ? 2 * circleP * circleP
-          : 1 - Math.pow(-2 * circleP + 2, 2) / 2;
-        const scale = 1 + eased * (maxScale - 1);
-        expandCircle.style.transform = `scale(${scale})`;
-      }
-
-      // Hero text fades out as circle nears completion
-      if (heroContent) {
-        const textFade = Math.max(0, 1 - Math.max(0, (progress - 0.75) / 0.15));
-        heroContent.style.opacity = textFade;
-        heroContent.style.visibility = textFade <= 0 ? 'hidden' : 'visible';
-        heroContent.style.pointerEvents = textFade <= 0 ? 'none' : '';
-      }
-
-      // Books section fades in as circle finishes (starts at 85% of animation)
-      if (booksSection) {
-        const booksFade = Math.max(0, Math.min(1, (progress - 0.85) / 0.15));
-        booksSection.style.opacity = booksFade;
-      }
-
-      // Hide circle only when hero-wrapper fully exits — books section (z-index:200)
-      // scrolls over the circle naturally, both are blue so transition is seamless
-      const wrapperBottom = wrapper.getBoundingClientRect().bottom;
-      if (expandCircle) {
-        expandCircle.style.visibility = wrapperBottom <= 0 ? 'hidden' : 'visible';
+      if (logoImg && heroSticky) {
+        const threshold = heroSticky.offsetHeight * 0.75;
+        logoImg.src = window.scrollY >= threshold ? '/logo-dark.svg' : '/logo.svg';
       }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('touchmove', onScroll, { passive: true });
 
-    /* Intersection observer for .anim-in */
     const animEls = document.querySelectorAll('.anim-in');
     const observer = new IntersectionObserver(
       (entries) => {
@@ -278,8 +196,6 @@ export default function Home() {
 
     return () => {
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('touchmove', onScroll);
-      window.removeEventListener('resize', initCircle);
       observer.disconnect();
     };
   }, []);
@@ -320,7 +236,6 @@ export default function Home() {
       <div className="hero-wrapper" ref={wrapperRef} id="heroWrapper">
         <div className="hero-sticky" id="heroSticky">
           <div className="hero-bg" />
-          <div id="expandCircle" className="expand-circle" />
           <div className="hero-content" id="heroContent">
 
             <div className="hero-center">
@@ -328,54 +243,6 @@ export default function Home() {
                 {/* Line 1: Where + mascot */}
                 <div className="hero-line">
                   <span className="h-word">Where</span>
-                  <div className="mascot-wrap" ref={mascotRef}>
-                    {/* CIRCLE — clips lower body to circle shape */}
-                    <div style={{
-                      position: 'absolute',
-                      inset: 0,
-                      borderRadius: '50%',
-                      overflow: 'hidden',
-                      background: 'rgb(0, 80, 54)',
-                    }}>
-                      {/* Video A: height=150%H, bottom=0 → shows bottom 67% of video inside circle */}
-                      <video autoPlay loop muted playsInline style={{
-                        position: 'absolute',
-                        height: '150%',
-                        width: 'auto',
-                        bottom: '-20%',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        pointerEvents: 'none',
-                      }}>
-                        <source src="/character-loop.webm" type="video/webm" />
-                        <source src="/character-loop.mp4" type="video/mp4" />
-                      </video>
-                    </div>
-                    {/* UPPER BODY — overlaps 10% into circle to eliminate seam white marks.
-                        Container bottom=90% (10% inside circle), height=60%.
-                        Video bottom=-180% keeps alignment with circle video. */}
-                    <div style={{
-                      position: 'absolute',
-                      left: 0,
-                      right: 0,
-                      bottom: '90%',
-                      height: '60%',
-                      overflow: 'hidden',
-                      pointerEvents: 'none',
-                    }}>
-                      <video autoPlay loop muted playsInline style={{
-                        position: 'absolute',
-                        height: '250%',
-                        width: 'auto',
-                        bottom: '-183%',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                      }}>
-                        <source src="/character-loop.webm" type="video/webm" />
-                        <source src="/character-loop.mp4" type="video/mp4" />
-                      </video>
-                    </div>
-                  </div>
                 </div>
                 {/* Line 2: stories grow */}
                 <div className="hero-line indent">
