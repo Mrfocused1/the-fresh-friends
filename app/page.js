@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { gsap } from 'gsap';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import Footer from './components/Footer';
@@ -137,6 +138,7 @@ const testimonials = [
    ============================================================ */
 export default function Home() {
   const logoImgRef = useRef(null);
+  const coverRef = useRef(null);
   const [selectedChips, setSelectedChips] = useState([]);
 
   const serviceChips = [
@@ -158,6 +160,15 @@ export default function Home() {
      SCROLL EFFECTS
      ---------------------------------------------------------- */
   useEffect(() => {
+    /* Book open animation */
+    if (coverRef.current) {
+      gsap.fromTo(
+        coverRef.current,
+        { rotateY: 0 },
+        { rotateY: -140, duration: 1.8, delay: 0.6, ease: 'power2.inOut' }
+      );
+    }
+
     const logoImg = logoImgRef.current;
 
     function onScroll() {
@@ -204,39 +215,63 @@ export default function Home() {
       <Navbar activePage="Home" />
 
       {/* HERO */}
-      <section className="nh-hero" id="nh-hero">
-        <div className="nh-hero-bg">
-          <img src="/hero-bg.png" alt="Author with Fresh Friends book collection" />
-        </div>
+      <section className="sb-hero" id="nh-hero">
+        <div className="sb-hero-inner">
 
-        <div className="nh-hero-inner">
-          <div className="nh-hero-text">
-            <h1 className="nh-hero-h1">
+          {/* LEFT: text */}
+          <div className="sb-hero-text">
+            <h1 className="sb-hero-h1">
               Where stories come alive and children discover their{' '}
               <em>extraordinary</em> Nature Powers.
             </h1>
-            <p className="nh-hero-sub">
+            <p className="sb-hero-sub">
               Meet the Fresh Friends — eight fruit and vegetable characters
               with extraordinary Nature Powers. A children&apos;s book series
               celebrating courage, joy, strength, and everything in between.
             </p>
-            <div className="nh-hero-actions">
-              <a href="#books" className="nh-cta-btn">Get your copy today</a>
-              <div className="nh-social-proof">
-                <div className="nh-avatars">
-                  <div className="nh-avatar" style={{ background: '#e8365d' }}>🍓</div>
-                  <div className="nh-avatar" style={{ background: '#f5c518' }}>🍌</div>
-                  <div className="nh-avatar" style={{ background: '#27ae60' }}>🥦</div>
+            <div className="sb-hero-actions">
+              <a href="#books" className="sb-cta-btn">Get your copy today</a>
+              <div className="sb-social-proof">
+                <div className="sb-avatars">
+                  <div className="sb-avatar" style={{ background: '#e8365d' }}>🍓</div>
+                  <div className="sb-avatar" style={{ background: '#f5c518' }}>🍌</div>
+                  <div className="sb-avatar" style={{ background: '#27ae60' }}>🥦</div>
                 </div>
                 <div>
-                  <div className="nh-stars">★★★★★</div>
-                  <p className="nh-trust">Loved by over <strong>10,000</strong> families</p>
+                  <div className="sb-stars">★★★★★</div>
+                  <p className="sb-trust">Loved by over <strong>10,000</strong> families</p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
+          {/* RIGHT: 3D Book */}
+          <div className="sb-book-scene">
+            <div className="sb-book">
+              {/* Pages (revealed once cover opens) */}
+              <div className="sb-book-pages">
+                <div className="sb-page-content">
+                  <p className="sb-page-tagline">Meet the</p>
+                  <p className="sb-page-title">Fresh Friends</p>
+                  <div className="sb-page-chars">🍓🍌🥦🥕🍊🍋🥥🍎</div>
+                </div>
+              </div>
+
+              {/* Front cover — GSAP opens this */}
+              <div className="sb-book-cover" ref={coverRef}>
+                <div className="sb-cover-front">
+                  <img src="/book-cover.jpeg" alt="The Fresh Friends" />
+                </div>
+                <div className="sb-cover-inside" />
+              </div>
+
+              {/* Spine */}
+              <div className="sb-book-spine" />
+            </div>
+            <div className="sb-book-shadow" />
+          </div>
+
+        </div>
       </section>
 
 
