@@ -139,6 +139,7 @@ const testimonials = [
 export default function Home() {
   const logoImgRef = useRef(null);
   const coverRef = useRef(null);
+  const bookSceneRef = useRef(null);
   const [selectedChips, setSelectedChips] = useState([]);
 
   const serviceChips = [
@@ -166,6 +167,23 @@ export default function Home() {
         coverRef.current,
         { rotateY: 0 },
         { rotateY: -140, duration: 1.8, delay: 0.6, ease: 'power2.inOut' }
+      );
+    }
+
+    /* Compensate for cover swinging left when book opens */
+    if (bookSceneRef.current) {
+      const isMobile = window.innerWidth <= 900;
+      gsap.fromTo(
+        bookSceneRef.current,
+        { x: 0 },
+        {
+          /* Mobile: cover swings left off-screen — shift book right to recentre */
+          /* Desktop: scene is centred in column — shift right to account for cover */
+          x: isMobile ? 70 : 60,
+          duration: 1.8,
+          delay: 0.6,
+          ease: 'power2.inOut',
+        }
       );
     }
 
@@ -246,7 +264,7 @@ export default function Home() {
           </div>
 
           {/* RIGHT: 3D Book */}
-          <div className="sb-book-scene">
+          <div className="sb-book-scene" ref={bookSceneRef}>
             <div className="sb-book">
               {/* Pages (revealed once cover opens) */}
               <div className="sb-book-pages">
