@@ -179,7 +179,7 @@ export default function Home() {
         {
           /* Mobile: cover swings left off-screen — shift book right to recentre */
           /* Desktop: scene is centred in column — shift right to account for cover */
-          x: isMobile ? 70 : 60,
+          x: isMobile ? 70 : 140,
           duration: 1.8,
           delay: 0.6,
           ease: 'power2.inOut',
@@ -239,17 +239,27 @@ export default function Home() {
           {/* LEFT: text */}
           <div className="sb-hero-text">
             <h1 className="sb-hero-h1">
-              Where stories come alive and children discover{' '}
+              Where stories come alive{' '}
               <span className="hero-inline-video">
                 <video
-                  src="/inline-video.mp4"
+                  src="/inline-video-2.mp4"
                   autoPlay
                   muted
                   loop
                   playsInline
                 />
               </span>
-              {' '}their <em>extraordinary</em> Nature Powers.
+              {' '}and children discover their <em>extraordinary</em>{' '}
+              <span className="hero-inline-video hero-inline-video--crop-top">
+                <video
+                  src="/inline-video-3.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              </span>
+              {' '}Nature Powers.
             </h1>
             <p className="sb-hero-sub">
               Meet the Fresh Friends — eight fruit and vegetable characters
@@ -258,7 +268,7 @@ export default function Home() {
             </p>
             <div className="sb-hero-actions">
               <a href="#books" className="sb-cta-btn">Get your copy today</a>
-              <div className="sb-social-proof">
+              <div className="sb-social-proof sb-social-proof--desktop">
                 <div className="sb-avatars">
                   <div className="sb-avatar" style={{ background: '#e8365d' }} />
                   <div className="sb-avatar" style={{ background: '#f5c518' }} />
@@ -296,6 +306,17 @@ export default function Home() {
               <div className="sb-book-spine" />
             </div>
             <div className="sb-book-shadow" />
+            <div className="sb-social-proof sb-social-proof--mobile">
+              <div className="sb-avatars">
+                <div className="sb-avatar" style={{ background: '#e8365d' }} />
+                <div className="sb-avatar" style={{ background: '#f5c518' }} />
+                <div className="sb-avatar" style={{ background: '#27ae60' }} />
+              </div>
+              <div>
+                <div className="sb-stars">★★★★★</div>
+                <p className="sb-trust">Loved by over <strong>500</strong> families</p>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -311,6 +332,10 @@ export default function Home() {
               <p className="label-medium">Making Waves</p>
               <h1>
                 Growing healthy{' '}
+                <span className="hero-inline-video hero-inline-video--white-border">
+                  <video src="/inline-video.mp4" autoPlay muted loop playsInline />
+                </span>
+                {' '}
                 <span className="scribble-wrap">
                   <span className="italic-secondary">minds & bodies.</span>
                   <svg viewBox="0 0 200 12" fill="none" xmlns="http://www.w3.org/2000/svg">

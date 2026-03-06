@@ -571,8 +571,8 @@ p { font-family: var(--font-playful); }
   vertical-align: middle;
   border-radius: 50%;
   overflow: hidden;
-  width: clamp(80px, 9vw, 140px);
-  height: clamp(80px, 9vw, 140px);
+  width: clamp(55px, 6vw, 95px);
+  height: clamp(55px, 6vw, 95px);
   margin: 0 6px;
   position: relative;
   top: -2px;
@@ -586,6 +586,17 @@ p { font-family: var(--font-playful); }
   object-fit: cover;
   object-position: top;
   display: block;
+}
+
+.hero-inline-video--white-border {
+  border-color: #ffffff;
+}
+
+.hero-inline-video--crop-top video {
+  object-position: center;
+  height: 100%;
+  transform: translateY(18%) scale(1.25);
+  transform-origin: center center;
 }
 
 .sb-hero-sub {
@@ -661,6 +672,17 @@ p { font-family: var(--font-playful); }
 }
 
 .sb-trust strong { color: #111827; }
+
+.sb-social-proof--mobile { display: none; }
+
+@media (max-width: 900px) {
+  .sb-social-proof--desktop { display: none; }
+  .sb-social-proof--mobile {
+    display: flex;
+    margin-top: 24px;
+    justify-content: center;
+  }
+}
 
 /* BOOK SCENE */
 .sb-book-scene {
