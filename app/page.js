@@ -287,41 +287,44 @@ export default function Home() {
       <section className="marquee-section">
         <div className="marquee-inner">
           {[
-            { dir: 'left',  light: false, duration: '30s' },
-            { dir: 'right', light: true,  duration: '25s' },
-            { dir: 'left',  light: false, duration: '28s' },
-            { dir: 'right', light: true,  duration: '32s' },
+            { dir: 'left',  duration: '20s' },
+            { dir: 'right', duration: '20s' },
           ].map((row, i) => (
             <div className="marquee-row" key={i}>
               <div
-                className={`marquee-track${row.light ? ' marquee-track-light' : ''}`}
-                style={{ animationName: row.dir === 'left' ? 'marquee-left' : 'marquee-right', animationDuration: row.duration }}
+                className="marquee-track"
+                style={{
+                  animationName: row.dir === 'left' ? 'marquee-left' : 'marquee-right',
+                  animationDuration: row.duration,
+                }}
               >
-                {[0, 1].map((j) => (
-                  <span className="marquee-set" key={j}>
-                    <span className="marquee-text">Where stories come alive</span>
-                    <span className="marquee-sep">•</span>
-                    <span className="marquee-text">Meet the Fresh Friends</span>
-                    <span className="marquee-sep">•</span>
-                    <span className="marquee-text">Courage Joy Strength</span>
-                    <span className="marquee-sep">•</span>
+                {[0, 1].map((copy) => (
+                  <span className="marquee-set" key={copy} aria-hidden={copy === 1 ? true : undefined}>
+                    <span className="mq-bold">Where stories come alive</span>
+                    <span className="mq-light">Where stories come alive</span>
+                    <span className="mq-bold">Where stories come alive</span>
+                    <span className="mq-light">Where stories come alive</span>
+                    <span className="mq-bold">Where stories come alive</span>
+                    <span className="mq-light">Where stories come alive</span>
                   </span>
                 ))}
               </div>
             </div>
           ))}
         </div>
+
         <div className="marquee-badge">
           <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" className="badge-svg">
             <defs>
               <path id="badge-path" d="M 80,80 m -52,0 a 52,52 0 1,1 104,0 a 52,52 0 1,1 -104,0" />
             </defs>
-            <circle cx="80" cy="80" r="58" fill="rgb(0,113,77)" />
-            <text fontSize="12" fill="white" fontWeight="700" letterSpacing="2.5" fontFamily="sans-serif">
-              <textPath href="#badge-path">• Fresh Friends • Stories •</textPath>
+            <circle cx="80" cy="80" r="60" fill="#1a4d8c" />
+            <circle cx="80" cy="80" r="46" fill="none" stroke="white" strokeWidth="1" strokeOpacity="0.3" />
+            <text fontSize="11.5" fill="white" fontWeight="700" letterSpacing="2" fontFamily="sans-serif">
+              <textPath href="#badge-path" textLength="327">• Let&apos;s talk stories • </textPath>
             </text>
           </svg>
-          <span className="marquee-badge-arrow">↓</span>
+          <span className="marquee-badge-arrow">↗</span>
         </div>
       </section>
 
