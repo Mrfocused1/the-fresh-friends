@@ -259,6 +259,102 @@ p { font-family: var(--font-playful); }
 /* MASCOT */
 
 /* ============================================================
+   MARQUEE TICKER
+   ============================================================ */
+.marquee-section {
+  position: relative;
+  background: var(--hero-bg);
+  overflow: hidden;
+  padding: 80px 0;
+}
+
+.marquee-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transform: rotate(-5deg) scaleX(1.2);
+  transform-origin: center;
+}
+
+.marquee-row {
+  overflow: hidden;
+  padding: 4px 0;
+}
+
+.marquee-track {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: marquee-left 30s linear infinite;
+  font-size: clamp(32px, 4.5vw, 60px);
+  font-weight: 800;
+  color: var(--text-primary);
+  gap: 20px;
+}
+
+.marquee-track-light {
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(34, 34, 34, 0.25);
+  font-family: var(--font-serif);
+}
+
+.marquee-set {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.marquee-sep {
+  color: rgb(0, 113, 77);
+  font-style: normal;
+  font-weight: 800;
+}
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+.marquee-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 116px;
+  height: 116px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: badge-spin 14s linear infinite;
+}
+
+.marquee-badge-arrow {
+  position: relative;
+  z-index: 1;
+  font-size: 22px;
+  color: white;
+  line-height: 1;
+}
+
+@keyframes badge-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ============================================================
    OUR WORK / BOOKS SECTION
    ============================================================ */
 .our-work-section {
