@@ -305,33 +305,6 @@ export default function Home() {
      ---------------------------------------------------------- */
   return (
     <>
-      {/* COMING SOON OVERLAY */}
-      <div className="coming-soon-overlay">
-        <div className="coming-soon-grain" />
-        <img src="/logo-dark.svg" alt="The Fresh Friends" className="coming-soon-logo" />
-        <div className="coming-soon-content">
-          <p className="coming-soon-eyebrow">Something special is growing</p>
-          <h1 className="coming-soon-heading">Coming <em>Soon</em></h1>
-          <p className="coming-soon-sub">
-            The Fresh Friends are getting ready. Follow along for the big reveal.
-          </p>
-          <a
-            href="https://instagram.com/thefreshfriends"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="coming-soon-cta"
-          >
-            <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" strokeWidth="0" />
-            </svg>
-            Follow @thefreshfriends
-          </a>
-        </div>
-        <p className="coming-soon-wordmark">The Fresh Friends</p>
-      </div>
-
       {/* GRAIN */}
       <div className="grain-overlay" />
 
