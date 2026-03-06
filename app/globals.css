@@ -2153,3 +2153,112 @@ p { font-family: var(--font-playful); }
   }
 }
 
+/* ============================================================
+   PUBLISH WITH ONYX — RESPONSIVE
+   ============================================================ */
+
+.pow-hero {
+  padding: 140px 40px 100px;
+}
+
+.pow-section {
+  padding: 100px 40px;
+}
+
+.pow-enrol {
+  padding-bottom: 120px;
+}
+
+.pow-module-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 44px 48px;
+  align-items: start;
+}
+
+.pow-journey-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.pow-journey-line {
+  position: absolute;
+  top: 28px;
+  left: calc(12.5% + 16px);
+  right: calc(12.5% + 16px);
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 0;
+}
+
+.pow-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.pow-meet-onyx {
+  align-items: center;
+}
+
+.pow-pricing-card {
+  padding: 56px 48px;
+}
+
+@media (max-width: 900px) {
+  .pow-journey-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pow-journey-line {
+    display: none;
+  }
+
+  .pow-two-col {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pow-hero {
+    padding: 120px 24px 72px;
+  }
+
+  .pow-section {
+    padding: 64px 20px;
+  }
+
+  .pow-enrol {
+    padding-bottom: 80px;
+  }
+
+  .pow-module-card {
+    grid-template-columns: 1fr;
+    padding: 32px 24px;
+    gap: 24px;
+  }
+
+  .pow-journey-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .pow-avatar-col {
+    display: none;
+  }
+
+  .pow-pricing-card {
+    padding: 36px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pow-journey-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

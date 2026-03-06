@@ -194,6 +194,24 @@ export default function CharactersScroll() {
                     muted
                     playsInline
                   />
+                ) : char.name === 'Broccoli' ? (
+                  <video
+                    className="panel-video"
+                    src="/broccoli-loop.webm"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                ) : char.name === 'Carrot' ? (
+                  <video
+                    className="panel-video"
+                    src="/carrot-loop.webm"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
                 ) : char.name === 'Cauliflower' ? (
                   <video
                     className="panel-video"
