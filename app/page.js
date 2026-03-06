@@ -239,13 +239,6 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="nh-stat-card">
-          <div className="nh-stat-icon">📚</div>
-          <div>
-            <p className="nh-stat-title">Best Seller</p>
-            <p className="nh-stat-sub">Backed by Sainsbury&apos;s</p>
-          </div>
-        </div>
       </section>
 
       {/* STATS BAR */}
