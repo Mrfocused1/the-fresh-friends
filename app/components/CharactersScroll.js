@@ -25,25 +25,24 @@ function VideoBlend({ src, className }) {
     const canvas = canvasRef.current;
     if (!video || !canvas) return;
 
+    // Explicitly play — autoPlay is unreliable on dynamically-mounted elements on iOS
+    video.play().catch(() => {});
+
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     let sized = false;
     let lastDrawn = 0;
-    const FRAME_MS = 1000 / 15; // cap at 15fps — matches the 12fps source
+    const FRAME_MS = 1000 / 15;
 
     function draw(ts) {
-      // Size canvas once video metadata is ready
       if (!sized && video.videoWidth) {
         canvas.width  = video.videoWidth;
         canvas.height = video.videoHeight;
         sized = true;
       }
 
-      // Throttle by wall-clock time, NOT currentTime.
-      // iOS reports currentTime=0 for off-screen video, causing the still-image bug.
       if (sized && video.readyState >= 2 && ts - lastDrawn >= FRAME_MS) {
         lastDrawn = ts;
         ctx.drawImage(video, 0, 0);
-
         try {
           const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
           const d = imgData.data;
@@ -56,26 +55,27 @@ function VideoBlend({ src, className }) {
             }
           }
           ctx.putImageData(imgData, 0, 0);
-        } catch (_) { /* same-origin so this shouldn't fire */ }
+        } catch (_) {}
       }
 
       rafRef.current = requestAnimationFrame(draw);
     }
 
     rafRef.current = requestAnimationFrame(draw);
-    return () => cancelAnimationFrame(rafRef.current);
+    return () => { cancelAnimationFrame(rafRef.current); video.pause(); };
   }, [ios, src]);
 
   if (ios) {
+    // Video must be physically on-screen at non-zero size — scale(0), display:none,
+    // visibility:hidden and left:-9999px all suspend iOS's video decoder.
+    // 1×1px at opacity:0.01 is invisible to users but keeps the decoder running.
     return (
       <div style={{ position: 'relative', display: 'inline-block' }}>
-        {/* transform:scale(0) keeps element in the render tree so iOS decodes frames,
-            but takes no visual space. left:-9999px stops iOS updating currentTime. */}
         <video
           ref={videoRef}
           src={src}
           autoPlay loop muted playsInline
-          style={{ position: 'absolute', transform: 'scale(0)', transformOrigin: '0 0' }}
+          style={{ position: 'absolute', top: 0, left: 0, width: '1px', height: '1px', opacity: 0.01 }}
         />
         <canvas
           ref={canvasRef}
