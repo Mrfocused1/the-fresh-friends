@@ -682,6 +682,10 @@ p { font-family: var(--font-playful); }
     margin-top: 24px;
     justify-content: center;
   }
+  .sb-social-proof--mobile .sb-stars,
+  .sb-social-proof--mobile .sb-trust {
+    text-align: center;
+  }
 }
 
 /* BOOK SCENE */
