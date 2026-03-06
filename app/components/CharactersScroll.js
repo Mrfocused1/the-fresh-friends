@@ -1,16 +1,76 @@
 'use client';
 
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useEffect, useState } from 'react';
+
+/* Renders a video frame-by-frame onto a <canvas> so CSS mix-blend-mode works on iOS.
+   iOS Safari hardware-decodes video outside the CSS compositor, so mix-blend-mode
+   has no effect on <video> elements. Drawing to canvas forces software compositing. */
+function VideoBlend({ src, className }) {
+  const [ios, setIos] = useState(false);
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+  const rafRef = useRef(null);
+
+  useEffect(() => {
+    const isIos =
+      /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    setIos(isIos);
+  }, []);
+
+  useEffect(() => {
+    if (!ios) return;
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    if (!video || !canvas) return;
+    const ctx = canvas.getContext('2d');
+    let sized = false;
+
+    function draw() {
+      if (video.readyState >= 2) {
+        if (!sized && video.videoWidth) {
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          sized = true;
+        }
+        if (sized) ctx.drawImage(video, 0, 0);
+      }
+      rafRef.current = requestAnimationFrame(draw);
+    }
+
+    rafRef.current = requestAnimationFrame(draw);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [ios, src]);
+
+  if (ios) {
+    return (
+      <div style={{ position: 'relative', height: '420px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        {/* Video must remain rendered (not 0x0) so iOS decodes frames */}
+        <video
+          ref={videoRef}
+          src={src}
+          autoPlay loop muted playsInline
+          style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', height: '420px', width: 'auto' }}
+        />
+        <canvas ref={canvasRef} className={className} style={{ height: '420px', width: 'auto', display: 'block', mixBlendMode: 'screen' }} />
+      </div>
+    );
+  }
+
+  return (
+    <video className={className} src={src} autoPlay loop muted playsInline />
+  );
+}
 
 const characters = [
-  { emoji:'🍓', name:'Strawberry',   power:'Power of Courage',      powerColor:'#e8365d', bgColor:'rgba(232,54,93,0.12)',   body:"Strawberry is the bravest fruit in Freshland. When the others are scared, she leads the way — reminding us that courage isn't the absence of fear, it's doing it anyway." },
-  { emoji:'🍌', name:'Banana',       power:'Power of Joy',           powerColor:'#f5c518', bgColor:'rgba(245,197,24,0.12)',  body:"Banana brings sunshine to every corner of Freshland. His laughter is contagious and his energy unstoppable — a reminder that happiness is a superpower all of its own." },
-  { emoji:'🍎', name:'Apple',        power:'Power of Focus',         powerColor:'#c0392b', bgColor:'rgba(192,57,43,0.12)',   body:"Apple is the sharpest mind in the orchard. She teaches that staying present and focused — even when distractions abound — is how great things get done." },
-  { emoji:'🍊', name:'Orange',       power:'Power of Energy',        powerColor:'#f39c12', bgColor:'rgba(243,156,18,0.12)',  body:"Orange never runs out of fizz! His boundless energy and enthusiasm inspire everyone around him to jump in, try new things, and keep moving forward." },
-  { emoji:'🥦', name:'Broccoli',     power:'Power of Strength',      powerColor:'#27ae60', bgColor:'rgba(39,174,96,0.12)',   body:"Broccoli is the strongest friend in Freshland — not just in muscles, but in character. He shows children that true strength comes from helping others and never giving up." },
-  { emoji:'🥕', name:'Carrot',       power:'Power of Vision',        powerColor:'#e67e22', bgColor:'rgba(230,126,34,0.12)',  body:"Carrot can see what others miss. Her far-sighted vision teaches children to look beyond the obvious and imagine what's possible." },
-  { emoji:'🥬', name:'Cauliflower',  power:'Power of Imagination',   powerColor:'#8e44ad', bgColor:'rgba(142,68,173,0.12)',  body:"Cauliflower's creamy white head hides a world of possibility. She teaches children that the most extraordinary ideas often come from the quietest minds — and that imagination has no limits." },
-  { emoji:'🥥', name:'Coconut',      power:'Power of Calm',          powerColor:'#8e7560', bgColor:'rgba(142,117,96,0.12)',  body:"Coconut carries stillness wherever she goes. In a busy world, she teaches children the art of breathing, slowing down, and finding peace within themselves." },
+  { emoji:'🍓', name:'Strawberry',   power:'Power of Courage',      powerColor:'#e8365d', bgColor:'rgba(232,54,93,0.12)',   video:'/strawberry-loop.webm',   body:"Strawberry is the bravest fruit in Freshland. When the others are scared, she leads the way — reminding us that courage isn't the absence of fear, it's doing it anyway." },
+  { emoji:'🍌', name:'Banana',       power:'Power of Joy',           powerColor:'#f5c518', bgColor:'rgba(245,197,24,0.12)',  video:'/banana-loop.webm',       body:"Banana brings sunshine to every corner of Freshland. His laughter is contagious and his energy unstoppable — a reminder that happiness is a superpower all of its own." },
+  { emoji:'🍎', name:'Apple',        power:'Power of Focus',         powerColor:'#c0392b', bgColor:'rgba(192,57,43,0.12)',   video:'/apple-loop.webm',        body:"Apple is the sharpest mind in the orchard. She teaches that staying present and focused — even when distractions abound — is how great things get done." },
+  { emoji:'🍊', name:'Orange',       power:'Power of Energy',        powerColor:'#f39c12', bgColor:'rgba(243,156,18,0.12)',  video:'/orange-loop.webm',       body:"Orange never runs out of fizz! His boundless energy and enthusiasm inspire everyone around him to jump in, try new things, and keep moving forward." },
+  { emoji:'🥦', name:'Broccoli',     power:'Power of Strength',      powerColor:'#27ae60', bgColor:'rgba(39,174,96,0.12)',   video:'/broccoli-loop.webm',     body:"Broccoli is the strongest friend in Freshland — not just in muscles, but in character. He shows children that true strength comes from helping others and never giving up." },
+  { emoji:'🥕', name:'Carrot',       power:'Power of Vision',        powerColor:'#e67e22', bgColor:'rgba(230,126,34,0.12)',  video:'/carrot-loop.webm',       body:"Carrot can see what others miss. Her far-sighted vision teaches children to look beyond the obvious and imagine what's possible." },
+  { emoji:'🥬', name:'Cauliflower',  power:'Power of Imagination',   powerColor:'#8e44ad', bgColor:'rgba(142,68,173,0.12)',  video:'/cauliflower-loop.webm',  body:"Cauliflower's creamy white head hides a world of possibility. She teaches children that the most extraordinary ideas often come from the quietest minds — and that imagination has no limits." },
+  { emoji:'🥥', name:'Coconut',      power:'Power of Calm',          powerColor:'#8e7560', bgColor:'rgba(142,117,96,0.12)',  video:'/coconut-loop.webm',      body:"Coconut carries stillness wherever she goes. In a busy world, she teaches children the art of breathing, slowing down, and finding peace within themselves." },
 ];
 
 export default function CharactersScroll() {
@@ -167,78 +227,8 @@ export default function CharactersScroll() {
                 </a>
               </div>
               <div className="panel-right">
-                {char.name === 'Strawberry' ? (
-                  <video
-                    className="panel-video"
-                    src="/strawberry-loop.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                ) : char.name === 'Banana' ? (
-                  <video
-                    className="panel-video"
-                    src="/banana-loop.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                ) : char.name === 'Apple' ? (
-                  <video
-                    className="panel-video"
-                    src="/apple-loop.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                ) : char.name === 'Broccoli' ? (
-                  <video
-                    className="panel-video"
-                    src="/broccoli-loop.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                ) : char.name === 'Carrot' ? (
-                  <video
-                    className="panel-video"
-                    src="/carrot-loop.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                ) : char.name === 'Cauliflower' ? (
-                  <video
-                    className="panel-video"
-                    src="/cauliflower-loop.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                ) : char.name === 'Orange' ? (
-                  <video
-                    className="panel-video"
-                    src="/orange-loop.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                ) : char.name === 'Coconut' ? (
-                  <video
-                    className="panel-video"
-                    src="/coconut-loop.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
+                {char.video ? (
+                  <VideoBlend src={char.video} className="panel-video" />
                 ) : (
                   <div className="panel-visual" style={{ background: char.bgColor }}>
                     {char.emoji}
