@@ -1279,6 +1279,7 @@ p { font-family: var(--font-playful); }
   height: 420px;
   width: auto;
   object-fit: contain;
+  mix-blend-mode: screen;
 }
 
 /* SERVICES NAV */
