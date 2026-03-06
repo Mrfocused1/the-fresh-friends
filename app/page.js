@@ -191,7 +191,7 @@ export default function Home() {
         {
           /* Mobile: cover swings left off-screen — shift book right to recentre */
           /* Desktop: scene is centred in column — shift right to account for cover */
-          x: isMobile ? 70 : 140,
+          x: isMobile ? 95 : 140,
           duration: 1.8,
           delay: 0.6,
           ease: 'power2.inOut',
