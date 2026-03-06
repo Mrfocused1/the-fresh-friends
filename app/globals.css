@@ -299,7 +299,7 @@ p { font-family: var(--font-playful); }
 
 .mq-bold {
   font-size: clamp(52px, 6.5vw, 88px);
-  font-weight: 800;
+  font-weight: 600;
   color: #1a1a1a;
   line-height: 1.15;
   padding: 0 18px;
