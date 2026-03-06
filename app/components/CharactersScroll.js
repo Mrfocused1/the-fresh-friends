@@ -25,41 +25,40 @@ function VideoBlend({ src, className }) {
     const canvas = canvasRef.current;
     if (!video || !canvas) return;
 
-    // willReadFrequently: true tells the browser to optimise for repeated getImageData calls
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     let sized = false;
-    let lastTime = -1;
+    let lastDrawn = 0;
+    const FRAME_MS = 1000 / 15; // cap at 15fps — matches the 12fps source
 
-    function draw() {
-      if (video.readyState >= 2) {
-        if (!sized && video.videoWidth) {
-          canvas.width  = video.videoWidth;
-          canvas.height = video.videoHeight;
-          sized = true;
-        }
-        // Only reprocess when the video has advanced to a new frame
-        if (sized && video.currentTime !== lastTime) {
-          lastTime = video.currentTime;
-          ctx.drawImage(video, 0, 0);
-
-          try {
-            const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const d = imgData.data;
-            for (let i = 0; i < d.length; i += 4) {
-              // Use perceived brightness to detect the black background
-              const brightness = (d[i] * 0.299 + d[i + 1] * 0.587 + d[i + 2] * 0.114);
-              if (brightness < 30) {
-                d[i + 3] = 0;                                          // fully transparent
-              } else if (brightness < 70) {
-                d[i + 3] = Math.round(((brightness - 30) / 40) * 255); // soft edge fade
-              }
-            }
-            ctx.putImageData(imgData, 0, 0);
-          } catch (_) {
-            // getImageData blocked (shouldn't happen for same-origin) — canvas still renders
-          }
-        }
+    function draw(ts) {
+      // Size canvas once video metadata is ready
+      if (!sized && video.videoWidth) {
+        canvas.width  = video.videoWidth;
+        canvas.height = video.videoHeight;
+        sized = true;
       }
+
+      // Throttle by wall-clock time, NOT currentTime.
+      // iOS reports currentTime=0 for off-screen video, causing the still-image bug.
+      if (sized && video.readyState >= 2 && ts - lastDrawn >= FRAME_MS) {
+        lastDrawn = ts;
+        ctx.drawImage(video, 0, 0);
+
+        try {
+          const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const d = imgData.data;
+          for (let i = 0; i < d.length; i += 4) {
+            const brightness = d[i] * 0.299 + d[i + 1] * 0.587 + d[i + 2] * 0.114;
+            if (brightness < 30) {
+              d[i + 3] = 0;
+            } else if (brightness < 70) {
+              d[i + 3] = Math.round(((brightness - 30) / 40) * 255);
+            }
+          }
+          ctx.putImageData(imgData, 0, 0);
+        } catch (_) { /* same-origin so this shouldn't fire */ }
+      }
+
       rafRef.current = requestAnimationFrame(draw);
     }
 
@@ -70,12 +69,13 @@ function VideoBlend({ src, className }) {
   if (ios) {
     return (
       <div style={{ position: 'relative', display: 'inline-block' }}>
-        {/* Keep video off-screen (not display:none) so iOS continues decoding frames */}
+        {/* transform:scale(0) keeps element in the render tree so iOS decodes frames,
+            but takes no visual space. left:-9999px stops iOS updating currentTime. */}
         <video
           ref={videoRef}
           src={src}
           autoPlay loop muted playsInline
-          style={{ position: 'absolute', left: '-9999px', top: 0, height: '420px', width: 'auto' }}
+          style={{ position: 'absolute', transform: 'scale(0)', transformOrigin: '0 0' }}
         />
         <canvas
           ref={canvasRef}
