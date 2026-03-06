@@ -313,19 +313,6 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="marquee-badge">
-          <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" className="badge-svg">
-            <defs>
-              <path id="badge-path" d="M 80,80 m -52,0 a 52,52 0 1,1 104,0 a 52,52 0 1,1 -104,0" />
-            </defs>
-            <circle cx="80" cy="80" r="60" fill="#1a4d8c" />
-            <circle cx="80" cy="80" r="46" fill="none" stroke="white" strokeWidth="1" strokeOpacity="0.3" />
-            <text fontSize="11.5" fill="white" fontWeight="700" letterSpacing="2" fontFamily="sans-serif">
-              <textPath href="#badge-path" textLength="327">• Let&apos;s talk stories • </textPath>
-            </text>
-          </svg>
-          <span className="marquee-badge-arrow">↗</span>
-        </div>
       </section>
 
       {/* BOOKS / OUR WORK */}
