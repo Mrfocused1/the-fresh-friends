@@ -138,8 +138,12 @@ p { font-family: var(--font-playful); }
 }
 
 .hero-sticky {
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .hero-bg {
@@ -265,7 +269,7 @@ p { font-family: var(--font-playful); }
   position: relative;
   background: var(--hero-bg);
   overflow: hidden;
-  padding: 80px 0;
+  padding: 24px 0 60px;
 }
 
 .marquee-inner {
