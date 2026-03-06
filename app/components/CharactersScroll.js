@@ -2,9 +2,10 @@
 
 import { useLayoutEffect, useRef, useEffect, useState } from 'react';
 
-/* Renders a video frame-by-frame onto a <canvas> so CSS mix-blend-mode works on iOS.
-   iOS Safari hardware-decodes video outside the CSS compositor, so mix-blend-mode
-   has no effect on <video> elements. Drawing to canvas forces software compositing. */
+/* On iOS Safari, mix-blend-mode has no effect on <video> elements because the browser
+   hardware-decodes video in a separate compositor layer. Even on <canvas>, blend modes
+   can fail inside GSAP-pinned sections due to stacking context issues.
+   Solution: pixel-level black removal via getImageData/putImageData — no CSS blend modes. */
 function VideoBlend({ src, className }) {
   const [ios, setIos] = useState(false);
   const videoRef = useRef(null);
@@ -23,17 +24,41 @@ function VideoBlend({ src, className }) {
     const video = videoRef.current;
     const canvas = canvasRef.current;
     if (!video || !canvas) return;
-    const ctx = canvas.getContext('2d');
+
+    // willReadFrequently: true tells the browser to optimise for repeated getImageData calls
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
     let sized = false;
+    let lastTime = -1;
 
     function draw() {
       if (video.readyState >= 2) {
         if (!sized && video.videoWidth) {
-          canvas.width = video.videoWidth;
+          canvas.width  = video.videoWidth;
           canvas.height = video.videoHeight;
           sized = true;
         }
-        if (sized) ctx.drawImage(video, 0, 0);
+        // Only reprocess when the video has advanced to a new frame
+        if (sized && video.currentTime !== lastTime) {
+          lastTime = video.currentTime;
+          ctx.drawImage(video, 0, 0);
+
+          try {
+            const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const d = imgData.data;
+            for (let i = 0; i < d.length; i += 4) {
+              // Use perceived brightness to detect the black background
+              const brightness = (d[i] * 0.299 + d[i + 1] * 0.587 + d[i + 2] * 0.114);
+              if (brightness < 30) {
+                d[i + 3] = 0;                                          // fully transparent
+              } else if (brightness < 70) {
+                d[i + 3] = Math.round(((brightness - 30) / 40) * 255); // soft edge fade
+              }
+            }
+            ctx.putImageData(imgData, 0, 0);
+          } catch (_) {
+            // getImageData blocked (shouldn't happen for same-origin) — canvas still renders
+          }
+        }
       }
       rafRef.current = requestAnimationFrame(draw);
     }
@@ -44,22 +69,24 @@ function VideoBlend({ src, className }) {
 
   if (ios) {
     return (
-      <div style={{ position: 'relative', height: '420px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        {/* Video must remain rendered (not 0x0) so iOS decodes frames */}
+      <div style={{ position: 'relative', display: 'inline-block' }}>
+        {/* Keep video off-screen (not display:none) so iOS continues decoding frames */}
         <video
           ref={videoRef}
           src={src}
           autoPlay loop muted playsInline
-          style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', height: '420px', width: 'auto' }}
+          style={{ position: 'absolute', left: '-9999px', top: 0, height: '420px', width: 'auto' }}
         />
-        <canvas ref={canvasRef} className={className} style={{ height: '420px', width: 'auto', display: 'block', mixBlendMode: 'screen' }} />
+        <canvas
+          ref={canvasRef}
+          className={className}
+          style={{ height: '420px', width: 'auto', display: 'block' }}
+        />
       </div>
     );
   }
 
-  return (
-    <video className={className} src={src} autoPlay loop muted playsInline />
-  );
+  return <video className={className} src={src} autoPlay loop muted playsInline />;
 }
 
 const characters = [

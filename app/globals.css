@@ -1279,7 +1279,7 @@ p { font-family: var(--font-playful); }
   height: 420px;
   width: auto;
   object-fit: contain;
-  mix-blend-mode: screen;
+  mix-blend-mode: screen; /* desktop Chrome/Firefox: removes black bg */
 }
 
 /* SERVICES NAV */
