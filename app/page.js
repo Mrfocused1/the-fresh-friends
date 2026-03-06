@@ -287,8 +287,8 @@ export default function Home() {
       <section className="marquee-section">
         <div className="marquee-inner">
           {[
-            { dir: 'left',  duration: '20s' },
-            { dir: 'right', duration: '20s' },
+            { dir: 'left',  duration: '50s' },
+            { dir: 'right', duration: '50s' },
           ].map((row, i) => (
             <div className="marquee-row" key={i}>
               <div

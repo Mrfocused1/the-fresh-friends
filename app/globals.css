@@ -299,7 +299,7 @@ p { font-family: var(--font-playful); }
   color: #1a1a1a;
   line-height: 1.15;
   padding: 0 18px;
-  font-family: var(--font-main);
+  font-family: var(--font-playful);
 }
 
 .mq-light {
@@ -309,7 +309,7 @@ p { font-family: var(--font-playful); }
   color: rgba(34, 34, 34, 0.22);
   line-height: 1.15;
   padding: 0 18px;
-  font-family: var(--font-main);
+  font-family: var(--font-playful);
 }
 
 @keyframes marquee-left {
