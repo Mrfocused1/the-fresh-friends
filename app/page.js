@@ -207,8 +207,6 @@ export default function Home() {
       <section className="nh-hero" id="nh-hero">
         <div className="nh-hero-bg">
           <img src="/hero-bg.png" alt="Author with Fresh Friends book collection" />
-          <div className="nh-hero-overlay" />
-          <div className="nh-hero-overlay-bottom" />
         </div>
 
         <div className="nh-hero-inner">
