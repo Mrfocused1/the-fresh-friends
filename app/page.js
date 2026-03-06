@@ -318,16 +318,17 @@ export default function Home() {
               <div className="sb-book-spine" />
             </div>
             <div className="sb-book-shadow" />
-            <div className="sb-social-proof sb-social-proof--mobile">
-              <div className="sb-avatars">
-                <div className="sb-avatar" style={{ background: '#e8365d' }} />
-                <div className="sb-avatar" style={{ background: '#f5c518' }} />
-                <div className="sb-avatar" style={{ background: '#27ae60' }} />
-              </div>
-              <div>
-                <div className="sb-stars">★★★★★</div>
-                <p className="sb-trust">Loved by over <strong>500</strong> families</p>
-              </div>
+          </div>
+
+          <div className="sb-social-proof sb-social-proof--mobile">
+            <div className="sb-avatars">
+              <div className="sb-avatar" style={{ background: '#e8365d' }} />
+              <div className="sb-avatar" style={{ background: '#f5c518' }} />
+              <div className="sb-avatar" style={{ background: '#27ae60' }} />
+            </div>
+            <div>
+              <div className="sb-stars">★★★★★</div>
+              <p className="sb-trust">Loved by over <strong>500</strong> families</p>
             </div>
           </div>
 
