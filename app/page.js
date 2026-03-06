@@ -251,9 +251,9 @@ export default function Home() {
               <a href="#books" className="sb-cta-btn">Get your copy today</a>
               <div className="sb-social-proof">
                 <div className="sb-avatars">
-                  <div className="sb-avatar" style={{ background: '#e8365d' }}>🍓</div>
-                  <div className="sb-avatar" style={{ background: '#f5c518' }}>🍌</div>
-                  <div className="sb-avatar" style={{ background: '#27ae60' }}>🥦</div>
+                  <div className="sb-avatar" style={{ background: '#e8365d' }} />
+                  <div className="sb-avatar" style={{ background: '#f5c518' }} />
+                  <div className="sb-avatar" style={{ background: '#27ae60' }} />
                 </div>
                 <div>
                   <div className="sb-stars">★★★★★</div>
@@ -271,7 +271,7 @@ export default function Home() {
                 <div className="sb-page-content">
                   <p className="sb-page-tagline">Meet the</p>
                   <p className="sb-page-title">Fresh Friends</p>
-                  <div className="sb-page-chars">🍓🍌🥦🥕🍊🍋🥥🍎</div>
+                  <div className="sb-page-chars"></div>
                 </div>
               </div>
 
