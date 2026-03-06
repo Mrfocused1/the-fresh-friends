@@ -279,7 +279,7 @@ export default function Home() {
               celebrating courage, joy, strength, and everything in between.
             </p>
             <div className="sb-hero-actions">
-              <a href="#books" className="sb-cta-btn">Get your copy today</a>
+              <a href="#books" className="sb-cta-btn">Get Started Today!</a>
               <div className="sb-social-proof sb-social-proof--desktop">
                 <div className="sb-avatars">
                   <div className="sb-avatar" style={{ background: '#e8365d' }} />
