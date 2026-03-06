@@ -140,7 +140,6 @@ export default function Home() {
   const logoImgRef = useRef(null);
   const coverRef = useRef(null);
   const bookSceneRef = useRef(null);
-  const card1Ref = useRef(null);
   const [selectedChips, setSelectedChips] = useState([]);
 
   const serviceChips = [
@@ -356,10 +355,7 @@ export default function Home() {
 
           <div className="flip-cards">
             {/* Card 1 — Self Publish */}
-            <div
-              ref={card1Ref}
-              className="flip-card anim-in delay-1 flip-card--has-hover-img"
-            >
+            <div className="flip-card anim-in delay-1">
               <div className="flip-card-inner">
                 <div className="card-body">
                   <span className="card-num">Publish with Onyx</span>
@@ -392,7 +388,7 @@ export default function Home() {
               <div
                 className="card-preview"
                 style={{
-                  background: 'linear-gradient(135deg, #1a5c2a 0%, #0d3318 100%)',
+                  background: 'linear-gradient(135deg, #27ae60 0%, #1a7a43 100%)',
                   flexDirection: 'column',
                   gap: '16px',
                 }}
@@ -410,10 +406,6 @@ export default function Home() {
                 >
                   Self Publish with Onyx
                 </p>
-              </div>
-              {/* Hover image overlay */}
-              <div className="card-hover-img">
-                <img src="/author-hover.jpeg" alt="Author with Fresh Friends books" />
               </div>
             </div>
 
