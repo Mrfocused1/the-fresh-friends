@@ -239,8 +239,17 @@ export default function Home() {
           {/* LEFT: text */}
           <div className="sb-hero-text">
             <h1 className="sb-hero-h1">
-              Where stories come alive and children discover their{' '}
-              <em>extraordinary</em> Nature Powers.
+              Where stories come alive and children discover{' '}
+              <span className="hero-inline-video">
+                <video
+                  src="/inline-video.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              </span>
+              {' '}their <em>extraordinary</em> Nature Powers.
             </h1>
             <p className="sb-hero-sub">
               Meet the Fresh Friends — eight fruit and vegetable characters
@@ -257,7 +266,7 @@ export default function Home() {
                 </div>
                 <div>
                   <div className="sb-stars">★★★★★</div>
-                  <p className="sb-trust">Loved by over <strong>10,000</strong> families</p>
+                  <p className="sb-trust">Loved by over <strong>500</strong> families</p>
                 </div>
               </div>
             </div>

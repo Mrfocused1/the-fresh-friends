@@ -566,6 +566,28 @@ p { font-family: var(--font-playful); }
   color: rgb(0,113,77);
 }
 
+.hero-inline-video {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 50%;
+  overflow: hidden;
+  width: clamp(80px, 9vw, 140px);
+  height: clamp(80px, 9vw, 140px);
+  margin: 0 6px;
+  position: relative;
+  top: -2px;
+  border: 4px solid rgb(0, 113, 77);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.hero-inline-video video {
+  width: 100%;
+  height: calc(100% + 15px);
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
 .sb-hero-sub {
   font-family: var(--font-playful);
   font-size: clamp(15px, 1.3vw, 18px);
