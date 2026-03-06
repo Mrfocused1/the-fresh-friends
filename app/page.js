@@ -136,19 +136,8 @@ const testimonials = [
    HOME PAGE
    ============================================================ */
 export default function Home() {
-  const wrapperRef = useRef(null);
   const logoImgRef = useRef(null);
   const [selectedChips, setSelectedChips] = useState([]);
-  const growWords = [
-    { word: 'grow',     color: '#27ae60' }, // Broccoli green
-    { word: 'bloom',    color: '#e8365d' }, // Strawberry red
-    { word: 'thrive',   color: '#f5c518' }, // Banana yellow
-    { word: 'flourish', color: '#f39c12' }, // Orange
-    { word: 'expand',   color: '#1773b0' }, // Blue
-    { word: 'soar',     color: '#f1c40f' }, // Lemon
-  ];
-  const [growIndex, setGrowIndex] = useState(0);
-  const [growVisible, setGrowVisible] = useState(true);
 
   const serviceChips = [
     'School Workshop',
@@ -170,11 +159,11 @@ export default function Home() {
      ---------------------------------------------------------- */
   useEffect(() => {
     const logoImg = logoImgRef.current;
-    const heroSticky = document.getElementById('heroSticky');
 
     function onScroll() {
-      if (logoImg && heroSticky) {
-        const threshold = heroSticky.offsetHeight * 0.75;
+      if (logoImg) {
+        const hero = document.getElementById('nh-hero');
+        const threshold = hero ? hero.offsetHeight * 0.75 : window.innerHeight * 0.75;
         logoImg.src = window.scrollY >= threshold ? '/logo-dark.svg' : '/logo.svg';
       }
     }
@@ -185,9 +174,7 @@ export default function Home() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
+          if (entry.isIntersecting) entry.target.classList.add('visible');
         });
       },
       { threshold: 0.15 }
@@ -197,22 +184,6 @@ export default function Home() {
     return () => {
       window.removeEventListener('scroll', onScroll);
       observer.disconnect();
-    };
-  }, []);
-
-  /* Cycling word effect */
-  useEffect(() => {
-    let timeout;
-    const interval = setInterval(() => {
-      setGrowVisible(false);
-      timeout = setTimeout(() => {
-        setGrowIndex(i => (i + 1) % growWords.length);
-        setGrowVisible(true);
-      }, 600);
-    }, 2600);
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
     };
   }, []);
 
@@ -233,104 +204,100 @@ export default function Home() {
       <Navbar activePage="Home" />
 
       {/* HERO */}
-      <div className="hero-wrapper" ref={wrapperRef} id="heroWrapper">
-        <div className="hero-sticky" id="heroSticky">
-          <div className="hero-bg" />
-          <div className="hero-content" id="heroContent">
+      <section className="nh-hero" id="nh-hero">
+        <div className="nh-hero-bg">
+          <img src="/hero-bg.png" alt="Author with Fresh Friends book collection" />
+          <div className="nh-hero-overlay" />
+          <div className="nh-hero-overlay-bottom" />
+        </div>
 
-            <div className="hero-center">
-              <div className="hero-headline">
-                {/* Line 1: Where */}
-                <div className="hero-line">
-                  <span className="h-word">Where</span>
+        <div className="nh-hero-inner">
+          <div className="nh-hero-text">
+            <h1 className="nh-hero-h1">
+              Where stories come alive and children discover their{' '}
+              <em>extraordinary</em> Nature Powers.
+            </h1>
+            <p className="nh-hero-sub">
+              Meet the Fresh Friends — eight fruit and vegetable characters
+              with extraordinary Nature Powers. A children&apos;s book series
+              celebrating courage, joy, strength, and everything in between.
+            </p>
+            <div className="nh-hero-actions">
+              <a href="#books" className="nh-cta-btn">Get your copy today</a>
+              <div className="nh-social-proof">
+                <div className="nh-avatars">
+                  <div className="nh-avatar" style={{ background: '#e8365d' }}>🍓</div>
+                  <div className="nh-avatar" style={{ background: '#f5c518' }}>🍌</div>
+                  <div className="nh-avatar" style={{ background: '#27ae60' }}>🥦</div>
                 </div>
-                {/* Line 2: stories grow */}
-                <div className="hero-line indent">
-                  <span className="h-word italic-word">stories</span>
-                  <span className="grow-stack">
-                    {growWords.map((w, i) => {
-                      const isActive = i === growIndex;
-                      return (
-                        <span
-                          key={w.word}
-                          className={`h-word grow-cycle${isActive ? (growVisible ? ' grow-in' : ' grow-out') : ''}`}
-                          style={{
-                            color: w.color,
-                            visibility: isActive ? 'visible' : 'hidden',
-                          }}
-                          aria-hidden={!isActive}
-                        >
-                          {w.word}
-                        </span>
-                      );
-                    })}
-                  </span>
-                </div>
-                {/* Line 3: into adventures. */}
-                <div className="hero-line">
-                  <span className="h-word">into</span>
-                  <span className="h-word italic-word">adventures.</span>
+                <div>
+                  <div className="nh-stars">★★★★★</div>
+                  <p className="nh-trust">Loved by over <strong>10,000</strong> families</p>
                 </div>
               </div>
-
-              <p className="hero-sub">
-                Meet the Fresh Friends — eight fruit and vegetable characters
-                with extraordinary Nature Powers. A children's book series
-                celebrating courage, joy, strength, and everything in between.
-              </p>
             </div>
+          </div>
+        </div>
 
-            <div className="hero-video-wrap">
-              <video
-                autoPlay
-                muted
-                playsInline
-                className="hero-video"
-                ref={(el) => {
-                  if (!el) return;
-                  const handler = () => {
-                    if (el.currentTime >= 19) el.currentTime = 0;
-                  };
-                  el.addEventListener('timeupdate', handler);
+        <div className="nh-stat-card">
+          <div className="nh-stat-icon">📚</div>
+          <div>
+            <p className="nh-stat-title">Best Seller</p>
+            <p className="nh-stat-sub">Backed by Sainsbury&apos;s</p>
+          </div>
+        </div>
+      </section>
+
+      {/* STATS BAR */}
+      <section className="nh-stats-bar">
+        <div className="nh-stats-grid">
+          <div className="nh-stat-item">
+            <strong>8 Characters</strong>
+            <span>Each with unique Nature Powers</span>
+          </div>
+          <div className="nh-stat-item">
+            <strong>4.9/5</strong>
+            <span>Average parent rating</span>
+          </div>
+          <div className="nh-stat-item">
+            <strong>Ages 2–8</strong>
+            <span>Perfect for little readers</span>
+          </div>
+          <div className="nh-stat-item">
+            <strong>UK-wide</strong>
+            <span>School workshops available</span>
+          </div>
+        </div>
+      </section>
+
+      {/* MARQUEE TICKER */}
+      <div className="marquee-section">
+        <div className="marquee-inner">
+          {[
+            { dir: 'left',  duration: '50s' },
+            { dir: 'right', duration: '50s' },
+          ].map((row, i) => (
+            <div className="marquee-row" key={i}>
+              <div
+                className="marquee-track"
+                style={{
+                  animationName: row.dir === 'left' ? 'marquee-left' : 'marquee-right',
+                  animationDuration: row.duration,
                 }}
               >
-                <source src="/hero-video.mp4" type="video/mp4" />
-              </video>
+                {[0, 1].map((copy) => (
+                  <span className="marquee-set" key={copy} aria-hidden={copy === 1 ? true : undefined}>
+                    <span className="mq-bold">Where stories come alive</span>
+                    <span className="mq-light">Where stories come alive</span>
+                    <span className="mq-bold">Where stories come alive</span>
+                    <span className="mq-light">Where stories come alive</span>
+                    <span className="mq-bold">Where stories come alive</span>
+                    <span className="mq-light">Where stories come alive</span>
+                  </span>
+                ))}
+              </div>
             </div>
-
-          </div>
-
-          {/* MARQUEE TICKER — sits directly below hero paragraph */}
-          <div className="marquee-section">
-            <div className="marquee-inner">
-              {[
-                { dir: 'left',  duration: '50s' },
-                { dir: 'right', duration: '50s' },
-              ].map((row, i) => (
-                <div className="marquee-row" key={i}>
-                  <div
-                    className="marquee-track"
-                    style={{
-                      animationName: row.dir === 'left' ? 'marquee-left' : 'marquee-right',
-                      animationDuration: row.duration,
-                    }}
-                  >
-                    {[0, 1].map((copy) => (
-                      <span className="marquee-set" key={copy} aria-hidden={copy === 1 ? true : undefined}>
-                        <span className="mq-bold">Where stories come alive</span>
-                        <span className="mq-light">Where stories come alive</span>
-                        <span className="mq-bold">Where stories come alive</span>
-                        <span className="mq-light">Where stories come alive</span>
-                        <span className="mq-bold">Where stories come alive</span>
-                        <span className="mq-light">Where stories come alive</span>
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
+          ))}
         </div>
       </div>
 
