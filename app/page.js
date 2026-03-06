@@ -239,27 +239,6 @@ export default function Home() {
 
       </section>
 
-      {/* STATS BAR */}
-      <section className="nh-stats-bar">
-        <div className="nh-stats-grid">
-          <div className="nh-stat-item">
-            <strong>8 Characters</strong>
-            <span>Each with unique Nature Powers</span>
-          </div>
-          <div className="nh-stat-item">
-            <strong>4.9/5</strong>
-            <span>Average parent rating</span>
-          </div>
-          <div className="nh-stat-item">
-            <strong>Ages 2–8</strong>
-            <span>Perfect for little readers</span>
-          </div>
-          <div className="nh-stat-item">
-            <strong>UK-wide</strong>
-            <span>School workshops available</span>
-          </div>
-        </div>
-      </section>
 
 
       {/* BOOKS / OUR WORK */}
