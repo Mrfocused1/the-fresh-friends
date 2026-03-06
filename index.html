@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Fresh Friends</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --hero-bg:          #F0F0F3;
+      --nav-bg:           #F8F8FB;
+      --dark-bg:          #151618;
+      --dark-card-bg:     #1B1D22;
+      --text-primary:     #222222;
+      --text-secondary:   #676A70;
+      --text-light:       #ADAEB5;
+      --orange:           #F66C40;
+      --white:            #ffffff;
+      --font-main:        'Be Vietnam Pro', sans-serif;
+      --font-serif:       'Platypi', serif;
+      --nav-h:            74px;
+    }
+
+    html { scroll-behavior: auto; overflow-x: hidden; }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--text-primary);
+      background: var(--dark-bg);
+      overflow-x: hidden;
+    }
+
+    /* ── GRAIN ───────────────────────────────── */
+    .grain-overlay {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 128px 128px;
+    }
+
+    /* ── NAVBAR (floating) ───────────────────── */
+    .navbar {
+      position: fixed;
+      top: 20px; right: 20px;
+      z-index: 200;
+      background: var(--nav-bg);
+      border-radius: 100px;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.13);
+      display: inline-flex; align-items: center;
+    }
+    .nav-container {
+      display: flex; align-items: center;
+      padding: 8px 8px 8px 6px;
+      gap: 0;
+    }
+    .nav-logo { display: none; }
+    .floating-logo {
+      position: fixed;
+      top: 20px; left: 20px;
+      z-index: 200;
+      display: flex; align-items: center;
+      text-decoration: none;
+    }
+    .floating-logo img {
+      height: 30px; width: auto; display: block;
+    }
+    .nav-right { display: flex; align-items: center; gap: 2px; }
+    .nav-links { list-style: none; display: flex; gap: 2px; }
+    .nav-links a {
+      font-size: 14px; font-weight: 500; color: var(--text-primary);
+      text-decoration: none; padding: 8px 16px; border-radius: 100px;
+      transition: background 0.2s;
+    }
+    .nav-links a:hover { background: rgba(0,0,0,0.06); }
+    .nav-cta {
+      margin-left: 4px; padding: 10px 22px;
+      background: rgb(120,181,57); color: var(--white);
+      font-size: 14px; font-weight: 600;
+      border-radius: 100px; text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { opacity: 0.85; transform: scale(0.98); }
+
+    /* ── HERO ────────────────────────────────── */
+    .hero-wrapper {
+      position: relative;
+    }
+
+    .hero-sticky {
+      height: 100vh;
+      overflow: hidden;
+      background-color: var(--hero-bg);
+      background-image: radial-gradient(circle, #c4c4c8 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    /* Dotted background */
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-color: var(--hero-bg);
+      background-image: radial-gradient(circle, #c4c4c8 1px, transparent 1px);
+      background-size: 24px 24px;
+      z-index: 0;
+    }
+
+    /* Hero content stacking context */
+    .hero-content {
+      position: relative; z-index: 2;
+      height: 100%;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      padding-bottom: 40px;
+    }
+
+    /* Side decorations */
+    .hero-side {
+      position: absolute;
+      top: 50%; z-index: 1;
+      font-size: 12px; font-weight: 600;
+      color: var(--text-secondary);
+      writing-mode: vertical-rl;
+      letter-spacing: 2px;
+    }
+    .hero-side.left  { left: 28px;  transform: translateY(-50%); }
+    .hero-side.right { right: 28px; transform: translateY(-50%) rotate(180deg); }
+
+    /* Headline */
+    .hero-center {
+      flex: 1; display: flex;
+      align-items: center; justify-content: center;
+      padding-top: 40px;
+      position: relative; z-index: 3;
+    }
+    .hero-headline {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 4px; text-align: center;
+    }
+    .hero-line { display: flex; align-items: center; gap: 20px; }
+
+    .h-word {
+      font-size: clamp(68px, 9.5vw, 128px);
+      font-weight: 800; line-height: 1;
+      letter-spacing: -3px; color: var(--text-primary);
+    }
+    .h-word-italic {
+      font-family: var(--font-serif);
+      font-size: clamp(68px, 9.5vw, 128px);
+      font-weight: 500; font-style: italic;
+      line-height: 1; letter-spacing: -2px;
+      color: var(--text-primary);
+    }
+
+    /* Mascot circle — this IS the expand-circle visually */
+    .mascot-wrap {
+      width: clamp(80px, 9vw, 118px);
+      height: clamp(80px, 9vw, 118px);
+      border-radius: 50%;
+      background: var(--dark-bg);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      position: relative; z-index: 3;
+    }
+    .mascot-wrap svg { width: 88%; height: 88%; }
+
+    /* Bottom bar */
+    .hero-bottom {
+      display: flex; align-items: flex-end;
+      justify-content: space-between;
+      padding: 0 40px;
+      position: relative; z-index: 3;
+    }
+    .hero-bottom span {
+      font-size: 12.5px; font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .hero-bottom a {
+      color: var(--text-secondary); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 5px;
+      transition: color 0.2s;
+    }
+    .hero-bottom a:hover { color: var(--text-primary); }
+    .hero-bottom a::after { content: '→'; font-size: 11px; }
+
+    /* ── OUR WORK SECTION ────────────────────── */
+    .our-work-section {
+      background: var(--dark-bg);
+      padding: 60px 40px 100px;
+    }
+    .section-container { max-width: 1280px; margin: 0 auto; overflow: visible; }
+
+    /* Animate-in class (set by JS via IntersectionObserver) */
+    .anim-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.8s cubic-bezier(0.22,1,0.36,1);
+    }
+    .anim-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .anim-in.delay-1 { transition-delay: 0.1s; }
+    .anim-in.delay-2 { transition-delay: 0.25s; }
+    .anim-in.delay-3 { transition-delay: 0.4s; }
+
+    .our-work-heading-div {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 40px;
+      margin-bottom: 64px;
+    }
+    .our-work-heading-left { flex: 1; }
+
+    .label-medium {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--text-light); margin-bottom: 20px;
+    }
+    .our-work-heading-left h1 {
+      font-size: clamp(34px, 4.2vw, 58px);
+      font-weight: 700; line-height: 1.08;
+      letter-spacing: -1.5px; color: var(--white);
+    }
+    .italic-secondary {
+      font-family: var(--font-serif);
+      font-style: italic; font-weight: 400;
+    }
+    .scribble-wrap { position: relative; display: inline-block; }
+    .scribble-wrap svg {
+      position: absolute; bottom: -12px; left: 0; width: 100%;
+    }
+
+    .our-work-heading-right { max-width: 300px; padding-top: 52px; }
+    .body-large {
+      font-size: 15px; font-weight: 400;
+      line-height: 1.7; color: var(--text-light);
+    }
+
+    /* Cards */
+    .flip-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      overflow: visible;
+    }
+    .flip-card {
+      border-radius: 16px; overflow: visible;
+      background: transparent;
+      cursor: url("data:image/svg+xml,%3Csvg width='40' height='52' viewBox='0 0 197 257' xmlns='http://www.w3.org/2000/svg' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;'%3E%3Cpath d='M194.19,123.72C190.92,103.16 178.07,95.79 167.08,96.38C162.88,96.15 158.92,96.81 156.11,97.62C150.07,87.77 138.04,83.86 122.68,86.71C121.81,86.94 121.61,87.01 121.98,86.86C115.82,78.07 105.78,74.06 93.19,75.41C89.98,75.89 87.18,76.88 86.04,77.71C85.44,60.94 85.32,43.46 81.72,30.04C77.14,13.18 66.74,3.22 53.49,3.22C38.41,3.22 27.31,16.97 27.31,36.89C27.31,51.91 32.39,70.23 42.21,117.24C38.64,116.31 35.43,116.01 32.18,116.01C16.02,116.01 4.09,127.18 4.09,141.43C4.09,153.93 12.11,163.92 29.78,180.12C31.79,181.72 33.99,183.07 34.91,184.61C42.21,197.86 48.88,208.07 59.34,215.87C59.21,217.19 59.19,217.91 59.19,218.94C59.19,236.91 77.85,253.92 110.45,253.92C140.91,253.92 170.18,236.62 170.18,218.69C170.18,215.19 169.39,212.58 168.51,210.28C179.61,197.13 184.18,180.88 188.63,163.48C192.82,147.69 195.38,132.14 194.19,123.72Z' style='fill-rule:nonzero;'/%3E%3Cpath d='M187.01,125.92C184.51,107.48 173.82,99.97 161.81,102.26C159.08,102.79 157.19,103.42 155.69,104.27C157.12,112.04 155.49,115.42 155.19,115.21C153.91,103.12 147.92,92.31 133.27,91.01C127.31,90.48 123.82,92.44 122.28,93.43C122.7,98.28 122.49,105.78 121.88,106.11C120.21,91.39 113.93,81.76 98.81,81.76C87.14,81.76 83.66,88.75 80.22,97.71C80.22,77.89 80.33,52.36 76.36,34.19C72.83,18.82 63.09,9.44 52.81,9.44C41.07,9.44 33.11,20.92 33.11,36.89C33.11,51.85 37.61,67.19 48.71,119.17C61.52,124.47 69.91,130.48 75.07,135.72C74.41,124.32 76.45,107.82 81.76,95.44C78.11,111.19 76.89,126.97 79.78,143.37C82.28,156.79 87.14,163.97 96.65,163.97C108.51,163.97 117.14,151.11 120.97,108.11C123.21,115.81 122.01,138.48 123.71,146.81C125.11,153.92 129.81,155.21 134.22,155.09C143.88,154.84 151.94,143.81 153.42,116.72C156.42,126.71 154.92,144.71 148.81,158.64C152.41,162.91 156.82,163.97 160.84,162.91C171.72,159.93 180.66,145.93 182.82,123.72C186.12,135.26 184.41,146.18 180.48,156.16C173.09,176.19 159.08,187.26 149.82,191.71L164.19,209.75C174.97,197.07 179.72,181.18 184.13,163.71C187.96,149.22 188.72,136.04 187.01,125.92Z' style='fill:rgb(250,254,255);fill-rule:nonzero;'/%3E%3Cpath d='M41.07,35.1C41.07,21.64 46.13,10.04 54.12,9.38C40.71,9.38 37.19,23.06 37.19,34.13C37.19,50.03 45.82,85.15 59.19,114.52C64.95,115.18 70.16,115.9 74.41,109.19C76.31,105.96 77.94,102.81 79.27,99.76C76.41,109.31 75.07,122.31 75.58,134.79C68.29,127.12 58.18,121.76 50.01,118.91C42.12,84.11 41.07,51.36 41.07,35.1Z' style='fill:rgb(184,189,195);fill-rule:nonzero;'/%3E%3Cpath d='M185.11,133.01L183.12,130.11C182.22,143.07 172.71,154.91 163.72,154.91C158.77,154.91 156.71,152.83 155.08,149.31C154.04,153.84 152.87,156.79 150.11,160.17C153.81,163.71 157.19,164.43 160.91,163.71C173.14,161.09 182.79,147.06 185.11,133.01Z' style='fill:rgb(184,189,195);fill-rule:nonzero;'/%3E%3Cpath d='M119.06,108.22C118.3,123.12 116.21,150.81 100.32,151.41C84.15,152.06 81.91,133.86 82.28,108.05C79.78,121.92 79.41,134.19 83.13,148.72C86.13,159.93 90.83,164.03 97.56,163.82C109.11,163.42 115.88,152.26 118.93,134.09C120.11,127.31 120.21,116.52 119.06,108.22Z' style='fill:rgb(184,189,195);fill-rule:nonzero;'/%3E%3Cpath d='M176.99,167.69C171.09,175.91 158.13,180.24 146.46,171.1C138.92,178.81 126.06,180.65 117.07,173.01L112.45,175.63L105.41,168.51L101.01,170.61L84.15,163.91C81.16,173.75 72.22,179.11 61.93,178.69C50.26,178.21 39.06,173.25 27.31,161.71C37.71,167.66 46.65,166.81 55.09,166.81C66.19,166.81 74.72,163.91 75.28,153.21C75.94,141.12 53.71,123.06 32.18,122.07C17.15,121.33 8.11,130.62 8.11,141.31C13.42,153.66 32.91,165.26 57.28,166.75C46.18,167.35 34.15,164.45 27.01,161.59C34.2,168.83 45.14,178.07 55.79,184.21C66.08,185.14 74.2,180.41 81.39,175.74C86.71,172.31 93.49,172.31 98.61,171.65C107.19,177.19 115.11,186.91 119.81,199.35C120.47,189.87 115.72,178.45 110.01,172.01C113.06,169.93 114.14,168.65 114.75,166.09C119.6,173.19 126.12,172.71 129.72,171.72C135.92,170.51 139.94,168.11 145.26,163.66C152.8,171.36 159.02,171.95 166.41,168.35C171.03,166.03 174.19,163.91 176.99,167.69Z' style='fill:rgb(243,243,243);fill-rule:nonzero;'/%3E%3Cpath d='M163.58,212.84C154.07,219.37 146.42,222.27 135.12,223.78C146.62,219.25 156.92,214.07 163.03,207.01L160.28,205.23C150.44,215.31 137.58,226.42 101.11,228.83C86.13,229.76 75.48,225.81 65.64,220.09C66.15,234.61 80.68,246.56 109.89,246.56C137.79,246.56 164.39,230.71 164.39,218.11C164.39,215.81 164.09,214.21 163.58,212.84Z' style='fill:rgb(184,189,195);fill-rule:nonzero;'/%3E%3Cpath d='M81.36,230.22C93.85,233.29 107.11,239.93 129.61,238.32C140.71,236.72 150.22,231.76 154.37,226.81C156.92,223.62 154.92,222.02 150.12,223.33C139.42,226.48 124.82,229.76 107.96,230.22C97.56,230.71 88.62,229.76 81.36,230.22Z' style='fill:rgb(254,255,255);fill-rule:nonzero;'/%3E%3Cpath d='M173.72,190.11C181.91,173.46 185.11,153.92 186.09,134.03L184.71,131.13C183.9,146.36 177.41,163.07 162.12,168.83C155.49,171.45 148.55,168.55 145.01,164.61L146.54,161.09C151.91,167.29 158.95,170.25 166.72,166.31C176.12,161.41 182.11,149.31 183.59,136.16L185.32,137.21C185.11,147.06 182.11,164.91 173.72,182.81C162.42,205.14 144.19,212.26 133.25,210.66C127.94,210.42 124.73,210.18 120.01,208.71C117.77,208.13 116.29,209.73 111.28,210.72C91.79,214.93 70.26,208.71 55.74,184.61C64.13,185.66 72.91,181.72 80.68,175.71C85.43,172.71 91.23,172.23 97.29,171.75C102.61,173.75 114.44,183.23 119.34,198.6C118.42,186.16 113.72,177.25 105.23,168.77L103.09,168.35L106.14,167.29L112.71,161.35L114.03,161.71C118.28,168.35 124.08,170.31 129.93,169.71C137.48,168.83 142.18,164.89 146.11,159.53L147.03,160.65C143.31,167.29 151.84,170.77 156.25,170.77C166.71,170.77 177.11,161.77 182.16,146.36L183.12,150.11C181.31,164.91 177.92,181.66 173.72,190.11Z' style='fill:rgb(241,241,241);fill-rule:nonzero;'/%3E%3C/svg%3E") 11 1, pointer;
+      position: relative;
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    .flip-card:hover { transform: translateY(-6px); }
+    .flip-card-inner {
+      border-radius: 0; overflow: hidden;
+      background: var(--dark-card-bg);
+    }
+
+    /* ── CARD HOVER PREVIEW ───────────────────── */
+    .card-preview {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border-radius: 0;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 20;
+      transition: opacity 0.42s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.42s cubic-bezier(0.22,1,0.36,1);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+    }
+    .flip-card:nth-child(1) .card-preview {
+      transform: rotate(-8deg) scale(0.95);
+    }
+    .flip-card:nth-child(1):hover .card-preview {
+      opacity: 1;
+      transform: rotate(-8deg) scale(1);
+    }
+    .flip-card:nth-child(2) .card-preview {
+      transform: rotate(7deg) scale(0.95);
+    }
+    .flip-card:nth-child(2):hover .card-preview {
+      opacity: 1;
+      transform: rotate(7deg) scale(1);
+    }
+    .flip-card:nth-child(3) .card-preview {
+      transform: rotate(-5deg) scale(0.95);
+    }
+    .flip-card:nth-child(3):hover .card-preview {
+      opacity: 1;
+      transform: rotate(-5deg) scale(1);
+    }
+
+    /* Preview inner styles */
+    .card-preview-1 {
+      width: 100%; height: 100%;
+      background: linear-gradient(160deg, #e8f4fd 0%, #b8d8f5 35%, #1a4d8c 100%);
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 24px;
+    }
+    .card-preview-2 {
+      width: 100%; height: 100%;
+      background: linear-gradient(170deg, #e8d5c0 0%, #c9956a 55%, #8b4513 100%);
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 28px;
+    }
+    .card-preview-3 {
+      width: 100%; height: 100%;
+      background: linear-gradient(150deg, #0d4f4f 0%, #1a9090 50%, #e8a020 100%);
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 24px;
+    }
+
+    .card-img {
+      display: none;
+    }
+    .card-img-inner {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card-img-1 { background: linear-gradient(135deg, #1a1b2e 0%, #2d1b69 55%, #11998e 100%); }
+    .card-img-2 { background: linear-gradient(135deg, #0f0c29 0%, #302b63 55%, #24243e 100%); }
+    .card-img-3 { background: linear-gradient(135deg, #1c1a2e 0%, #16213e 55%, #0f3460 100%); }
+
+    .card-body { padding: 28px 28px 32px; min-height: clamp(480px, 65vh, 700px); display: flex; flex-direction: column; justify-content: space-between; }
+    .card-body-top { flex: 1; }
+    .card-num {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 1.2px; color: var(--text-light); margin-bottom: 16px;
+    }
+    .card-body h3 {
+      font-size: clamp(32px, 3.2vw, 46px); font-weight: 700;
+      letter-spacing: -1px; color: var(--white);
+      line-height: 1.05; margin-bottom: 0;
+    }
+    .card-body h3 .si {
+      font-family: var(--font-serif);
+      font-style: italic; font-weight: 400;
+    }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-size: 11px; font-weight: 500;
+      color: var(--text-light);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 4px 11px; border-radius: 100px;
+    }
+
+    /* ── HAMBURGER ───────────────────────────── */
+    .nav-hamburger {
+      display: none;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--white);
+      border: none; cursor: pointer;
+      align-items: center; justify-content: center;
+      flex-direction: column; gap: 5px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+      flex-shrink: 0;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 18px; height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+    }
+
+    /* ── SERVICES HORIZONTAL SCROLL ─────────── */
+    .services-scroll {
+      position: relative;
+      background: var(--dark-bg);
+      overflow: hidden;
+    }
+    .services-track {
+      display: flex;
+      height: 100vh;
+      will-change: transform;
+    }
+    .service-panel {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .sp-1 { background: linear-gradient(145deg, #151618 40%, #1c1e2c 100%); }
+    .sp-2 { background: linear-gradient(145deg, #151618 40%, #1e1820 100%); }
+    .sp-3 { background: linear-gradient(145deg, #151618 40%, #171e1c 100%); }
+    .sp-4 { background: linear-gradient(145deg, #151618 40%, #1a1c18 100%); }
+    .sp-5 { background: linear-gradient(145deg, #151618 40%, #1e1c18 100%); }
+    .sp-6 { background: linear-gradient(145deg, #151618 40%, #181e1a 100%); }
+    .sp-7 { background: linear-gradient(145deg, #151618 40%, #1c1820 100%); }
+    .sp-8 { background: linear-gradient(145deg, #151618 40%, #1a1818 100%); }
+    .panel-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; z-index: 0;
+    }
+    .panel-video-overlay {
+      position: absolute; inset: 0;
+      background: rgba(21,22,24,0.80);
+      z-index: 1;
+    }
+    .panel-inner {
+      position: relative; z-index: 2;
+      height: 100%;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 80px 80px 110px;
+      gap: 40px; overflow: hidden;
+    }
+    .panel-text { flex: 0 0 44%; max-width: 560px; }
+    .panel-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--text-light); margin-bottom: 20px;
+    }
+    .panel-heading {
+      font-size: clamp(36px, 4.2vw, 62px);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -2px; color: var(--white);
+      margin-bottom: 24px;
+    }
+    .panel-heading em {
+      font-family: var(--font-serif);
+      font-style: italic; font-weight: 400;
+    }
+    .panel-body {
+      font-size: 15px; line-height: 1.75;
+      color: var(--text-light);
+      margin-bottom: 28px; max-width: 460px;
+    }
+    .panel-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .panel-list li {
+      font-size: 14px; color: var(--text-secondary);
+      padding-left: 18px; position: relative;
+    }
+    .panel-list li::before { content: '•'; position: absolute; left: 0; color: var(--orange); }
+    .panel-visual {
+      flex: 1; display: flex;
+      align-items: flex-end; justify-content: center;
+      height: 100%; pointer-events: none; overflow: hidden;
+    }
+    .panel-svg { width: 100%; max-width: 460px; height: auto; max-height: 74vh; }
+
+    /* Services bottom nav */
+    .services-nav {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      z-index: 10; display: flex; gap: 24px;
+      padding: 0 80px 36px;
+    }
+    .snav-item {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: flex-start; gap: 10px;
+      cursor: pointer; opacity: 0.4;
+      transition: opacity 0.3s;
+    }
+    .snav-item.active { opacity: 1; }
+    .snav-icon { width: 22px; height: 22px; color: var(--white); }
+    .snav-icon svg { width: 100%; height: 100%; }
+    .snav-bar {
+      width: 100%; height: 2px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 2px; overflow: hidden;
+    }
+    .snav-fill {
+      height: 100%; width: 0%;
+      background: var(--white); border-radius: 2px;
+      transition: width 0.05s linear;
+    }
+
+    /* ── TESTIMONIALS ────────────────────────── */
+    .testimonials-section {
+      background: var(--hero-bg);
+      padding: 100px 0 100px;
+      overflow: hidden;
+    }
+    .testimonials-heading {
+      padding: 0 80px 60px;
+    }
+    .testimonials-heading h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(48px, 7vw, 96px);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--text-primary);
+    }
+    .testimonials-heading h2 em {
+      font-style: italic;
+    }
+    .testimonials-marquee {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: marquee-scroll 40s linear infinite;
+    }
+    .testimonials-marquee:hover { animation-play-state: paused; }
+    @keyframes marquee-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .testimonials-track {
+      overflow: hidden;
+      padding-bottom: 8px;
+    }
+    .t-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 44px 44px 36px;
+      width: 480px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .t-card-quote {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--text-primary);
+      font-weight: 400;
+    }
+    .t-card-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .t-card-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: #e0e0e8;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 20px;
+      border: 2px solid #d0d0d8;
+    }
+    .t-card-info strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .t-card-info span {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* ── ENQUIRY FORM ────────────────────────── */
+    .enquiry-section {
+      background: rgb(0,113,77);
+      padding: 120px 40px 140px;
+    }
+    .enquiry-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .enquiry-left h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(42px, 5.5vw, 72px);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .enquiry-left h2 em {
+      font-style: italic;
+      color: rgb(120,181,57);
+    }
+    .enquiry-left p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-light);
+      max-width: 380px;
+    }
+    .enquiry-left .enquiry-contact {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .enquiry-contact a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s;
+    }
+    .enquiry-contact a:hover { color: var(--white); }
+    .enquiry-contact-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .enquiry-contact-icon svg { width: 15px; height: 15px; stroke: currentColor; }
+
+    /* Form */
+    .enquiry-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .form-field label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      background: var(--dark-card-bg);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-family: var(--font-main);
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      -webkit-appearance: none;
+    }
+    .form-field select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23676A70' stroke-width='1.5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 18px center;
+      padding-right: 44px;
+    }
+    .form-field select option { background: var(--dark-bg); }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: rgba(255,255,255,0.2); }
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus {
+      border-color: rgb(120,181,57);
+      background: rgba(120,181,57,0.04);
+    }
+    .form-field textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .service-chip {
+      padding: 8px 16px;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.1);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.18s;
+      background: transparent;
+      font-family: var(--font-main);
+    }
+    .service-chip:hover { border-color: rgba(255,255,255,0.25); color: var(--white); }
+    .service-chip.selected {
+      background: rgb(120,181,57);
+      border-color: rgb(120,181,57);
+      color: var(--white);
+    }
+    .form-submit {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+    .form-submit p {
+      font-size: 12px;
+      color: var(--text-light);
+      max-width: 240px;
+      line-height: 1.5;
+    }
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgb(120,181,57);
+      color: var(--white);
+      font-family: var(--font-main);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 16px 32px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .btn-submit:hover { opacity: 0.85; transform: scale(0.98); }
+    .btn-submit svg { width: 16px; height: 16px; stroke: currentColor; flex-shrink: 0; }
+
+    @media (max-width: 900px) {
+      .enquiry-inner { grid-template-columns: 1fr; gap: 56px; }
+      .enquiry-left p { max-width: 100%; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-submit { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+
+    /* ── FOOTER ──────────────────────────────── */
+    .footer {
+      background: #0D0E10;
+      padding: 80px 40px 40px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 64px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-brand img {
+      height: 28px; width: auto;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .footer-brand p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-light);
+      max-width: 260px;
+      margin-bottom: 28px;
+    }
+    .footer-social {
+      display: flex;
+      gap: 10px;
+    }
+    .footer-social a {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .footer-social a:hover { border-color: rgba(255,255,255,0.3); color: var(--white); }
+    .footer-social svg { width: 15px; height: 15px; stroke: currentColor; }
+    .footer-col h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-col ul a {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--white); }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 32px;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-bottom p {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+    .footer-bottom p span {
+      color: rgb(120,181,57);
+    }
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-legal a {
+      font-size: 13px;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-legal a:hover { color: var(--white); }
+    .footer-wordmark {
+      font-family: var(--font-serif);
+      font-size: clamp(52px, 8vw, 110px);
+      font-weight: 700;
+      color: rgba(255,255,255,0.04);
+      line-height: 1;
+      letter-spacing: -2px;
+      text-align: center;
+      padding: 40px 0 0;
+      pointer-events: none;
+      user-select: none;
+    }
+    @media (max-width: 900px) {
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 560px) {
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 900px) {
+      .our-work-heading-div { flex-direction: column; }
+      .our-work-heading-right { max-width: 100%; padding-top: 0; }
+      .flip-cards { grid-template-columns: 1fr; }
+      .our-work-section { padding: 80px 20px 60px; }
+    }
+
+    @media (max-width: 768px) {
+      /* Nav */
+      .nav-container { padding: 0 20px; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+
+      /* Hero text */
+      .h-word, .h-word-italic { font-size: clamp(56px, 15vw, 80px); letter-spacing: -2px; }
+
+      /* Hero layout: text left, mascot top-right */
+      .hero-center {
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 24px 20px 0;
+      }
+      .hero-headline {
+        align-items: flex-start;
+        text-align: left;
+        gap: 0;
+        width: 100%;
+      }
+      .hero-line {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+      }
+
+      /* Mascot: pull out of flow, pin top-right of hero */
+      .mascot-wrap {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: min(52vw, 240px);
+        height: min(52vw, 240px);
+        z-index: 4;
+      }
+
+      /* Hide left side decoration */
+      .hero-side.left { display: none; }
+
+      /* Bottom bar: stack vertically */
+      .hero-bottom {
+        padding: 0 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .hero-bottom a { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain-overlay"></div>
+
+  <!-- FLOATING LOGO -->
+  <a href="/" class="floating-logo">
+    <img src="./logo.svg" alt="The Fresh Friends">
+  </a>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <img src="./logo.svg" alt="The Fresh Friends">
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#">Our work</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Shop</a></li>
+        </ul>
+        <a href="#" class="nav-cta">Let's talk!</a>
+        <button class="nav-hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SCROLL WRAPPER -->
+  <div class="hero-wrapper" id="heroWrapper">
+    <div class="hero-sticky" id="heroSticky">
+
+      <!-- Dotted bg -->
+      <div class="hero-bg"></div>
+
+      <!-- All hero content -->
+      <div class="hero-content" id="heroContent">
+
+        <div class="hero-side left">W.</div>
+        <div class="hero-side right">Subscribe</div>
+
+        <!-- Headline -->
+        <div class="hero-center">
+          <div class="hero-headline">
+
+            <div class="hero-line">
+              <span class="h-word">Crafting</span>
+              <span class="h-word">bold</span>
+            </div>
+
+            <div class="hero-line">
+              <span class="h-word">design</span>
+              <span class="h-word-italic">experiences</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="hero-bottom">
+          <span>@thefreshfriends</span>
+          <span>We see the magic in the details.</span>
+          <span><a href="#">Click for a surprise</a></span>
+        </div>
+
+      </div><!-- /hero-content -->
+    </div><!-- /hero-sticky -->
+  </div><!-- /hero-wrapper -->
+
+  <!-- OUR WORK SECTION -->
+  <section class="our-work-section" id="ourWork">
+    <div class="section-container">
+
+      <div class="our-work-heading-div">
+        <div class="our-work-heading-left">
+          <p class="label-medium anim-in">Our Work</p>
+          <h1 class="anim-in delay-1">
+            We craft <span class="italic-secondary">custom </span>design solutions
+            that help you<br>
+            <span class="scribble-wrap">
+              drive change.
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 307 21" fill="none" height="13">
+                <path d="M1 13.2473C60.0748 3.516 122.336 2.97626 183.811 4.5935C206.317 5.18557 228.718 6.06673 250.819 6.89182C268.112 7.53745 319.657 9.05786 302.58 10.8829C294.595 11.7363 285.888 10.9903 277.828 11.2175C255.636 11.8428 233.439 12.5034 211.267 13.354C164.003 15.1673 116.818 17.7203 69.5272 19.2496C59.0976 19.5868 47.8575 20.7225 37.4047 19.3061C26.9054 17.8834 42.3739 13.8278 44.4728 13.3766C57.503 10.5757 71.3453 10.1782 84.8036 9.48318C112.947 8.0297 141.126 6.92979 169.262 5.40513C174.112 5.14233 178.961 4.86922 183.811 4.5935C216.183 2.75324 248.572 0.796955 281.101 1.01699" stroke="#ADAEB5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </h1>
+        </div>
+        <div class="our-work-heading-right anim-in delay-2">
+          <p class="body-large">Empowering tech companies with innovative design solutions, enabling them to drive impactful change.</p>
+        </div>
+      </div>
+
+      <div class="flip-cards">
+
+        <div class="flip-card anim-in delay-1">
+          <div class="card-preview">
+            <div class="card-preview-1">
+              <svg viewBox="0 0 280 60" fill="none" style="margin-bottom:8px">
+                <text x="0" y="42" font-family="sans-serif" font-size="38" font-weight="700" fill="#1a4d8c" opacity="0.9">We turn</text>
+              </svg>
+              <svg viewBox="0 0 280 100" fill="none">
+                <text x="0" y="50" font-family="sans-serif" font-size="32" font-weight="700" fill="#1a4d8c">customer</text>
+                <text x="0" y="90" font-family="sans-serif" font-size="32" font-weight="700" fill="#1a4d8c">data into margin</text>
+              </svg>
+            </div>
+          </div>
+          <div class="flip-card-inner">
+            <div class="card-img">
+              <div class="card-img-inner card-img-1">
+                <svg width="70" height="70" viewBox="0 0 80 80" fill="none" opacity="0.25">
+                  <rect x="10" y="10" width="60" height="60" rx="8" stroke="white" stroke-width="2"/>
+                  <path d="M25 40 L40 25 L55 40" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                  <rect x="30" y="40" width="20" height="20" rx="2" fill="white" opacity="0.5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-body-top">
+                <p class="card-num">01/03</p>
+                <h3><span class="si">Into</span> Margin</h3>
+              </div>
+              <div class="card-tags">
+                <span class="tag">Illustration</span>
+                <span class="tag">Brand Development</span>
+                <span class="tag">Web Design</span>
+                <span class="tag">Web Development</span>
+                <span class="tag">Lottie Animation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card anim-in delay-2">
+          <div class="card-preview">
+            <div class="card-preview-2" style="aspect-ratio:3/4; background: linear-gradient(170deg,#e8d5c0 0%,#c9956a 60%,#8b4513 100%); display:flex; flex-direction:column; justify-content:flex-end; padding:24px;">
+              <div style="background:rgba(255,255,255,0.15); border-radius:8px; padding:16px; backdrop-filter:blur(4px);">
+                <p style="color:white; font-family:sans-serif; font-size:13px; font-weight:600; margin-bottom:4px;">7 days away from</p>
+                <p style="color:white; font-family:sans-serif; font-size:18px; font-weight:800;">your perfect smile</p>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card-inner">
+            <div class="card-img">
+              <div class="card-img-inner card-img-2">
+                <svg width="70" height="70" viewBox="0 0 80 80" fill="none" opacity="0.25">
+                  <circle cx="40" cy="40" r="28" stroke="white" stroke-width="2"/>
+                  <circle cx="40" cy="40" r="14" fill="white" opacity="0.5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-body-top">
+                <p class="card-num">02/03</p>
+                <h3>oiwhite</h3>
+              </div>
+              <div class="card-tags">
+                <span class="tag">Website Design</span>
+                <span class="tag">Shopify Development</span>
+                <span class="tag">Paid Ad Assets</span>
+                <span class="tag">Social Media Post Design</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card anim-in delay-3">
+          <div class="card-preview">
+            <div class="card-preview-3">
+              <p style="color:white; font-family:sans-serif; font-size:13px; font-weight:600; opacity:0.7; margin-bottom:6px;">With Moodtalk,</p>
+              <p style="color:white; font-family:sans-serif; font-size:22px; font-weight:800; line-height:1.2;">work better<br>together.</p>
+            </div>
+          </div>
+          <div class="flip-card-inner">
+            <div class="card-img">
+              <div class="card-img-inner card-img-3">
+                <svg width="70" height="70" viewBox="0 0 80 80" fill="none" opacity="0.25">
+                  <path d="M20 50 Q40 20 60 50" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  <circle cx="30" cy="38" r="4" fill="white" opacity="0.6"/>
+                  <circle cx="50" cy="38" r="4" fill="white" opacity="0.6"/>
+                  <path d="M30 56 Q40 65 50 56" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+                </svg>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-body-top">
+                <p class="card-num">03/03</p>
+                <h3>Moodtalk</h3>
+              </div>
+              <div class="card-tags">
+                <span class="tag">Logo Design</span>
+                <span class="tag">Branding</span>
+                <span class="tag">UI Design</span>
+                <span class="tag">Website Design</span>
+                <span class="tag">UX Design</span>
+                <span class="tag">Marketing Collateral</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES HORIZONTAL SCROLL ─────────────────────────── -->
+  <section class="services-scroll" id="servicesScroll">
+    <div class="services-track" id="servicesTrack">
+
+      <!-- Panel 1: Customer Experience -->
+      <div class="service-panel sp-1">
+        <video class="panel-video" autoplay muted loop playsinline>
+          <source src="" type="video/mp4"><!-- swap in your video src -->
+        </video>
+        <div class="panel-video-overlay"></div>
+        <div class="panel-inner">
+          <div class="panel-text">
+            <p class="panel-label">01 / 08</p>
+            <h2 class="panel-heading">Customer <em>Experience.</em></h2>
+            <p class="panel-body">Our UX services focus on understanding user needs and behaviours to create interfaces that are easy to navigate and use. We collaborate with you to ensure the experience aligns with your business goals and provides real value to your customers.</p>
+            <ul class="panel-list">
+              <li>User Research</li>
+              <li>Wireframing and Prototyping</li>
+              <li>User Testing</li>
+              <li>Interaction Design</li>
+            </ul>
+          </div>
+          <div class="panel-visual">
+            <svg viewBox="0 0 320 500" fill="none" xmlns="http://www.w3.org/2000/svg" class="panel-svg">
+              <rect x="70" y="10" width="180" height="370" rx="26" stroke="white" stroke-width="2" opacity="0.22"/>
+              <rect x="85" y="46" width="150" height="248" rx="4" fill="white" fill-opacity="0.025" stroke="white" stroke-width="1" stroke-opacity="0.12"/>
+              <rect x="118" y="22" width="84" height="10" rx="5" fill="white" opacity="0.1"/>
+              <circle cx="104" cy="76" r="14" stroke="white" stroke-width="1.5" stroke-opacity="0.2"/>
+              <rect x="126" y="69" width="70" height="6" rx="3" fill="white" opacity="0.12"/>
+              <rect x="126" y="82" width="50" height="4" rx="2" fill="white" opacity="0.07"/>
+              <rect x="90" y="108" width="140" height="72" rx="10" fill="white" fill-opacity="0.03" stroke="white" stroke-width="1" stroke-opacity="0.1"/>
+              <rect x="102" y="120" width="55" height="5" rx="2.5" fill="white" opacity="0.12"/>
+              <rect x="102" y="132" width="90" height="4" rx="2" fill="white" opacity="0.06"/>
+              <rect x="102" y="142" width="70" height="4" rx="2" fill="white" opacity="0.06"/>
+              <rect x="90" y="192" width="140" height="56" rx="10" fill="white" fill-opacity="0.03" stroke="white" stroke-width="1" stroke-opacity="0.1"/>
+              <rect x="90" y="260" width="65" height="56" rx="10" fill="white" fill-opacity="0.04" stroke="white" stroke-width="1" stroke-opacity="0.1"/>
+              <rect x="165" y="260" width="65" height="56" rx="10" fill="white" fill-opacity="0.04" stroke="white" stroke-width="1" stroke-opacity="0.1"/>
+              <rect x="128" y="358" width="64" height="6" rx="3" fill="white" opacity="0.12"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Brand Identity -->
+      <div class="service-panel sp-2">
+        <video class="panel-video" autoplay muted loop playsinline>
+          <source src="" type="video/mp4"><!-- swap in your video src -->
+        </video>
+        <div class="panel-video-overlay"></div>
+        <div class="panel-inner">
+          <div class="panel-text">
+            <p class="panel-label">02 / 08</p>
+            <h2 class="panel-heading">Brand <em>Identity.</em></h2>
+            <p class="panel-body">We craft distinctive brand identities that tell your story and set you apart from the crowd. From logo to full visual system, every detail is designed with purpose, clarity, and lasting impact.</p>
+            <ul class="panel-list">
+              <li>Logo Design</li>
+              <li>Visual Identity Systems</li>
+              <li>Brand Guidelines</li>
+              <li>Tone of Voice</li>
+            </ul>
+          </div>
+          <div class="panel-visual">
+            <svg viewBox="0 0 340 430" fill="none" xmlns="http://www.w3.org/2000/svg" class="panel-svg">
+              <polygon points="170,20 320,145 170,410 20,145" stroke="white" stroke-width="2" opacity="0.2"/>
+              <polygon points="170,82 262,150 170,346 78,150" stroke="white" stroke-width="1" opacity="0.1"/>
+              <line x1="170" y1="20" x2="170" y2="410" stroke="white" stroke-width="0.75" opacity="0.07"/>
+              <line x1="20" y1="145" x2="320" y2="145" stroke="white" stroke-width="0.75" opacity="0.07"/>
+              <line x1="20" y1="145" x2="170" y2="410" stroke="white" stroke-width="0.5" opacity="0.06"/>
+              <line x1="320" y1="145" x2="170" y2="410" stroke="white" stroke-width="0.5" opacity="0.06"/>
+              <line x1="20" y1="145" x2="170" y2="20" stroke="white" stroke-width="0.5" opacity="0.06"/>
+              <line x1="320" y1="145" x2="170" y2="20" stroke="white" stroke-width="0.5" opacity="0.06"/>
+              <circle cx="170" cy="145" r="5" fill="white" opacity="0.35"/>
+              <circle cx="170" cy="145" r="28" stroke="white" stroke-width="0.75" opacity="0.1"/>
+              <circle cx="170" cy="145" r="60" stroke="white" stroke-width="0.5" stroke-dasharray="3 7" opacity="0.08"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Web Development -->
+      <div class="service-panel sp-3">
+        <video class="panel-video" autoplay muted loop playsinline>
+          <source src="" type="video/mp4"><!-- swap in your video src -->
+        </video>
+        <div class="panel-video-overlay"></div>
+        <div class="panel-inner">
+          <div class="panel-text">
+            <p class="panel-label">03 / 08</p>
+            <h2 class="panel-heading">Web <em>Development.</em></h2>
+            <p class="panel-body">We build fast, modern, and scalable web experiences that perform beautifully across every device. From polished landing pages to complex web applications — built to convert.</p>
+            <ul class="panel-list">
+              <li>Frontend Development</li>
+              <li>CMS Integration</li>
+              <li>Performance Optimisation</li>
+              <li>API Development</li>
+            </ul>
+          </div>
+          <div class="panel-visual">
+            <svg viewBox="0 0 420 320" fill="none" xmlns="http://www.w3.org/2000/svg" class="panel-svg">
+              <path d="M118 40 L32 160 L118 280" stroke="white" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.22"/>
+              <path d="M258 40 L344 160 L258 280" stroke="white" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.22"/>
+              <line x1="210" y1="50" x2="176" y2="270" stroke="white" stroke-width="11" stroke-linecap="round" opacity="0.15"/>
+              <line x1="60" y1="300" x2="360" y2="300" stroke="white" stroke-width="1" opacity="0.07" stroke-dasharray="4 6"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 4: Digital Strategy -->
+      <div class="service-panel sp-4">
+        <video class="panel-video" autoplay muted loop playsinline>
+          <source src="" type="video/mp4"><!-- swap in your video src -->
+        </video>
+        <div class="panel-video-overlay"></div>
+        <div class="panel-inner">
+          <div class="panel-text">
+            <p class="panel-label">04 / 08</p>
+            <h2 class="panel-heading">Digital <em>Strategy.</em></h2>
+            <p class="panel-body">Data-driven strategies that grow your digital presence and convert visitors into loyal customers. We blend analytics with creativity to deliver measurable, lasting results.</p>
+            <ul class="panel-list">
+              <li>SEO &amp; Content Strategy</li>
+              <li>Social Media</li>
+              <li>Paid Advertising</li>
+              <li>Analytics &amp; Reporting</li>
+            </ul>
+          </div>
+          <div class="panel-visual">
+            <svg viewBox="0 0 430 360" fill="none" xmlns="http://www.w3.org/2000/svg" class="panel-svg">
+              <line x1="55" y1="295" x2="395" y2="295" stroke="white" stroke-width="1" opacity="0.08"/>
+              <line x1="55" y1="55" x2="55" y2="295" stroke="white" stroke-width="1" opacity="0.08"/>
+              <line x1="55" y1="200" x2="395" y2="200" stroke="white" stroke-width="0.5" stroke-dasharray="4 5" opacity="0.06"/>
+              <line x1="55" y1="145" x2="395" y2="145" stroke="white" stroke-width="0.5" stroke-dasharray="4 5" opacity="0.06"/>
+              <line x1="55" y1="90" x2="395" y2="90" stroke="white" stroke-width="0.5" stroke-dasharray="4 5" opacity="0.06"/>
+              <path d="M85 262 L165 234 L228 202 L282 160 L338 108 L378 68" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+              <path d="M85 262 L165 234 L228 202 L282 160 L338 108 L378 68 L378 295 L85 295 Z" fill="white" opacity="0.025"/>
+              <circle cx="85"  cy="262" r="5" fill="white" opacity="0.3"/>
+              <circle cx="165" cy="234" r="5" fill="white" opacity="0.3"/>
+              <circle cx="228" cy="202" r="5" fill="white" opacity="0.3"/>
+              <circle cx="282" cy="160" r="5" fill="white" opacity="0.3"/>
+              <circle cx="338" cy="108" r="5" fill="white" opacity="0.3"/>
+              <circle cx="378" cy="68"  r="7" fill="white" opacity="0.5"/>
+              <circle cx="378" cy="68"  r="16" stroke="white" stroke-width="1" opacity="0.15"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 5: Motion & Animation -->
+      <div class="service-panel sp-5">
+        <video class="panel-video" autoplay muted loop playsinline>
+          <source src="" type="video/mp4"><!-- swap in your video src -->
+        </video>
+        <div class="panel-video-overlay"></div>
+        <div class="panel-inner">
+          <div class="panel-text">
+            <p class="panel-label">05 / 08</p>
+            <h2 class="panel-heading">Motion &amp; <em>Animation.</em></h2>
+            <p class="panel-body">We bring brands to life through purposeful motion. From micro-interactions to full Lottie animations, movement communicates what static design cannot — energy, personality, and delight.</p>
+            <ul class="panel-list">
+              <li>Lottie &amp; Web Animation</li>
+              <li>UI Micro-interactions</li>
+              <li>Explainer Videos</li>
+              <li>After Effects &amp; Motion Graphics</li>
+            </ul>
+          </div>
+          <div class="panel-visual">
+            <svg viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg" class="panel-svg">
+              <circle cx="190" cy="190" r="140" stroke="white" stroke-width="2" opacity="0.18"/>
+              <circle cx="190" cy="190" r="100" stroke="white" stroke-width="1" opacity="0.1" stroke-dasharray="6 8"/>
+              <circle cx="190" cy="190" r="60"  stroke="white" stroke-width="1" opacity="0.08" stroke-dasharray="3 6"/>
+              <path d="M165 148 L165 232 L242 190 Z" fill="white" opacity="0.2"/>
+              <circle cx="190" cy="190" r="8" fill="white" opacity="0.3"/>
+              <!-- orbit dots -->
+              <circle cx="330" cy="190" r="6" fill="white" opacity="0.25"/>
+              <circle cx="190" cy="50"  r="5" fill="white" opacity="0.18"/>
+              <circle cx="62"  cy="258" r="4" fill="white" opacity="0.14"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 6: E-commerce -->
+      <div class="service-panel sp-6">
+        <video class="panel-video" autoplay muted loop playsinline>
+          <source src="" type="video/mp4"><!-- swap in your video src -->
+        </video>
+        <div class="panel-video-overlay"></div>
+        <div class="panel-inner">
+          <div class="panel-text">
+            <p class="panel-label">06 / 08</p>
+            <h2 class="panel-heading">E-<em>Commerce.</em></h2>
+            <p class="panel-body">We design and build online stores that convert. Leveraging Shopify and custom solutions, we create shopping experiences that are beautiful, fast, and engineered to sell.</p>
+            <ul class="panel-list">
+              <li>Shopify Design &amp; Development</li>
+              <li>Product Page Optimisation</li>
+              <li>Checkout Flow Design</li>
+              <li>Conversion Rate Optimisation</li>
+            </ul>
+          </div>
+          <div class="panel-visual">
+            <svg viewBox="0 0 320 420" fill="none" xmlns="http://www.w3.org/2000/svg" class="panel-svg">
+              <!-- bag body -->
+              <path d="M60 130 L50 370 Q50 385 65 385 L255 385 Q270 385 270 370 L260 130 Z" stroke="white" stroke-width="2" opacity="0.22" fill="white" fill-opacity="0.02"/>
+              <!-- bag handle -->
+              <path d="M110 130 Q110 60 160 60 Q210 60 210 130" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.22" fill="none"/>
+              <!-- shine line -->
+              <line x1="90" y1="200" x2="90" y2="320" stroke="white" stroke-width="1" opacity="0.08" stroke-linecap="round"/>
+              <!-- tag -->
+              <rect x="138" y="240" width="44" height="30" rx="6" stroke="white" stroke-width="1.5" opacity="0.2" fill="none"/>
+              <line x1="160" y1="240" x2="160" y2="228" stroke="white" stroke-width="1.5" opacity="0.15" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 7: Photography & Video -->
+      <div class="service-panel sp-7">
+        <video class="panel-video" autoplay muted loop playsinline>
+          <source src="" type="video/mp4"><!-- swap in your video src -->
+        </video>
+        <div class="panel-video-overlay"></div>
+        <div class="panel-inner">
+          <div class="panel-text">
+            <p class="panel-label">07 / 08</p>
+            <h2 class="panel-heading">Photo &amp; <em>Video.</em></h2>
+            <p class="panel-body">Compelling visuals that capture attention and communicate your brand story. From product photography to brand films, we create content built for the modern digital landscape.</p>
+            <ul class="panel-list">
+              <li>Brand Photography</li>
+              <li>Product Shoots</li>
+              <li>Brand Films &amp; Reels</li>
+              <li>Content for Social Media</li>
+            </ul>
+          </div>
+          <div class="panel-visual">
+            <svg viewBox="0 0 380 300" fill="none" xmlns="http://www.w3.org/2000/svg" class="panel-svg">
+              <!-- camera body -->
+              <rect x="40" y="90" width="260" height="180" rx="20" stroke="white" stroke-width="2" opacity="0.22" fill="white" fill-opacity="0.02"/>
+              <!-- viewfinder bump -->
+              <rect x="120" y="62" width="80" height="32" rx="10" stroke="white" stroke-width="1.5" opacity="0.18" fill="white" fill-opacity="0.02"/>
+              <!-- lens outer -->
+              <circle cx="170" cy="180" r="66" stroke="white" stroke-width="2" opacity="0.2"/>
+              <!-- lens inner -->
+              <circle cx="170" cy="180" r="44" stroke="white" stroke-width="1.5" opacity="0.14"/>
+              <circle cx="170" cy="180" r="24" stroke="white" stroke-width="1" opacity="0.1"/>
+              <circle cx="170" cy="180" r="8"  fill="white" opacity="0.15"/>
+              <!-- flash -->
+              <rect x="258" y="108" width="24" height="16" rx="4" stroke="white" stroke-width="1.2" opacity="0.18" fill="none"/>
+              <!-- shutter button -->
+              <circle cx="290" cy="100" r="10" stroke="white" stroke-width="1.2" opacity="0.18"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 8: Packaging & Print -->
+      <div class="service-panel sp-8">
+        <video class="panel-video" autoplay muted loop playsinline>
+          <source src="" type="video/mp4"><!-- swap in your video src -->
+        </video>
+        <div class="panel-video-overlay"></div>
+        <div class="panel-inner">
+          <div class="panel-text">
+            <p class="panel-label">08 / 08</p>
+            <h2 class="panel-heading">Packaging &amp; <em>Print.</em></h2>
+            <p class="panel-body">Design that exists in the real world. We create packaging and print materials that feel as premium as your product — extending your brand identity from screen to shelf.</p>
+            <ul class="panel-list">
+              <li>Packaging Design</li>
+              <li>Label &amp; Sleeve Design</li>
+              <li>Marketing Collateral</li>
+              <li>Editorial &amp; Print</li>
+            </ul>
+          </div>
+          <div class="panel-visual">
+            <svg viewBox="0 0 340 380" fill="none" xmlns="http://www.w3.org/2000/svg" class="panel-svg">
+              <!-- box front face -->
+              <path d="M60 160 L170 220 L280 160 L170 100 Z" stroke="white" stroke-width="2" opacity="0.22" fill="white" fill-opacity="0.025"/>
+              <!-- box left face -->
+              <path d="M60 160 L60 290 L170 350 L170 220 Z" stroke="white" stroke-width="2" opacity="0.18" fill="white" fill-opacity="0.015"/>
+              <!-- box right face -->
+              <path d="M280 160 L280 290 L170 350 L170 220 Z" stroke="white" stroke-width="2" opacity="0.14" fill="white" fill-opacity="0.01"/>
+              <!-- lid open flap -->
+              <path d="M60 160 L170 100 L280 160 L170 205 Z" stroke="white" stroke-width="1.5" opacity="0.25" fill="white" fill-opacity="0.04"/>
+              <!-- center crease -->
+              <line x1="170" y1="100" x2="170" y2="220" stroke="white" stroke-width="0.75" opacity="0.1"/>
+              <line x1="170" y1="220" x2="170" y2="350" stroke="white" stroke-width="0.75" opacity="0.08"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Progress Nav -->
+    <div class="services-nav" id="servicesNav">
+      <div class="snav-item active" data-panel="0">
+        <div class="snav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
+        <div class="snav-bar"><div class="snav-fill"></div></div>
+      </div>
+      <div class="snav-item" data-panel="1">
+        <div class="snav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/></svg></div>
+        <div class="snav-bar"><div class="snav-fill"></div></div>
+      </div>
+      <div class="snav-item" data-panel="2">
+        <div class="snav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg></div>
+        <div class="snav-bar"><div class="snav-fill"></div></div>
+      </div>
+      <div class="snav-item" data-panel="3">
+        <div class="snav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,17 9,11 13,15 21,7"/><polyline points="17,7 21,7 21,11"/></svg></div>
+        <div class="snav-bar"><div class="snav-fill"></div></div>
+      </div>
+      <div class="snav-item" data-panel="4">
+        <div class="snav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><polygon points="10,8 10,16 16,12"/></svg></div>
+        <div class="snav-bar"><div class="snav-fill"></div></div>
+      </div>
+      <div class="snav-item" data-panel="5">
+        <div class="snav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+        <div class="snav-bar"><div class="snav-fill"></div></div>
+      </div>
+      <div class="snav-item" data-panel="6">
+        <div class="snav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2"/><circle cx="12" cy="14" r="3"/></svg></div>
+        <div class="snav-bar"><div class="snav-fill"></div></div>
+      </div>
+      <div class="snav-item" data-panel="7">
+        <div class="snav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <div class="snav-bar"><div class="snav-fill"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ──────────────────────────────────────────── -->
+  <section class="testimonials-section">
+    <div class="testimonials-heading anim-in">
+      <h2>Now we're <em>blushing!</em></h2>
+    </div>
+    <div class="testimonials-track">
+      <div class="testimonials-marquee" id="testimonialsMarquee">
+
+        <!-- Card 1 -->
+        <div class="t-card">
+          <p class="t-card-quote">"Working with The Fresh Friends was a game-changer. They brought an entirely new energy to our brand, translating our vision into a visual identity we're genuinely proud of."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar">🎨</div>
+            <div class="t-card-info">
+              <strong>Sarah Mitchell</strong>
+              <span>Founder, Bloom Studio</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="t-card">
+          <p class="t-card-quote">"The Fresh Friends have become a seamless extension of our own team. Creative and innovative to the core, they showed an unmatched passion for helping us grow into the best version of ourselves."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar">🌿</div>
+            <div class="t-card-info">
+              <strong>Daniel Osei</strong>
+              <span>CEO, Experience Foundry</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="t-card">
+          <p class="t-card-quote">"I am thrilled to share my experience working with The Fresh Friends — an exceptional team. From the moment we started collaborating, they demonstrated an extraordinary ability to bring ideas to life."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar">🔷</div>
+            <div class="t-card-info">
+              <strong>John Howerton</strong>
+              <span>Co-Founder, Cord Analytics</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="t-card">
+          <p class="t-card-quote">"They supported us in the customisation of our web presence and created compelling materials for our socials. Their team seamlessly integrated into our creative process and produced visuals vital to our early development."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar">🎯</div>
+            <div class="t-card-info">
+              <strong>David Wipraechtiger</strong>
+              <span>Co-Founder, Oiwhite</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="t-card">
+          <p class="t-card-quote">"I love working with The Fresh Friends because of their creativity, reliability and how they are as people. I always think twice before recommending them — I'm afraid they'll have less time for us!"</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar">⭐</div>
+            <div class="t-card-info">
+              <strong>Loris Niederberger</strong>
+              <span>CEO, Moodtalk</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="t-card">
+          <p class="t-card-quote">"From strategy to execution, The Fresh Friends delivered beyond expectations. Their attention to detail and genuine investment in our success made all the difference in our launch."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar">🚀</div>
+            <div class="t-card-info">
+              <strong>Amara Diallo</strong>
+              <span>Head of Brand, Novu</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Duplicate set for seamless loop -->
+        <div class="t-card">
+          <p class="t-card-quote">"Working with The Fresh Friends was a game-changer. They brought an entirely new energy to our brand, translating our vision into a visual identity we're genuinely proud of."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar">🎨</div>
+            <div class="t-card-info">
+              <strong>Sarah Mitchell</strong>
+              <span>Founder, Bloom Studio</span>
+            </div>
+          </div>
+        </div>
+        <div class="t-card">
+          <p class="t-card-quote">"The Fresh Friends have become a seamless extension of our own team. Creative and innovative to the core, they showed an unmatched passion for helping us grow into the best version of ourselves."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar">🌿</div>
+            <div class="t-card-info">
+              <strong>Daniel Osei</strong>
+              <span>CEO, Experience Foundry</span>
+            </div>
+          </div>
+        </div>
+        <div class="t-card">
+          <p class="t-card-quote">"I am thrilled to share my experience working with The Fresh Friends — an exceptional team. From the moment we started collaborating, they demonstrated an extraordinary ability to bring ideas to life."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar">🔷</div>
+            <div class="t-card-info">
+              <strong>John Howerton</strong>
+              <span>Co-Founder, Cord Analytics</span>
+            </div>
+          </div>
+        </div>
+        <div class="t-card">
+          <p class="t-card-quote">"They supported us in the customisation of our web presence and created compelling materials for our socials. Their team seamlessly integrated into our creative process and produced visuals vital to our early development."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar">🎯</div>
+            <div class="t-card-info">
+              <strong>David Wipraechtiger</strong>
+              <span>Co-Founder, Oiwhite</span>
+            </div>
+          </div>
+        </div>
+        <div class="t-card">
+          <p class="t-card-quote">"I love working with The Fresh Friends because of their creativity, reliability and how they are as people. I always think twice before recommending them — I'm afraid they'll have less time for us!"</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar">⭐</div>
+            <div class="t-card-info">
+              <strong>Loris Niederberger</strong>
+              <span>CEO, Moodtalk</span>
+            </div>
+          </div>
+        </div>
+        <div class="t-card">
+          <p class="t-card-quote">"From strategy to execution, The Fresh Friends delivered beyond expectations. Their attention to detail and genuine investment in our success made all the difference in our launch."</p>
+          <div class="t-card-author">
+            <div class="t-card-avatar">🚀</div>
+            <div class="t-card-info">
+              <strong>Amara Diallo</strong>
+              <span>Head of Brand, Novu</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ENQUIRY FORM ───────────────────────────────────────────── -->
+  <section class="enquiry-section" id="contact">
+    <div class="enquiry-inner">
+
+      <!-- Left: copy -->
+      <div class="enquiry-left anim-in">
+        <h2>Let's make<br>something <em>great</em><br>together.</h2>
+        <p>Whether you have a project in mind or just want to say hello — fill in the form and we'll get back to you within one business day.</p>
+        <div class="enquiry-contact">
+          <a href="mailto:hello@thefreshfriends.com">
+            <span class="enquiry-contact-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+            </span>
+            hello@thefreshfriends.com
+          </a>
+          <a href="https://instagram.com/thefreshfriends" target="_blank">
+            <span class="enquiry-contact-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="4" stroke-linecap="round"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+            </span>
+            @thefreshfriends
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <form class="enquiry-form anim-in delay-2" id="enquiryForm" onsubmit="handleEnquiry(event)">
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="eq-name">Your name</label>
+            <input type="text" id="eq-name" name="name" placeholder="Jane Smith" required>
+          </div>
+          <div class="form-field">
+            <label for="eq-email">Email address</label>
+            <input type="email" id="eq-email" name="email" placeholder="jane@company.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="eq-company">Company</label>
+            <input type="text" id="eq-company" name="company" placeholder="Acme Inc.">
+          </div>
+          <div class="form-field">
+            <label for="eq-budget">Budget range</label>
+            <select id="eq-budget" name="budget">
+              <option value="" disabled selected>Select a range</option>
+              <option>Under £5k</option>
+              <option>£5k – £15k</option>
+              <option>£15k – £30k</option>
+              <option>£30k – £60k</option>
+              <option>£60k+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>Services needed</label>
+          <div class="form-services" id="serviceChips">
+            <button type="button" class="service-chip" data-value="Brand Identity">Brand Identity</button>
+            <button type="button" class="service-chip" data-value="Web Design">Web Design</button>
+            <button type="button" class="service-chip" data-value="Web Development">Web Development</button>
+            <button type="button" class="service-chip" data-value="UX Design">UX Design</button>
+            <button type="button" class="service-chip" data-value="Motion & Animation">Motion & Animation</button>
+            <button type="button" class="service-chip" data-value="Social Media">Social Media</button>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="eq-message">Tell us about your project</label>
+          <textarea id="eq-message" name="message" placeholder="Describe what you have in mind — goals, timeline, anything relevant…" required></textarea>
+        </div>
+
+        <div class="form-submit">
+          <p>We'll respond within one business day. No spam, ever.</p>
+          <button type="submit" class="btn-submit">
+            Send message
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6-6m6 6l-6 6"/></svg>
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </section>
+
+  <script>
+    // ── Elements ──────────────────────────────────────────────────
+    const heroSticky  = document.getElementById('heroSticky');
+
+    // ── IntersectionObserver for Our Work section ─────────────────
+    const animEls = document.querySelectorAll('.anim-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    animEls.forEach(el => observer.observe(el));
+
+    // ── Logo colour on scroll ──────────────────────────────────────
+    const logoImg = document.querySelector('.floating-logo img');
+    function updateLogoTheme() {
+      const threshold = heroSticky.offsetHeight;
+      const onDark = window.scrollY >= threshold * 0.75;
+      logoImg.src = onDark ? './logo-dark.svg' : './logo.svg';
+    }
+    window.addEventListener('scroll', updateLogoTheme, { passive: true });
+    window.addEventListener('resize', updateLogoTheme);
+    updateLogoTheme();
+
+    // ── Services Horizontal Scroll (GSAP) ─────────────────────────
+    gsap.registerPlugin(ScrollTrigger);
+
+    const servicesTrack = document.getElementById('servicesTrack');
+    const snavItems     = document.querySelectorAll('.snav-item');
+    const snavFills     = document.querySelectorAll('.snav-fill');
+    const numPanels     = document.querySelectorAll('.service-panel').length;
+
+    gsap.to(servicesTrack, {
+      x: () => -(servicesTrack.scrollWidth - window.innerWidth),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#servicesScroll',
+        pin: true,
+        scrub: 1,
+        invalidateOnRefresh: true,
+        start: 'top top',
+        end: () => `+=${servicesTrack.scrollWidth - window.innerWidth}`,
+        onUpdate(self) {
+          const pp  = self.progress * numPanels;
+          const cur = Math.min(Math.floor(pp), numPanels - 1);
+          const pct = (pp - cur) * 100;
+          snavItems.forEach((item, i) => item.classList.toggle('active', i === cur));
+          snavFills.forEach((bar, i) => {
+            bar.style.width = i < cur ? '100%' : i === cur ? pct + '%' : '0%';
+          });
+        }
+      }
+    });
+
+    // ── Enquiry form ───────────────────────────────────────────────
+    document.querySelectorAll('.service-chip').forEach(chip => {
+      chip.addEventListener('click', () => chip.classList.toggle('selected'));
+    });
+
+    function handleEnquiry(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.btn-submit');
+      btn.textContent = 'Sent ✓';
+      btn.style.background = 'rgba(120,181,57,0.3)';
+      btn.disabled = true;
+    }
+  </script>
+
+  <!-- ── FOOTER ────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer-inner">
+
+      <div class="footer-top">
+
+        <!-- Brand col -->
+        <div class="footer-brand">
+          <img src="./logo-dark.svg" alt="The Fresh Friends">
+          <p>We craft custom design solutions that help tech companies drive real, impactful change.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="4" stroke-linecap="round"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" aria-label="LinkedIn">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="4" r="2" stroke-linecap="round"/></svg>
+            </a>
+            <a href="#" aria-label="Dribbble">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M4.93 4.93c2.5 3.5 4 7.5 4.5 11.5M19.07 4.93C16 8 12.5 9.5 8 10M20 12c-3 0-6.5.5-9.5 2.5"/></svg>
+            </a>
+            <a href="#" aria-label="Twitter / X">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4l16 16M4 20L20 4"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Work col -->
+        <div class="footer-col">
+          <h4>Work</h4>
+          <ul>
+            <li><a href="#ourWork">Case Studies</a></li>
+            <li><a href="#">Process</a></li>
+            <li><a href="#">Results</a></li>
+            <li><a href="#">Testimonials</a></li>
+          </ul>
+        </div>
+
+        <!-- Services col -->
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#servicesScroll">Brand Identity</a></li>
+            <li><a href="#servicesScroll">Web Design</a></li>
+            <li><a href="#servicesScroll">UX Design</a></li>
+            <li><a href="#servicesScroll">Motion & Animation</a></li>
+            <li><a href="#servicesScroll">Social Media</a></li>
+          </ul>
+        </div>
+
+        <!-- Company col -->
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Ghost wordmark -->
+      <div class="footer-wordmark">The Fresh Friends</div>
+
+      <!-- Bottom bar -->
+      <div class="footer-bottom">
+        <p>© 2026 The Fresh Friends. Made with <span>♥</span> somewhere creative.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Settings</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
