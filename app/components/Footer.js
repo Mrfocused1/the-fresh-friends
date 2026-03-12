@@ -6,15 +6,15 @@ export default function Footer() {
       <div className="footer-inner">
         <div className="footer-top">
           <div className="footer-brand">
-            <img src="/logo-dark.svg" alt="The Fresh Friends" />
+            <p className="footer-brand-logo">Onyx Publishing</p>
             <p>
-              A children's book series celebrating the extraordinary nature
-              powers within every fruit, vegetable — and child.
+              Helping aspiring authors write, publish, and sell their books.
+              From first draft to bookstore shelf — we guide you every step of the way.
             </p>
             <div className="footer-social">
               {/* Instagram */}
               <a
-                href="https://instagram.com/thefreshfriends"
+                href="https://instagram.com/onyxpublishing"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -32,25 +32,39 @@ export default function Footer() {
                   <circle cx="17.5" cy="6.5" r="1" fill="currentColor" strokeWidth="0" />
                 </svg>
               </a>
-              {/* Facebook — disabled */}
-              <span aria-label="Facebook" style={{ opacity: 0.25, cursor: 'default', width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>
-                <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 15, height: 15, stroke: 'currentColor' }}>
-                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+              {/* LinkedIn */}
+              <a
+                href="https://linkedin.com/company/onyxpublishing"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
+                <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
+                  <rect x="2" y="9" width="4" height="12" />
+                  <circle cx="4" cy="4" r="2" />
                 </svg>
-              </span>
-              {/* TikTok — disabled */}
-              <span aria-label="TikTok" style={{ opacity: 0.25, cursor: 'default', width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>
-                <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 15, height: 15, stroke: 'currentColor' }}>
-                  <path d="M9 12a4 4 0 104 4V4a5 5 0 005 5" />
+              </a>
+              {/* YouTube */}
+              <a
+                href="https://youtube.com/@onyxpublishing"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+              >
+                <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
+                  <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" strokeWidth="0" />
                 </svg>
-              </span>
+              </a>
             </div>
           </div>
 
           <div className="footer-col">
-            <h4>Navigate</h4>
+            <h4>Platform</h4>
             <ul>
               <li><Link href="/">Home</Link></li>
+              <li><Link href="/publish-with-onyx">How it works</Link></li>
               <li><Link href="/pricing">Pricing</Link></li>
               <li><Link href="/#contact">Contact</Link></li>
             </ul>
@@ -59,6 +73,7 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Account</h4>
             <ul>
+              <li><Link href="/login">Login</Link></li>
               <li><Link href="/dashboard">Dashboard</Link></li>
             </ul>
           </div>
@@ -66,7 +81,7 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <p>
-            © 2026 The Fresh Friends. Made with{' '}
+            © 2026 Onyx Publishing. Made with{' '}
             <span>&#9829;</span> in London.
           </p>
           <div className="footer-legal">
@@ -77,7 +92,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <p className="footer-wordmark">The Fresh Friends</p>
+      <p className="footer-wordmark">Onyx Publishing</p>
     </footer>
   );
 }

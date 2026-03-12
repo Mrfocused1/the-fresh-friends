@@ -30,43 +30,36 @@ export default function Navbar({ activePage }) {
   function openMenu() {
     setMenuOpen(true);
 
-    // Hamburger drops to the ground and fades
     gsap.to(hamburgerRef.current, {
-      y: window.innerHeight - 80,
-      rotation: 540,
       opacity: 0,
-      duration: 0.55,
-      ease: 'power3.in',
+      duration: 0.2,
+      ease: 'power2.in',
     });
 
-    // Green circle expands from hamburger position to fill screen
     gsap.to(circleRef.current, {
       scale: 55,
       duration: 0.65,
-      delay: 0.2,
+      delay: 0.05,
       ease: 'power2.inOut',
     });
 
-    // Menu content fades in after circle fills screen
     gsap.to(menuContentRef.current, {
       opacity: 1,
       duration: 0.35,
-      delay: 0.65,
+      delay: 0.55,
     });
 
-    // X pops in inside the navbar pill
     gsap.to(navXRef.current, {
       opacity: 1,
       scale: 1,
       pointerEvents: 'all',
-      duration: 0.35,
-      delay: 0.7,
+      duration: 0.3,
+      delay: 0.6,
       ease: 'back.out(2)',
     });
   }
 
   function closeMenu() {
-    // X disappears from navbar pill
     gsap.to(navXRef.current, {
       opacity: 0,
       scale: 0,
@@ -74,29 +67,23 @@ export default function Navbar({ activePage }) {
       duration: 0.2,
     });
 
-    // Menu content fades out first
     gsap.to(menuContentRef.current, {
       opacity: 0,
       duration: 0.2,
     });
 
-    // Circle shrinks back
     gsap.to(circleRef.current, {
       scale: 0,
-      duration: 0.55,
-      delay: 0.15,
+      duration: 0.5,
+      delay: 0.1,
       ease: 'power2.inOut',
       onComplete: () => setMenuOpen(false),
     });
 
-    // Hamburger bounces back up into position
     gsap.to(hamburgerRef.current, {
-      y: 0,
-      rotation: 0,
       opacity: 1,
-      duration: 0.5,
-      delay: 0.4,
-      ease: 'back.out(2)',
+      duration: 0.3,
+      delay: 0.35,
     });
   }
 
@@ -114,6 +101,12 @@ export default function Navbar({ activePage }) {
     <>
       <nav className="navbar">
         <div className="nav-container">
+          {/* Logo */}
+          <Link href="/" className="nav-logo">
+            Onyx Publishing
+          </Link>
+
+          {/* Desktop links + CTA */}
           <div className="nav-right">
             <div className="nav-links">
               {links.map(({ label, href, anchor }) => (
@@ -138,6 +131,8 @@ export default function Navbar({ activePage }) {
               ))}
             </div>
             <Link href="/login" className="nav-cta">Login</Link>
+
+            {/* Hamburger — mobile only */}
             <button
               ref={hamburgerRef}
               className="nav-hamburger"
@@ -148,7 +143,8 @@ export default function Navbar({ activePage }) {
               <span className="ham-line" />
               <span className="ham-line" />
             </button>
-            {/* X button — lives inside the navbar pill, appears when menu opens */}
+
+            {/* X button — appears when mobile menu opens */}
             <button
               ref={navXRef}
               className="nav-menu-x"
@@ -163,7 +159,7 @@ export default function Navbar({ activePage }) {
         </div>
       </nav>
 
-      {/* Expanding dark-green circle */}
+      {/* Expanding dark circle */}
       <div ref={circleRef} className="menu-circle" />
 
       {/* Full-screen menu content */}

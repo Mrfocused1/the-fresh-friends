@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Be_Vietnam_Pro, Platypi, Boogaloo } from "next/font/google";
+import { Be_Vietnam_Pro, Platypi, Inter } from "next/font/google";
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin"],
@@ -15,9 +15,9 @@ const platypi = Platypi({
   variable: "--font-serif",
 });
 
-const boogaloo = Boogaloo({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["300", "400", "500", "600"],
   variable: "--font-playful",
 });
 
@@ -29,7 +29,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${beVietnamPro.variable} ${platypi.variable} ${boogaloo.variable}`} suppressHydrationWarning>{children}</body>
+      <body className={`${beVietnamPro.variable} ${platypi.variable} ${inter.variable}`} suppressHydrationWarning>{children}</body>
     </html>
   );
 }

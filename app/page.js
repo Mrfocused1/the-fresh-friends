@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import Footer from './components/Footer';
+import DashboardMockup from './components/DashboardMockup';
 
 const CharactersScroll = dynamic(() => import('./components/CharactersScroll'), { ssr: false });
 const Navbar = dynamic(() => import('./components/Navbar'), { ssr: false });
@@ -90,44 +91,44 @@ const characters = [
 const testimonials = [
   {
     quote:
-      '"My daughter absolutely loves Strawberry — she even said she wants Strawberry\'s courage when she grows up. This book opened a beautiful conversation about bravery."',
+      '"I had the idea for my book for five years. Onyx gave me the structure, the confidence, and the clarity I needed to finally get it published. The platform is genuinely world-class."',
     name: 'Amara K.',
-    role: 'Parent of a 5-year-old',
+    role: 'Published Author & Entrepreneur',
     emoji: '',
   },
   {
     quote:
-      '"We read the Banana book every night before bed. My son is already asking why HE doesn\'t have a Nature Power. I told him joy IS his power — and he beamed!"',
+      '"I went from a blank document to a published book in under four months. Onyx\'s step-by-step framework removed every obstacle I had. Worth every penny."',
     name: 'David O.',
-    role: 'Dad of two',
+    role: 'Business Coach & Author',
     emoji: '',
   },
   {
     quote:
-      '"As a Reception teacher, I\'ve used the Fresh Friends books in circle time. Children are genuinely engaged, and the conversation around feelings has been incredible."',
-    name: 'Miss Yvonne T.',
-    role: 'Primary School Teacher',
+      '"As a first-time author, I was completely overwhelmed. Onyx broke the entire process down so clearly. I now have a book I\'m genuinely proud of and it\'s selling consistently."',
+    name: 'Yvonne T.',
+    role: 'Life Coach & First-Time Author',
     emoji: '',
   },
   {
     quote:
-      '"The illustrations are gorgeous. My twins fight over who gets to hold the book first — which is honestly the best problem to have at bedtime!"',
+      '"The editorial templates alone saved me months of confusion. Onyx doesn\'t just teach you how to write — it teaches you how to think like a published author."',
     name: 'Priya S.',
-    role: 'Parent of twins, age 4',
+    role: 'Non-Fiction Author',
     emoji: '',
   },
   {
     quote:
-      '"Broccoli & the Power of Strength made my son actually WANT to eat his vegetables because he wants to be as strong as Broccoli. I cannot thank this series enough."',
+      '"I\'d started and abandoned my manuscript three times before finding Onyx. Within weeks I had a complete outline and a writing routine that actually stuck. Incredible."',
     name: 'Marcus J.',
-    role: 'Parent',
+    role: 'Author & Speaker',
     emoji: '',
   },
   {
     quote:
-      '"We ran a school workshop with The Fresh Friends team and the children were spellbound. The storytelling, the characters, the message — all absolutely world-class."',
-    name: 'Mr. Adebayo R.',
-    role: 'Head of Year, Sunshine Academy',
+      '"Onyx is not just a course — it\'s a full publishing mentorship. The launch strategy alone helped me hit bestseller status in my category on launch day."',
+    name: 'Adebayo R.',
+    role: 'Bestselling Author',
     emoji: '⭐',
   },
 ];
@@ -137,18 +138,17 @@ const testimonials = [
    HOME PAGE
    ============================================================ */
 export default function Home() {
-  const logoImgRef = useRef(null);
   const coverRef = useRef(null);
   const bookSceneRef = useRef(null);
   const [selectedChips, setSelectedChips] = useState([]);
 
   const serviceChips = [
-    'School Workshop',
-    'Nursery Visit',
-    'Book Donation',
-    'Full Collection',
-    'Bulk Order',
-    'Storytelling Session',
+    'Full Platform Access',
+    '1-to-1 Mentorship',
+    'Editorial Review',
+    'Launch Strategy',
+    'Book Formatting',
+    'Publishing Roadmap',
   ];
 
   function toggleChip(chip) {
@@ -199,17 +199,7 @@ export default function Home() {
       );
     }
 
-    const logoImg = logoImgRef.current;
-
-    function onScroll() {
-      if (logoImg) {
-        const hero = document.getElementById('nh-hero');
-        const threshold = hero ? hero.offsetHeight * 0.75 : window.innerHeight * 0.75;
-        logoImg.src = window.scrollY >= threshold ? '/logo-dark.svg' : '/logo.svg';
-      }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', () => {}, { passive: true });
 
     const animEls = document.querySelectorAll('.anim-in');
     const observer = new IntersectionObserver(
@@ -236,11 +226,6 @@ export default function Home() {
       {/* GRAIN */}
       <div className="grain-overlay" />
 
-      {/* FLOATING LOGO */}
-      <a href="/" className="floating-logo">
-        <img ref={logoImgRef} src="/logo.svg" alt="The Fresh Friends" />
-      </a>
-
       {/* NAVBAR */}
       <Navbar activePage="Home" />
 
@@ -251,24 +236,24 @@ export default function Home() {
           {/* LEFT: text */}
           <div className="sb-hero-text">
             <h1 className="sb-hero-h1">
-              Where stories come alive and children discover their <em>extraordinary</em> Nature Powers.
+              Publish the book you have always known you were meant to <em>write.</em>
             </h1>
             <p className="sb-hero-sub">
-              Meet the Fresh Friends — eight fruit and vegetable characters
-              with extraordinary Nature Powers. A children&apos;s book series
-              celebrating courage, joy, strength, and everything in between.
+              Onyx is a premium publishing education platform that takes you
+              from blank page to published author — with expert mentorship,
+              proven structure, and a clear roadmap at every step.
             </p>
             <div className="sb-hero-actions">
-              <a href="#books" className="sb-cta-btn">Get Started Today!</a>
+              <a href="#books" className="sb-cta-btn">Start Your Journey</a>
               <div className="sb-social-proof sb-social-proof--desktop">
                 <div className="sb-avatars">
-                  <div className="sb-avatar" style={{ background: '#e8365d' }} />
-                  <div className="sb-avatar" style={{ background: '#f5c518' }} />
-                  <div className="sb-avatar" style={{ background: '#27ae60' }} />
+                  <div className="sb-avatar" style={{ background: '#2D2D2D' }} />
+                  <div className="sb-avatar" style={{ background: '#D4AF37' }} />
+                  <div className="sb-avatar" style={{ background: '#C1A79B' }} />
                 </div>
                 <div>
                   <div className="sb-stars">★★★★★</div>
-                  <p className="sb-trust">Loved by over <strong>500</strong> families</p>
+                  <p className="sb-trust">Trusted by over <strong>300</strong> published authors</p>
                 </div>
               </div>
             </div>
@@ -302,13 +287,13 @@ export default function Home() {
 
           <div className="sb-social-proof sb-social-proof--mobile">
             <div className="sb-avatars">
-              <div className="sb-avatar" style={{ background: '#e8365d' }} />
-              <div className="sb-avatar" style={{ background: '#f5c518' }} />
-              <div className="sb-avatar" style={{ background: '#27ae60' }} />
+              <div className="sb-avatar" style={{ background: '#2D2D2D' }} />
+              <div className="sb-avatar" style={{ background: '#D4AF37' }} />
+              <div className="sb-avatar" style={{ background: '#C1A79B' }} />
             </div>
             <div>
               <div className="sb-stars">★★★★★</div>
-              <p className="sb-trust">Loved by over <strong>500</strong> families</p>
+              <p className="sb-trust">Trusted by over <strong>300</strong> published authors</p>
             </div>
           </div>
 
@@ -322,19 +307,15 @@ export default function Home() {
         <div className="section-container">
           <div className="our-work-heading-div">
             <div className="our-work-heading-left anim-in">
-              <p className="label-medium">Making Waves</p>
+              <p className="label-medium">What We Offer</p>
               <h1>
-                Growing healthy{' '}
-                <span className="hero-inline-video hero-inline-video--white-border">
-                  <video src="/inline-video.mp4" autoPlay muted loop playsInline />
-                </span>
-                {' '}
+                Everything you need to{' '}
                 <span className="scribble-wrap">
-                  <span className="italic-secondary">minds & bodies.</span>
+                  <span className="italic-secondary">become published.</span>
                   <svg viewBox="0 0 200 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M2 9 C40 3, 80 11, 120 5 C160 -1, 180 9, 198 6"
-                      stroke="white"
+                      stroke="#2D2D2D"
                       strokeWidth="2.5"
                       strokeLinecap="round"
                     />
@@ -348,127 +329,84 @@ export default function Home() {
 
           <div className="flip-cards">
             {/* Card 1 — Self Publish */}
-            <div className="flip-card anim-in delay-1">
+            <div className="flip-card flip-card--photo anim-in delay-1">
               <div className="flip-card-inner">
                 <div className="card-body">
-                  <span className="card-num">Publish with Onyx</span>
+                  <span className="card-num">The Platform</span>
                   <div className="card-body-top">
                     <h3>
                       How to{' '}
                       <span className="si">Self Publish</span>
                     </h3>
                     <p className="body-large">
-                      Learn how to bring your children's book idea to life —
-                      from first draft to published copy.
+                      A structured, phase-by-phase programme that takes you
+                      from first idea to published book — with no guesswork.
                     </p>
                   </div>
                   <div className="tag-marquee">
                     <div className="tag-marquee-track">
                       <span className="tag">Publishing</span>
                       <span className="tag">Authors</span>
-                      <span className="tag">Creators</span>
+                      <span className="tag">Mentorship</span>
                       <span className="tag">Step-by-step</span>
-                      <span className="tag">Free guide</span>
+                      <span className="tag">Online</span>
                       <span className="tag">Publishing</span>
                       <span className="tag">Authors</span>
-                      <span className="tag">Creators</span>
+                      <span className="tag">Mentorship</span>
                       <span className="tag">Step-by-step</span>
-                      <span className="tag">Free guide</span>
+                      <span className="tag">Online</span>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div
-                className="card-preview"
-                style={{
-                  background: 'linear-gradient(135deg, #27ae60 0%, #1a7a43 100%)',
-                  flexDirection: 'column',
-                  gap: '16px',
-                }}
-              >
-                <p
-                  style={{
-                    color: 'white',
-                    fontWeight: 400,
-                    fontSize: '22px',
-                    textAlign: 'center',
-                    padding: '0 32px',
-                    fontFamily: 'var(--font-serif)',
-                    fontStyle: 'italic',
-                  }}
-                >
-                  Self Publish with Onyx
-                </p>
               </div>
             </div>
 
             {/* Card 2 — Nursery Visits */}
-            <div className="flip-card anim-in delay-2">
+            <div className="flip-card flip-card--photo anim-in delay-2" style={{ backgroundImage: 'url(/card2-bg.png)', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
               <div className="flip-card-inner">
                 <div className="card-body">
-                  <span className="card-num">Nursery Visits</span>
+                  <span className="card-num">1-to-1 Mentorship</span>
                   <div className="card-body-top">
                     <h3>
-                      Nutrition Workshops
+                      Expert{' '}
+                      <span className="si">Guidance</span>
                     </h3>
                     <p className="body-large">
-                      Fun, interactive workshops that inspire healthy eating —
-                      powered by Sainsbury's "Good food for all" foundation.
+                      Work directly with a publishing mentor to refine your
+                      manuscript, sharpen your message, and accelerate your path to print.
                     </p>
                   </div>
                   <div className="tag-marquee">
                     <div className="tag-marquee-track">
-                      <span className="tag">Workshops</span>
-                      <span className="tag">Nutrition</span>
-                      <span className="tag">Ages 2–5</span>
-                      <span className="tag">Nurseries</span>
+                      <span className="tag">Mentorship</span>
+                      <span className="tag">Editorial</span>
+                      <span className="tag">1-to-1</span>
+                      <span className="tag">Feedback</span>
                       <span className="tag">UK-wide</span>
-                      <span className="tag">Workshops</span>
-                      <span className="tag">Nutrition</span>
-                      <span className="tag">Ages 2–5</span>
-                      <span className="tag">Nurseries</span>
+                      <span className="tag">Mentorship</span>
+                      <span className="tag">Editorial</span>
+                      <span className="tag">1-to-1</span>
+                      <span className="tag">Feedback</span>
                       <span className="tag">UK-wide</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div
-                className="card-preview"
-                style={{
-                  background: 'linear-gradient(135deg, #27ae60 0%, #1a7a43 100%)',
-                  flexDirection: 'column',
-                  gap: '16px',
-                }}
-              >
-                <p
-                  style={{
-                    color: '#ffffff',
-                    fontWeight: 400,
-                    fontSize: '22px',
-                    textAlign: 'center',
-                    padding: '0 32px',
-                    fontFamily: 'var(--font-serif)',
-                    fontStyle: 'italic',
-                  }}
-                >
-                  Nutrition Workshops
-                </p>
-              </div>
             </div>
 
             {/* Card 3 — Sainsbury's Funding */}
-            <div className="flip-card anim-in delay-3">
+            <div className="flip-card flip-card--photo anim-in delay-3" style={{ backgroundImage: 'url(/card3-bg.png)', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
               <div className="flip-card-inner">
                 <div className="card-body">
                   <span className="card-num">Milestone</span>
                   <div className="card-body-top">
                     <h3>
                       Sainsbury's &{' '}
-                      <span className="si">the Fresh Friends</span>
+                      <span className="si">Onyx</span>
                     </h3>
                     <p className="body-large">
-                      Proudly backed by Sainsbury's to bring The Fresh Friends
-                      to families and communities across the UK.
+                      Proudly backed by Sainsbury's to expand access to
+                      publishing education across communities in the UK.
                     </p>
                   </div>
                   <div className="tag-marquee">
@@ -487,60 +425,74 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div
-                className="card-preview"
-                style={{
-                  background:
-                    'linear-gradient(135deg, #27ae60 0%, #1a7a43 100%)',
-                  flexDirection: 'column',
-                  gap: '16px',
-                }}
-              >
-                <p
-                  style={{
-                    color: 'white',
-                    fontWeight: 400,
-                    fontSize: '22px',
-                    textAlign: 'center',
-                    padding: '0 32px',
-                    fontFamily: 'var(--font-serif)',
-                    fontStyle: 'italic',
-                  }}
-                >
-                  Backed by Sainsbury's
-                </p>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CHARACTERS SCROLL */}
-      <CharactersScroll />
+      {/* PLATFORM SECTION */}
+      <section className="platform-section">
+        <div className="platform-container">
+
+          <div className="platform-heading">
+            <p className="platform-label">The Platform</p>
+            <h2 className="platform-title">
+              A Clear Path From Idea<br />
+              <em>to Published Book</em>
+            </h2>
+            <p className="platform-sub">
+              Step inside an immersive digital learning environment designed specifically for aspiring authors. No guesswork, just a structured system.
+            </p>
+          </div>
+
+          {/* Dashboard Mockup */}
+          <div className="platform-dashboard-wrap">
+            <DashboardMockup />
+          </div>
+
+          {/* Features */}
+          <div className="platform-features">
+            <div className="platform-feature">
+              <p className="platform-feature-title">Guided Video Lessons</p>
+              <p className="platform-feature-body">Cinematic, step-by-step instruction covering every phase of writing and publishing.</p>
+            </div>
+            <div className="platform-feature">
+              <p className="platform-feature-title">Editorial Templates</p>
+              <p className="platform-feature-body">Downloadable workbooks, outlines, and checklists used by professional authors.</p>
+            </div>
+            <div className="platform-feature">
+              <p className="platform-feature-title">Launch Strategy</p>
+              <p className="platform-feature-body">A proven roadmap to get your book into readers' hands and hit best-seller status.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
 
       {/* TESTIMONIALS */}
       <section className="testimonials-section">
         <div className="testimonials-heading anim-in">
-          <h2>
-            What parents{' '}
-            <em>are saying!</em>
-          </h2>
+          <p className="testimonials-label">Author stories</p>
+          <h2>What our <em>authors say.</em></h2>
         </div>
-        <div className="testimonials-track">
-          <div className="testimonials-marquee">
-            {[...testimonials, ...testimonials].map((t, i) => (
-              <div className="t-card" key={i}>
-                <p className="t-card-quote">{t.quote}</p>
-                <div className="t-card-author">
-                  <div className="t-card-avatar">{t.emoji}</div>
-                  <div className="t-card-info">
-                    <strong>{t.name}</strong>
-                    <span>{t.role}</span>
-                  </div>
-                </div>
+        <div className="testimonials-grid">
+          {testimonials.map((t, i) => (
+            <div className="t-card" key={i}>
+              <div className="t-card-stars">
+                {[...Array(5)].map((_, s) => (
+                  <svg key={s} width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                ))}
               </div>
-            ))}
-          </div>
+              <p className="t-card-quote">{t.quote}</p>
+              <div className="t-card-info">
+                <strong>{t.name}</strong>
+                <span>{t.role}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -549,15 +501,15 @@ export default function Home() {
         <div className="enquiry-inner">
           <div className="enquiry-left">
             <h2>
-              Bring <em>Freshland</em> to your school.
+              Ready to write your <em>book?</em>
             </h2>
             <p>
-              We offer immersive storytelling workshops, nursery visits, and
-              school book programmes. Let us know what you need and we'll make
-              it happen.
+              Whether you're starting from scratch or have a half-finished
+              manuscript, we'll help you get it published. Tell us where you
+              are and we'll map out the right path forward.
             </p>
             <div className="enquiry-contact">
-              <a href="mailto:hello@thefreshfriends.com">
+              <a href="mailto:hello@onyxpublishing.com">
                 <span className="enquiry-contact-icon">
                   <svg
                     viewBox="0 0 24 24"
@@ -571,9 +523,9 @@ export default function Home() {
                     <path d="M2 7l10 7 10-7" />
                   </svg>
                 </span>
-                hello@thefreshfriends.com
+                hello@onyxpublishing.com
               </a>
-              <a href="https://instagram.com/thefreshfriends" target="_blank" rel="noopener noreferrer">
+              <a href="https://instagram.com/onyxpublishing" target="_blank" rel="noopener noreferrer">
                 <span className="enquiry-contact-icon">
                   <svg
                     viewBox="0 0 24 24"
@@ -588,7 +540,7 @@ export default function Home() {
                     <circle cx="17.5" cy="6.5" r="1" fill="currentColor" strokeWidth="0" />
                   </svg>
                 </span>
-                @thefreshfriends
+                @onyxpublishing
               </a>
             </div>
           </div>
@@ -614,25 +566,25 @@ export default function Home() {
             </div>
 
             <div className="form-field">
-              <label htmlFor="contact-school">School / Organisation</label>
+              <label htmlFor="contact-book">Book Title / Working Title</label>
               <input
-                id="contact-school"
+                id="contact-book"
                 type="text"
-                placeholder="e.g. Sunshine Primary Academy"
+                placeholder="e.g. The Confident Leader"
               />
             </div>
 
             <div className="form-field">
-              <label htmlFor="contact-age">Age Group</label>
-              <select id="contact-age" defaultValue="">
+              <label htmlFor="contact-stage">Where are you in your journey?</label>
+              <select id="contact-stage" defaultValue="">
                 <option value="" disabled>
-                  Select age group
+                  Select your current stage
                 </option>
-                <option>Nursery (2–3 years)</option>
-                <option>Reception (4–5 years)</option>
-                <option>KS1 (5–7 years)</option>
-                <option>KS2 (7–11 years)</option>
-                <option>Mixed ages</option>
+                <option>Just an idea — haven't started yet</option>
+                <option>I have notes / research but no draft</option>
+                <option>I have a partial draft</option>
+                <option>I have a full draft that needs editing</option>
+                <option>I'm ready to publish</option>
               </select>
             </div>
 
@@ -656,14 +608,14 @@ export default function Home() {
               <label htmlFor="contact-message">Message</label>
               <textarea
                 id="contact-message"
-                placeholder="Tell us a bit about your school, how many children, any specific dates or requirements..."
+                placeholder="Tell us about your book idea, your goals, and any questions you have about the publishing process..."
               />
             </div>
 
             <div className="form-submit">
-              <p>We typically respond within 1–2 working days.</p>
+              <p>We typically respond within 1 working day.</p>
               <button type="submit" className="btn-submit">
-                Send enquiry
+                Get in touch
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
