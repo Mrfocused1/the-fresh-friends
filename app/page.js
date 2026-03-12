@@ -251,27 +251,7 @@ export default function Home() {
           {/* LEFT: text */}
           <div className="sb-hero-text">
             <h1 className="sb-hero-h1">
-              Where stories come alive{' '}
-              <span className="hero-inline-video">
-                <video
-                  src="/inline-video-2.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                />
-              </span>
-              {' '}and children discover their <em>extraordinary</em>{' '}
-              <span className="hero-inline-video hero-inline-video--crop-top">
-                <video
-                  src="/inline-video-3.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                />
-              </span>
-              {' '}Nature Powers.
+              Where stories come alive and children discover their <em>extraordinary</em> Nature Powers.
             </h1>
             <p className="sb-hero-sub">
               Meet the Fresh Friends — eight fruit and vegetable characters
