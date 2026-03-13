@@ -213,7 +213,6 @@ export default function Home() {
     animEls.forEach((el) => observer.observe(el));
 
     return () => {
-      window.removeEventListener('scroll', onScroll);
       observer.disconnect();
     };
   }, []);
