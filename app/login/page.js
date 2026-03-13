@@ -20,11 +20,6 @@ export default function LoginPage() {
 
   return (
     <>
-      {/* FLOATING LOGO */}
-      <a href="/" className="floating-logo">
-        <img src="/logo-dark.svg" alt="The Fresh Friends" />
-      </a>
-
       {/* NAVBAR */}
       <Navbar activePage="Login" />
 
@@ -33,7 +28,7 @@ export default function LoginPage() {
         className="login-page"
         style={{
           minHeight: '100vh',
-          background: '#f5f5f0',
+          background: '#F5F3EF',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -66,11 +61,22 @@ export default function LoginPage() {
             boxShadow: '0 32px 80px rgba(0,0,0,0.08)',
           }}
         >
-          {/* Logo mark inside card */}
+          {/* Text logotype */}
+          <div
+            style={{
+              fontFamily: 'var(--font-serif)',
+              fontSize: '13px',
+              letterSpacing: '4px',
+              textTransform: 'uppercase',
+              color: '#1a1a1a',
+              marginBottom: '32px',
+              textAlign: 'center',
+            }}
+          >
+            Onyx Publishing
+          </div>
+
           <div style={{ marginBottom: '32px', textAlign: 'center' }}>
-            <div style={{ margin: '0 auto 16px', width: 52, height: 52, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img src="/logo-dark.svg" alt="" style={{ height: 40, width: 'auto' }} />
-            </div>
             <h1
               style={{
                 fontFamily: 'var(--font-serif)',
