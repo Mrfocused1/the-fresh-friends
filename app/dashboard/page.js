@@ -6,137 +6,124 @@ import Link from 'next/link';
 /* ── COURSE DATA ─────────────────────────────────────────────── */
 const COURSE = [
   {
-    id: 'welcome',
-    phase: 'Welcome',
-    title: 'Meet Onyx + What\'s Possible',
+    id: 'module1',
+    phase: 'Module 1',
+    title: 'Creating Your Concept',
     emoji: '',
     lessons: [
-      { id: 'w1', title: 'Welcome — Meet Onyx', duration: '4:12', done: true },
-      { id: 'w2', title: 'My Self-Publishing Journey', duration: '8:34', done: true },
-      { id: 'w3', title: 'Why Self-Publishing Gives You Ownership', duration: '6:20', done: true },
-      { id: 'w4', title: 'What You\'ll Achieve in This Course', duration: '5:10', done: false },
-      { id: 'w5', title: 'Tools & Mindset — What You Need to Start', duration: '7:45', done: false },
+      { id: 'm1-1', title: 'Identifying Your Core Concept', duration: '9:00', done: false },
+      { id: 'm1-2', title: 'Defining Your Target Audience', duration: '8:30', done: false },
+      { id: 'm1-3', title: 'Conducting Market Research', duration: '10:15', done: false },
+      { id: 'm1-4', title: 'Validating Your Book Idea', duration: '9:45', done: false },
     ],
   },
   {
-    id: 'phase1',
-    phase: 'Phase 1',
-    title: 'Build Your Book',
+    id: 'module2',
+    phase: 'Module 2',
+    title: 'Book Blueprint',
     emoji: '',
     lessons: [
-      { id: 'p1-1', title: 'Finding Your Idea & Purpose', duration: '12:30', done: false },
-      { id: 'p1-2', title: 'Choosing Your Genre & Audience', duration: '9:15', done: false },
-      { id: 'p1-3', title: 'Turning Your Idea into a Strong Concept', duration: '11:00', done: false },
-      { id: 'p1-4', title: 'Creating a Book with Purpose', duration: '10:20', done: false },
-      { id: 'p1-5', title: 'Planning a Series vs Standalone Book', duration: '8:45', done: false },
-      { id: 'p1-6', title: 'Structuring Your Manuscript', duration: '13:10', done: false },
-      { id: 'p1-7', title: 'Story vs Educational Structure', duration: '9:55', done: false },
-      { id: 'p1-8', title: 'Writing Consistently & Avoiding Beginner Mistakes', duration: '11:30', done: false },
-      { id: 'p1-9', title: 'Self-Editing Checklist', duration: '14:00', done: false },
-      { id: 'p1-10', title: 'Working with Beta Readers', duration: '7:20', done: false },
-      { id: 'p1-11', title: 'Final Manuscript Polish', duration: '8:00', done: false },
+      { id: 'm2-1', title: 'Designing Your Chapter Structure', duration: '10:30', done: false },
+      { id: 'm2-2', title: 'Mapping the Reader Journey', duration: '9:15', done: false },
+      { id: 'm2-3', title: 'Content Mapping & Flow', duration: '11:00', done: false },
+      { id: 'm2-4', title: 'Creating Your Book Blueprint', duration: '12:45', done: false },
     ],
   },
   {
-    id: 'phase2',
-    phase: 'Phase 2',
-    title: 'Design Your Book in Canva',
+    id: 'module3',
+    phase: 'Module 3',
+    title: 'Writing Your Manuscript',
     emoji: '',
     lessons: [
-      { id: 'p2-1', title: 'Setting Correct Book Sizes (KDP Trim Sizes)', duration: '10:15', done: false },
-      { id: 'p2-2', title: 'Margins, Bleed & Layout Explained Simply', duration: '12:40', done: false },
-      { id: 'p2-3', title: 'Page Numbers, Headers & Interior Flow', duration: '9:30', done: false },
-      { id: 'p2-4', title: 'Formatting a Children\'s Book in Canva', duration: '15:20', done: false },
-      { id: 'p2-5', title: 'Formatting Educational Books & Workbooks', duration: '13:00', done: false },
-      { id: 'p2-6', title: 'Exporting Correctly for Amazon', duration: '8:10', done: false },
-      { id: 'p2-7', title: 'Creating a Professional Front Cover', duration: '16:45', done: false },
-      { id: 'p2-8', title: 'Spine Setup & Back Cover Layout', duration: '11:20', done: false },
-      { id: 'p2-9', title: 'Barcode Placement & Print-Ready Files', duration: '9:00', done: false },
-      { id: 'p2-10', title: 'PDF Settings & Resolution Checks', duration: '7:50', done: false },
+      { id: 'm3-1', title: 'Story vs Educational Structure', duration: '11:20', done: false },
+      { id: 'm3-2', title: 'The Writing Process', duration: '13:00', done: false },
+      { id: 'm3-3', title: 'Self-Editing Your Book', duration: '14:30', done: false },
+      { id: 'm3-4', title: 'Final Manuscript Polish', duration: '8:45', done: false },
     ],
   },
   {
-    id: 'phase3',
-    phase: 'Phase 3',
-    title: 'Publish on Amazon KDP',
+    id: 'module4',
+    phase: 'Module 4',
+    title: 'Formatting & Cover Design',
     emoji: '',
     lessons: [
-      { id: 'p3-1', title: 'Creating Your KDP Account', duration: '8:30', done: false },
-      { id: 'p3-2', title: 'Tax Information & Setup', duration: '6:15', done: false },
-      { id: 'p3-3', title: 'Understanding ISBNs & Copyright Basics', duration: '10:00', done: false },
-      { id: 'p3-4', title: 'Uploading Your Book Step-by-Step', duration: '18:20', done: false },
-      { id: 'p3-5', title: 'Keywords & Categories — This is Critical', duration: '14:10', done: false },
-      { id: 'p3-6', title: 'Pricing Strategy & Royalty Options', duration: '11:30', done: false },
-      { id: 'p3-7', title: '60% vs 70% Royalties Explained', duration: '9:45', done: false },
-      { id: 'p3-8', title: 'How to Price for Profit', duration: '8:20', done: false },
-      { id: 'p3-9', title: 'Ordering Author Copies', duration: '5:40', done: false },
+      { id: 'm4-1', title: 'Choosing Your Book Size (KDP Trim Size)', duration: '7:30', done: false },
+      { id: 'm4-2', title: 'Downloading Your KDP Template', duration: '6:15', done: false },
+      { id: 'm4-3', title: 'Formatting & Transferring Your Manuscript', duration: '12:40', done: false },
+      { id: 'm4-4', title: 'Cover Design in Canva (Front, Spine & Back)', duration: '16:00', done: false },
     ],
   },
   {
-    id: 'phase4',
-    phase: 'Phase 4',
-    title: 'Position for Impact',
+    id: 'module5',
+    phase: 'Module 5',
+    title: 'Amazon Account Set Up',
     emoji: '',
     lessons: [
-      { id: 'p4-1', title: 'Turning Your Book into a Brand', duration: '13:00', done: false },
-      { id: 'p4-2', title: 'Creating Book Bundles & Workshops', duration: '10:30', done: false },
-      { id: 'p4-3', title: 'Using Your Book as Authority', duration: '9:15', done: false },
-      { id: 'p4-4', title: 'Building Community Around Your Message', duration: '11:45', done: false },
-      { id: 'p4-5', title: 'Your Simple Launch Plan', duration: '12:20', done: false },
-      { id: 'p4-6', title: 'Using Instagram + Email to Launch', duration: '14:00', done: false },
-      { id: 'p4-7', title: 'Collecting Reviews & Your First 30 Days', duration: '10:10', done: false },
+      { id: 'm5-1', title: 'What is KDP (Kindle Direct Publishing)?', duration: '6:00', done: false },
+      { id: 'm5-2', title: 'Creating Your KDP Account', duration: '10:20', done: false },
+      { id: 'm5-3', title: 'Account Setup Video Walkthrough', duration: '8:30', done: false },
+      { id: 'm5-4', title: 'Account Setup Checklist', duration: '5:15', done: false },
     ],
   },
   {
-    id: 'phase5',
-    phase: 'Phase 5',
-    title: 'Fund Your Vision',
+    id: 'module6',
+    phase: 'Module 6',
+    title: 'Publishing Your Book!',
     emoji: '',
     lessons: [
-      { id: 'p5-1', title: 'Creating a Mission-Led Book', duration: '10:00', done: false },
-      { id: 'p5-2', title: 'Defining Your Community Benefit', duration: '8:30', done: false },
-      { id: 'p5-3', title: 'Sole Trader vs CIC vs Charity (UK)', duration: '12:15', done: false },
-      { id: 'p5-4', title: 'Registering Your Organisation', duration: '9:45', done: false },
-      { id: 'p5-5', title: 'Protecting Your Intellectual Property', duration: '8:00', done: false },
-      { id: 'p5-6', title: 'Grants for Educational Books', duration: '11:20', done: false },
-      { id: 'p5-7', title: 'Corporate Sponsorship & Local Council Funding', duration: '13:00', done: false },
-      { id: 'p5-8', title: 'Schools & Community Partnerships', duration: '9:10', done: false },
-      { id: 'p5-9', title: 'Creating a Simple Pitch Deck', duration: '15:30', done: false },
-      { id: 'p5-10', title: 'Writing a Winning Funding Application', duration: '14:45', done: false },
-    ],
-  },
-  {
-    id: 'bonus',
-    phase: 'Bonus',
-    title: 'Templates & Resources',
-    emoji: '',
-    lessons: [
-      { id: 'b1', title: 'Workbook Templates — Download & Use', duration: 'Resource', done: false },
-      { id: 'b2', title: 'Canva Interior Templates Pack', duration: 'Resource', done: false },
-      { id: 'b3', title: 'Funding Application Template', duration: 'Resource', done: false },
-      { id: 'b4', title: 'Self-Edit Checklist PDF', duration: 'Resource', done: false },
-      { id: 'b5', title: 'KDP Upload Checklist', duration: 'Resource', done: false },
-      { id: 'b6', title: 'Book Launch Checklist', duration: 'Resource', done: false },
+      { id: 'm6-1', title: 'How to Upload Your Book', duration: '5:45', done: false },
+      { id: 'm6-2', title: 'Complete Uploading Process', duration: '14:20', done: false },
+      { id: 'm6-3', title: 'Pricing & Understanding Royalties', duration: '11:10', done: false },
+      { id: 'm6-4', title: 'Ordering Your First Author Copy', duration: '6:30', done: false },
     ],
   },
 ];
 
 const LESSON_DESCRIPTIONS = {
-  w1: 'Welcome to Publish with Onyx. In this lesson you\'ll meet your instructor and get an overview of everything this course covers — from writing your first word to holding your published book in your hands.',
-  w2: 'Hear the real story behind The Fresh Friends series. From the first spark of an idea to Sainsbury\'s partnership, this is the journey that proves self-publishing can change your life.',
-  w3: 'Understand why self-publishing is the most powerful route for independent creators. You own your ISBN, your royalties, your story — forever.',
-  w4: 'A clear walkthrough of exactly what you\'ll have by the end of this course: a published book, a brand strategy, and the confidence to scale it.',
-  w5: 'The tools are simpler than you think. Canva, Amazon KDP, and the right mindset. This lesson sets you up before you start writing a single word.',
+  // Module 1 — Creating Your Concept
+  'm1-1': 'Before you write a single page, you need clarity. Learn how to generate ideas without judgment, identify the strongest one, define the purpose behind your book, and turn your idea into a clear one-sentence concept statement you can build everything around.',
+  'm1-2': '"For everyone" is the fastest way to connect with no one. Move from vague audience ideas to a detailed reader profile — age, lifestyle, challenges, desires — so your book feels like it was written specifically for the people you want to reach.',
+  'm1-3': 'Study bestsellers in your category on Amazon — titles, covers, blurbs, reviews, rankings. Spot the trends readers respond to, find the gaps your book can fill, and position your idea somewhere between familiar and distinctly different.',
+  'm1-4': 'Before you invest weeks writing, test whether people actually want your book. Share your concept simply, ask the right questions, collect honest feedback from 5–10 people, and refine your idea into something you know your audience will read.',
+
+  // Module 2 — Book Blueprint
+  'm2-1': 'Strong books aren\'t random — they\'re intentionally structured. Break your idea into 3–5 key sections, then turn each section into chapters with one clear purpose, whether you\'re writing a children\'s book, novel, or non-fiction guide.',
+  'm2-2': 'A great book is a journey, not a collection of chapters. Define where your reader starts emotionally, where they end up, and the transformation in between. Learn how to guide them one intentional step at a time.',
+  'm2-3': 'Take your chapter structure one level deeper. For each chapter, plan the 2–5 key points, scenes, or lessons you\'ll cover — so when you sit down to write, you never start from a blank page.',
+  'm2-4': 'Bring everything together into one master document: your concept, audience, reader journey, chapter structure, and content map. This blueprint is the guide you\'ll return to every time you\'re unsure what to do next.',
+
+  // Module 3 — Writing Your Manuscript
+  'm3-1': 'Some books teach through characters and emotion, others through clear steps and information. Learn the strengths of each structure, when to combine them, and how to choose the approach that best delivers your message.',
+  'm3-2': 'The biggest reason most people don\'t finish their book? Trying to write it perfectly the first time. Build a consistent writing system — small sessions, progress over perfection, and practical ways to overcome writer\'s block.',
+  'm3-3': 'Your first draft isn\'t your final draft. Follow a step-by-step self-editing process — structure first, then clarity, then sentence-level polish — to transform "something written" into something ready to share with the world.',
+  'm3-4': 'The last pass before your manuscript moves into book format. Work through a final consistency check, a read-aloud review, and a clean-up of tone, spacing, and chapter flow so your file is truly publish-ready.',
+
+  // Module 4 — Formatting & Cover Design
+  'm4-1': 'Your trim size affects every formatting decision that follows. Learn the standard KDP sizes — 6×9" for fiction and non-fiction, 8.5×8.5" for children\'s picture books, 8.5×11" for workbooks — and choose the right one before you format a single page.',
+  'm4-2': 'Skip the guesswork by starting with Amazon\'s official templates. This lesson walks you through downloading the correct trim-size template from KDP, extracting the ZIP, and opening the file so it\'s ready for your manuscript.',
+  'm4-3': 'Move your manuscript into the KDP template section by section. Apply consistent fonts, chapter headings, and page breaks, and learn how to place images cleanly so everything fits within the printable area.',
+  'm4-4': 'Your cover is the first thing every reader sees. Create a full wrap-around cover — back, spine, and front in a single Canva file — using the exact dimensions KDP requires, then export it as a print-ready PDF.',
+
+  // Module 5 — Amazon Account Set Up
+  'm5-1': 'Amazon Kindle Direct Publishing lets you publish globally for free using print-on-demand — no inventory, no publisher required. Understand how royalties work, what formats you can publish, and why KDP gives you full control.',
+  'm5-2': 'Walk through signing up for KDP, entering your author/publisher information, adding bank details for royalty payments, and completing your tax profile — the full setup so you\'re ready to receive payments.',
+  'm5-3': 'A visual, step-by-step video tutorial from Amazon KDP. Watch the official setup walkthrough alongside this lesson if you prefer visual guidance or get stuck on any step of the account process.',
+  'm5-4': 'Run through the full KDP account checklist — profile details, payment information, tax forms, and book preparation — to confirm nothing\'s missing before you start uploading.',
+
+  // Module 6 — Publishing Your Book!
+  'm6-1': 'Before you start, make sure both your manuscript and cover are finalized. This lesson introduces the full upload process and sets you up with a hand-picked video tutorial covering every KDP step for paperback and Kindle.',
+  'm6-2': 'Work through KDP\'s book setup: enter your book details, upload your manuscript and cover, preview your book, and handle print options. Learn which details can\'t be changed post-publish so you get them right the first time.',
+  'm6-3': 'Understand the paperback royalty formula (60% of list price minus printing cost) and eBook options (70% vs 35%). Research competitor pricing, meet minimum price floors, and set a price that\'s both competitive and profitable.',
+  'm6-4': 'It can take up to 72 hours for Amazon to publish your book. Once it\'s live, learn how to order your first physical author copy — your proof copy — and celebrate officially becoming a self-published author.',
 };
 
 const PHASE_COLORS = {
-  welcome: 'rgb(120,181,57)',
-  phase1:  '#e8365d',
-  phase2:  '#f5c518',
-  phase3:  '#27ae60',
-  phase4:  '#f39c12',
-  phase5:  '#8e44ad',
-  bonus:   'rgb(120,181,57)',
+  module1: '#e8365d',
+  module2: '#f5c518',
+  module3: '#27ae60',
+  module4: '#f39c12',
+  module5: '#8e44ad',
+  module6: 'rgb(120,181,57)',
 };
 
 /* ── HELPERS ─────────────────────────────────────────────────── */
@@ -165,7 +152,7 @@ function ProgressRing({ pct, size = 36, color = 'rgb(120,181,57)' }) {
 }
 
 function Sidebar({ modules, completedIds, activeLesson, onSelect, collapsed, setCollapsed }) {
-  const [expanded, setExpanded] = useState({ welcome: true });
+  const [expanded, setExpanded] = useState({ module1: true });
 
   const totalLessons = getAllLessons().length;
   const totalDone = completedIds.size;
@@ -240,7 +227,7 @@ function Sidebar({ modules, completedIds, activeLesson, onSelect, collapsed, set
                 onMouseLeave={e => e.currentTarget.style.background = 'none'}
               >
                 {collapsed ? (
-                  <span title={mod.title} style={{ fontSize: 11, fontWeight: 400, color: color, letterSpacing: '0.5px' }}>{mod.phase.replace('Phase ', 'P').replace('Welcome', 'W').replace('Bonus', 'B')}</span>
+                  <span title={mod.title} style={{ fontSize: 11, fontWeight: 400, color: color, letterSpacing: '0.5px' }}>{mod.phase.replace('Module ', 'M')}</span>
                 ) : (
                   <>
                     <ProgressRing pct={pct} size={32} color={color} />
@@ -578,7 +565,7 @@ function Overview({ completedIds, onSelect, isMobile }) {
 /* ── PAGE ─────────────────────────────────────────────────────── */
 export default function DashboardPage() {
   const [mounted, setMounted] = useState(false);
-  const [completedIds, setCompletedIds] = useState(() => new Set(['w1', 'w2', 'w3']));
+  const [completedIds, setCompletedIds] = useState(() => new Set());
   const [activeLesson, setActiveLesson] = useState(null);
   const [activeMod, setActiveMod] = useState(null);
   const [collapsed, setCollapsed] = useState(false);
