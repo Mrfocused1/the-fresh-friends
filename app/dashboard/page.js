@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { LESSON_CONTENT } from './courseContent';
 
 /* ── COURSE DATA ─────────────────────────────────────────────── */
 const COURSE = [
@@ -309,6 +310,90 @@ function Sidebar({ modules, completedIds, activeLesson, onSelect, collapsed, set
   );
 }
 
+function LessonContent({ blocks, color, isMobile }) {
+  if (!blocks || blocks.length === 0) return null;
+
+  return (
+    <div style={{ background: 'white', borderRadius: 16, padding: isMobile ? '24px 20px' : '32px 40px', marginBottom: 24, border: '1px solid rgba(0,0,0,0.07)', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
+      <h3 style={{ fontSize: 13, fontWeight: 400, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 20 }}>Learning Material</h3>
+      {blocks.map((b, i) => {
+        if (b.type === 'h') {
+          return <h4 key={i} style={{ fontFamily: 'var(--font-serif)', fontSize: 20, fontWeight: 500, color: '#111827', marginTop: i === 0 ? 0 : 28, marginBottom: 10, lineHeight: 1.3 }}>{b.text}</h4>;
+        }
+        if (b.type === 'p') {
+          return <p key={i} style={{ fontSize: 15, lineHeight: 1.75, color: 'rgba(0,0,0,0.72)', marginBottom: 14, whiteSpace: 'pre-line' }}>{b.text}</p>;
+        }
+        if (b.type === 'ul') {
+          return (
+            <ul key={i} style={{ listStyle: 'none', padding: 0, margin: '0 0 16px 0' }}>
+              {b.items.map((item, j) => (
+                <li key={j} style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(0,0,0,0.72)', paddingLeft: 22, position: 'relative', marginBottom: 8 }}>
+                  <span style={{ position: 'absolute', left: 4, top: 10, width: 6, height: 6, borderRadius: '50%', background: color }} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          );
+        }
+        if (b.type === 'ol') {
+          return (
+            <ol key={i} style={{ listStyle: 'none', padding: 0, margin: '0 0 16px 0', counterReset: 'step' }}>
+              {b.items.map((item, j) => (
+                <li key={j} style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(0,0,0,0.72)', paddingLeft: 32, position: 'relative', marginBottom: 10 }}>
+                  <span style={{ position: 'absolute', left: 0, top: 0, fontSize: 12, fontWeight: 600, color: color, width: 22, height: 22, borderRadius: '50%', background: `${color}1a`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{j + 1}</span>
+                  {item}
+                </li>
+              ))}
+            </ol>
+          );
+        }
+        if (b.type === 'quote') {
+          return (
+            <blockquote key={i} style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(0,0,0,0.7)', fontStyle: 'italic', borderLeft: `3px solid ${color}`, padding: '8px 0 8px 18px', margin: '16px 0 18px', whiteSpace: 'pre-line' }}>
+              {b.text}
+            </blockquote>
+          );
+        }
+        if (b.type === 'exercise') {
+          return (
+            <div key={i} style={{ background: 'rgba(120,181,57,0.06)', border: '1px solid rgba(120,181,57,0.18)', borderRadius: 12, padding: '18px 22px', margin: '20px 0' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgb(120,181,57)" strokeWidth="2" strokeLinecap="round"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+                <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgb(120,181,57)' }}>Workbook Exercise</span>
+              </div>
+              <h5 style={{ fontFamily: 'var(--font-serif)', fontSize: 17, fontWeight: 500, color: '#111827', marginBottom: 10 }}>{b.title}</h5>
+              {b.body.map((sub, j) => {
+                if (sub.type === 'p') return <p key={j} style={{ fontSize: 14.5, lineHeight: 1.7, color: 'rgba(0,0,0,0.72)', marginBottom: 10 }}>{sub.text}</p>;
+                if (sub.type === 'ul') return (
+                  <ul key={j} style={{ listStyle: 'none', padding: 0, margin: '0 0 10px 0' }}>
+                    {sub.items.map((item, k) => (
+                      <li key={k} style={{ fontSize: 14.5, lineHeight: 1.65, color: 'rgba(0,0,0,0.72)', paddingLeft: 20, position: 'relative', marginBottom: 6 }}>
+                        <span style={{ position: 'absolute', left: 4, top: 10, width: 5, height: 5, borderRadius: '50%', background: 'rgb(120,181,57)' }} />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                );
+                if (sub.type === 'quote') return <blockquote key={j} style={{ fontSize: 14.5, lineHeight: 1.65, color: 'rgba(0,0,0,0.7)', fontStyle: 'italic', borderLeft: '3px solid rgba(120,181,57,0.4)', padding: '4px 0 4px 14px', margin: '8px 0', whiteSpace: 'pre-line' }}>{sub.text}</blockquote>;
+                return null;
+              })}
+            </div>
+          );
+        }
+        if (b.type === 'takeaway') {
+          return (
+            <div key={i} style={{ background: `${color}0d`, borderLeft: `4px solid ${color}`, borderRadius: '0 10px 10px 0', padding: '18px 22px', margin: '24px 0 4px' }}>
+              <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '1.5px', textTransform: 'uppercase', color: color, marginBottom: 8 }}>Key Takeaway</div>
+              <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(0,0,0,0.8)', fontStyle: 'italic' }}>{b.text}</p>
+            </div>
+          );
+        }
+        return null;
+      })}
+    </div>
+  );
+}
+
 function VideoPlayer({ lesson, mod, completedIds, onComplete, onNext, onPrev, hasNext, hasPrev, isMobile }) {
   const isDone = completedIds.has(lesson.id);
   const color  = PHASE_COLORS[mod.id];
@@ -408,6 +493,9 @@ function VideoPlayer({ lesson, mod, completedIds, onComplete, onNext, onPrev, ha
         <h3 style={{ fontSize: 13, fontWeight: 400, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 12 }}>About This Lesson</h3>
         <p style={{ fontSize: 15, lineHeight: 1.75, color: 'rgba(0,0,0,0.65)' }}>{desc}</p>
       </div>
+
+      {/* Full learning material */}
+      <LessonContent blocks={LESSON_CONTENT[lesson.id]} color={color} isMobile={isMobile} />
 
       {/* Resources */}
       {mod.id === 'bonus' && (
