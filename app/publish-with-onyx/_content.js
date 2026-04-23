@@ -200,11 +200,11 @@ export default function PublishWithOnyxContent() {
 
       {/* ── THE 4 STAGES ── */}
       <section
+        className="pow-section-pad"
         style={{
           background: '#E8E1DC',
           backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.08) 1.5px, transparent 1.5px)',
           backgroundSize: '32px 32px',
-          padding: '100px 60px',
         }}
       >
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -236,14 +236,7 @@ export default function PublishWithOnyxContent() {
             <em style={{ fontStyle: 'italic', color: 'rgb(120,181,57)' }}>published book.</em>
           </h2>
 
-          <div
-            className="pow-journey-grid"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '32px',
-            }}
-          >
+          <div className="pow-journey-grid">
             {stages.map((step) => (
               <div key={step.num} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <div
@@ -292,7 +285,7 @@ export default function PublishWithOnyxContent() {
       </section>
 
       {/* ── THE CURRICULUM ── */}
-      <section style={{ background: '#0D0E10', padding: '100px 60px' }}>
+      <section className="pow-section-pad" style={{ background: '#0D0E10' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <p
             style={{
@@ -322,13 +315,7 @@ export default function PublishWithOnyxContent() {
             <em style={{ fontStyle: 'italic', color: 'rgb(120,181,57)' }}>master.</em>
           </h2>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
-              gap: '24px',
-            }}
-          >
+          <div className="pow-modules-grid">
             {modules.map((mod) => (
               <div
                 key={mod.num}
@@ -415,20 +402,17 @@ export default function PublishWithOnyxContent() {
 
       {/* ── WHO THIS IS FOR ── */}
       <section
+        className="pow-section-pad"
         style={{
           background: '#E8E1DC',
           backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.08) 1.5px, transparent 1.5px)',
           backgroundSize: '32px 32px',
-          padding: '100px 60px',
         }}
       >
         <div
           style={{
             maxWidth: '1200px',
             margin: '0 auto',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '80px',
             alignItems: 'center',
           }}
           className="pow-two-col"
@@ -512,7 +496,7 @@ export default function PublishWithOnyxContent() {
       </section>
 
       {/* ── WHAT YOU GET ── */}
-      <section style={{ background: '#0D0E10', padding: '100px 60px' }}>
+      <section className="pow-section-pad" style={{ background: '#0D0E10' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '64px' }}>
             <p
@@ -543,13 +527,7 @@ export default function PublishWithOnyxContent() {
             </h2>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '24px',
-            }}
-          >
+          <div className="pow-features-grid">
             {features.map((feature) => (
               <div
                 key={feature.label}
@@ -606,11 +584,11 @@ export default function PublishWithOnyxContent() {
 
       {/* ── TESTIMONIALS ── */}
       <section
+        className="pow-section-pad"
         style={{
           background: '#E8E1DC',
           backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.08) 1.5px, transparent 1.5px)',
           backgroundSize: '32px 32px',
-          padding: '100px 60px',
         }}
       >
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -643,13 +621,7 @@ export default function PublishWithOnyxContent() {
             </h2>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '24px',
-            }}
-          >
+          <div className="pow-testimonials-grid">
             {testimonials.map((t) => (
               <div
                 key={t.name}
@@ -731,7 +703,7 @@ export default function PublishWithOnyxContent() {
       </section>
 
       {/* ── BOTTOM CTA ── */}
-      <section style={{ background: '#0D0E10', padding: '100px 60px' }}>
+      <section className="pow-section-pad" style={{ background: '#0D0E10' }}>
         <div
           style={{
             maxWidth: '780px',
