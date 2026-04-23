@@ -1,8 +1,23 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+
+function useViewport() {
+  const [v, setV] = useState({ isMobile: false, isNarrow: false });
+  useEffect(() => {
+    const update = () => {
+      const w = window.innerWidth;
+      setV({ isMobile: w <= 768, isNarrow: w <= 900 });
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+  return v;
+}
 
 /* ============================================================
    DATA
@@ -87,6 +102,15 @@ const testimonials = [
    PAGE
    ============================================================ */
 export default function PublishWithOnyxContent() {
+  const { isMobile, isNarrow } = useViewport();
+  const sectionPad = isMobile ? '64px 20px' : '100px 60px';
+  const heroSidePad = isMobile ? '0 20px' : '0 40px';
+  const heroPadY = { paddingTop: isMobile ? '110px' : '130px', paddingBottom: isMobile ? '72px' : '100px' };
+  const stagesCols = isMobile ? '1fr' : isNarrow ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)';
+  const modulesCols = isMobile ? '1fr' : 'repeat(2, 1fr)';
+  const featuresCols = isMobile ? '1fr' : isNarrow ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)';
+  const twoColCols = isNarrow ? '1fr' : '1fr 1fr';
+  const twoColGap = isNarrow ? '40px' : '80px';
   return (
     <>
       <Navbar activePage="How it works" />
@@ -102,8 +126,7 @@ export default function PublishWithOnyxContent() {
           textAlign: 'center',
           position: 'relative',
           overflow: 'hidden',
-          paddingTop: '130px',
-          paddingBottom: '100px',
+          ...heroPadY,
         }}
       >
         <div
@@ -114,7 +137,7 @@ export default function PublishWithOnyxContent() {
             pointerEvents: 'none',
           }}
         />
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: '780px', width: '100%', padding: '0 40px' }}>
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '780px', width: '100%', padding: heroSidePad }}>
           <p
             style={{
               fontSize: '11px',
@@ -200,11 +223,11 @@ export default function PublishWithOnyxContent() {
 
       {/* ── THE 4 STAGES ── */}
       <section
-        className="pow-section-pad"
         style={{
           background: '#E8E1DC',
           backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.08) 1.5px, transparent 1.5px)',
           backgroundSize: '32px 32px',
+          padding: sectionPad,
         }}
       >
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -236,7 +259,7 @@ export default function PublishWithOnyxContent() {
             <em style={{ fontStyle: 'italic', color: 'rgb(120,181,57)' }}>published book.</em>
           </h2>
 
-          <div className="pow-journey-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: stagesCols, gap: '32px' }}>
             {stages.map((step) => (
               <div key={step.num} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <div
@@ -285,7 +308,7 @@ export default function PublishWithOnyxContent() {
       </section>
 
       {/* ── THE CURRICULUM ── */}
-      <section className="pow-section-pad" style={{ background: '#0D0E10' }}>
+      <section style={{ background: '#0D0E10', padding: sectionPad }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <p
             style={{
@@ -315,7 +338,7 @@ export default function PublishWithOnyxContent() {
             <em style={{ fontStyle: 'italic', color: 'rgb(120,181,57)' }}>master.</em>
           </h2>
 
-          <div className="pow-modules-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: modulesCols, gap: isMobile ? '16px' : '24px' }}>
             {modules.map((mod) => (
               <div
                 key={mod.num}
@@ -323,7 +346,7 @@ export default function PublishWithOnyxContent() {
                   background: '#161618',
                   border: '1px solid rgba(255,255,255,0.06)',
                   borderRadius: '16px',
-                  padding: '40px 36px',
+                  padding: isMobile ? '28px 22px' : '40px 36px',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '20px',
@@ -402,20 +425,22 @@ export default function PublishWithOnyxContent() {
 
       {/* ── WHO THIS IS FOR ── */}
       <section
-        className="pow-section-pad"
         style={{
           background: '#E8E1DC',
           backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.08) 1.5px, transparent 1.5px)',
           backgroundSize: '32px 32px',
+          padding: sectionPad,
         }}
       >
         <div
           style={{
             maxWidth: '1200px',
             margin: '0 auto',
-            alignItems: 'center',
+            display: 'grid',
+            gridTemplateColumns: twoColCols,
+            gap: twoColGap,
+            alignItems: isNarrow ? 'start' : 'center',
           }}
-          className="pow-two-col"
         >
           <div>
             <p
@@ -496,7 +521,7 @@ export default function PublishWithOnyxContent() {
       </section>
 
       {/* ── WHAT YOU GET ── */}
-      <section className="pow-section-pad" style={{ background: '#0D0E10' }}>
+      <section style={{ background: '#0D0E10', padding: sectionPad }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '64px' }}>
             <p
@@ -527,7 +552,7 @@ export default function PublishWithOnyxContent() {
             </h2>
           </div>
 
-          <div className="pow-features-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: featuresCols, gap: isMobile ? '16px' : '24px' }}>
             {features.map((feature) => (
               <div
                 key={feature.label}
@@ -584,11 +609,11 @@ export default function PublishWithOnyxContent() {
 
       {/* ── TESTIMONIALS ── */}
       <section
-        className="pow-section-pad"
         style={{
           background: '#E8E1DC',
           backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.08) 1.5px, transparent 1.5px)',
           backgroundSize: '32px 32px',
+          padding: sectionPad,
         }}
       >
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -621,7 +646,7 @@ export default function PublishWithOnyxContent() {
             </h2>
           </div>
 
-          <div className="pow-testimonials-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: featuresCols, gap: isMobile ? '16px' : '24px' }}>
             {testimonials.map((t) => (
               <div
                 key={t.name}
@@ -703,7 +728,7 @@ export default function PublishWithOnyxContent() {
       </section>
 
       {/* ── BOTTOM CTA ── */}
-      <section className="pow-section-pad" style={{ background: '#0D0E10' }}>
+      <section style={{ background: '#0D0E10', padding: sectionPad }}>
         <div
           style={{
             maxWidth: '780px',
